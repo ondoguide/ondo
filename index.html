@@ -240,6 +240,24 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
   0%,100% { opacity:1; } 50% { opacity:.35; }
 }
 
+/* 인플루언서 뱃지 */
+.influencer-badges {
+  display:flex; flex-wrap:wrap; gap:6px;
+  padding:0 28px; margin-bottom:4px;
+}
+.inf-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--cream-mid); border:1px solid var(--border-md);
+  border-radius:20px; padding:5px 10px;
+  font-family:var(--ko); font-size:11px; font-weight:400;
+  color:var(--brown-2); line-height:1;
+}
+.inf-badge-icon { font-size:13px; flex-shrink:0; }
+.inf-badge.black { background:#1a1a1a; border-color:#1a1a1a; color:#fff; }
+.inf-badge.michelin { background:#CC0000; border-color:#CC0000; color:#fff; }
+.inf-badge.pungja { background:#FF6B35; border-color:#FF6B35; color:#fff; }
+.inf-badge.wonillee { background:#2C5F2E; border-color:#2C5F2E; color:#fff; }
+
 /* ═══════════════════════════════════════════
    SCREEN 1 & 2 — QUESTIONS
 ═══════════════════════════════════════════ */
@@ -2001,6 +2019,8 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
     <div class="res-chip"><span class="chip-lbl">가격대</span><span class="chip-val" id="result-price">1 – 2만원</span></div>
     <div class="res-chip" id="chip-hours"><span class="chip-lbl">운영</span><span class="chip-val" id="result-hours">—</span></div>
   </div>
+  <div class="influencer-badges result-animate" id="ra-inf-badges" style="display:none;">
+  </div>
 
   <!-- 추천 경위 퍼널 섹션 -->
   <div class="res-rationale result-animate" id="ra-rationale">
@@ -2580,6 +2600,39 @@ function scoreStore(store, q2Val, nowHour, refineFilter) {
   return Math.max(0.01, score);
 }
 
+// ── 인플루언서 추천 뱃지 매핑 ──────────────────────────────
+const INFLUENCER_MAP = {
+  // 흑백요리사 / 부채도사
+  '동경밥상 본점':               [{ type:'black',   icon:'🎬', label:'흑백요리사 · 부채도사' }],
+  '오코메':                      [{ type:'black',   icon:'🎬', label:'흑백요리사 · 부채도사' }],
+  '시골통돼지볶음 부산남천점':   [{ type:'black',   icon:'🎬', label:'부채도사 추천' }],
+  // 풍자 또간집
+  '본스치킨 광안리점':           [{ type:'pungja',  icon:'🐓', label:'풍자 또간집' }],
+  // 미쉐린
+  '야키토리 해공':               [{ type:'michelin',icon:'⭐', label:'미쉐린 가이드' }],
+  '백일평냉':                    [{ type:'michelin',icon:'⭐', label:'미쉐린 가이드' }],
+  // 이원일 셰프
+  '디시':                        [{ type:'wonillee',icon:'👨‍🍳', label:'이원일 셰프 추천' }],
+  '마초스테이크 부산직영점':     [{ type:'pungja',  icon:'🐓', label:'풍자 또간집' }],
+};
+
+function renderInfluencerBadges(storeName) {
+  const wrap = document.getElementById('ra-inf-badges');
+  if (!wrap) return;
+  const badges = INFLUENCER_MAP[storeName];
+  if (!badges || badges.length === 0) {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+  wrap.style.display = 'flex';
+  wrap.innerHTML = badges.map(b =>
+    `<span class="inf-badge ${b.type}">
+      <span class="inf-badge-icon">${b.icon}</span>${b.label}
+    </span>`
+  ).join('');
+}
+
 // ── 추천 로직: Vibe 스코어링 + GPS + 카테고리 다양성 ──
 let currentRefineFilter = null;
 const recentlyShown = {};        // 중복 방지
@@ -2612,6 +2665,9 @@ function pickStore(q1Val, q2Val, refine) {
       const dist = getDistance(userLat, userLng, s.lat, s.lng);
       const decay = rf === 'closer' ? 300 : 700;
       w *= Math.exp(-dist / decay);
+    } else if (gpsActive && userLat && !s.lat) {
+      // GPS 활성이지만 좌표 없는 장소 → 거리 불확실하므로 가중치 낮춤
+      w *= 0.4;
     }
     return Math.max(0.01, w);
   });
@@ -2723,6 +2779,8 @@ function showResult() {
   document.getElementById('result-category').textContent =
     (catLabel[currentStore.category] || currentStore.category).toUpperCase() + (currentStore.addr ? ' · ' + (currentStore.addr.match(/([가-힣]+동)/) || ['','부산'])[1] : '');
   document.getElementById('result-quote').textContent = '"' + currentStore.review + '"';
+  // 인플루언서 뱃지 렌더링
+  renderInfluencerBadges(currentStore.name);
   // 결과 화면 거리 표시 — GPS 있으면 실시간, 없으면 store.walk
   const resultDistEl = document.getElementById('result-dist');
   if (gpsActive && userLat && currentStore.lat) {
