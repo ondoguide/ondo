@@ -609,6 +609,8 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
 }
 .rc-f:active { background:var(--cream-deep); }
 .rc-f.active { background:var(--brown); color:var(--cream); border-color:var(--brown); }
+.rc-cat { font-weight:500; }
+.rc-cat.active { background:var(--brown-2); color:var(--cream); border-color:var(--brown-2); }
 
 .btn-feedback {
   background:transparent; color:var(--brown-2);
@@ -2124,7 +2126,13 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
       </button>
       <!-- 미세조정 칩 패널 -->
       <div class="refine-panel" id="refine-panel">
-        <span class="refine-hint">어떤 방향으로 바꿔드릴까요?</span>
+        <span class="refine-hint">카테고리만 정해서</span>
+        <div class="refine-chips-row" style="margin-bottom:10px;">
+          <button class="rc-f rc-cat" onclick="rerollWith('food')">🍚 밥집만</button>
+          <button class="rc-f rc-cat" onclick="rerollWith('drink')">🍻 술집만</button>
+          <button class="rc-f rc-cat" onclick="rerollWith('cafe_only')">☕ 카페만</button>
+        </div>
+        <span class="refine-hint">분위기로 바꿔서</span>
         <div class="refine-chips-row">
           <button class="rc-f" onclick="rerollWith('quiet')">🤫 더 조용한</button>
           <button class="rc-f" onclick="rerollWith('closer')">📍 더 가까운</button>
@@ -2374,7 +2382,8 @@ function goTo(id, addHistory = true) {
   // 브라우저 히스토리에 현재 화면 상태 저장
   // → 뒤로가기 = 앱 내 이전 화면으로 이동
   if (addHistory) {
-    history.pushState({ screen: id }, '', '#' + id);
+    try { history.pushState({ screen: id }, '', '#' + id); }
+    catch(e) { /* sandboxed iframe(미리보기 환경) 등에서 차단될 수 있음 — 화면 전환은 정상 진행 */ }
   }
 
   document.querySelectorAll('.screen').forEach(s => {
@@ -2408,7 +2417,8 @@ window.addEventListener('popstate', (e) => {
 window.addEventListener('DOMContentLoaded', () => {
   const active = document.querySelector('.screen.active');
   if (active) {
-    history.replaceState({ screen: active.id }, '', '#' + active.id);
+    try { history.replaceState({ screen: active.id }, '', '#' + active.id); }
+    catch(e) { /* sandboxed iframe 등에서 차단될 수 있음 */ }
   }
   // 공유 링크 진입 시에도 GPS를 자동 시작 (권한 이미 허용된 경우 즉시 수신)
   if (navigator.geolocation && navigator.permissions) {
@@ -2646,10 +2656,44 @@ let currentRefineFilter = null;
 const recentlyShown = {};        // 중복 방지
 let lastShownCategory = null;    // 연속 같은 카테고리 방지
 
+// 카테고리 한정 필터 그룹
+const CATEGORY_GROUPS = {
+  food:      ['korean','japanese','western','chinese','meat','rawfish','etc_dining'],
+  drink:     ['sojuhouse','izakaya','cocktail','beerhall','winebar','whiskybar','bar_etc'],
+  cafe_only: ['cafe','brunch']
+};
+
 function pickStore(q1Val, q2Val, refine) {
   const key = q1Val + '-' + q2Val;
-  const pool = STORES[key] || [];
+  let pool = STORES[key] || [];
   if (pool.length === 0) return null;
+
+  // 카테고리 한정 필터 적용 (밥집만 / 술집만 / 카페만)
+  // 옵션 2: 사용자가 명시적으로 카테고리를 선택했으므로, 차수보다 카테고리 의도를 우선 존중
+  //         현재 q1 풀에 해당 카테고리가 없거나 너무 적으면, 같은 q2의 다른 q1 풀에서 찾음
+  if (refine && CATEGORY_GROUPS[refine]) {
+    const allowedCats = CATEGORY_GROUPS[refine];
+    const filterByCat = (arr) => arr.filter(s => allowedCats.includes(s.category || s.sub || ''));
+
+    let filtered = filterByCat(pool);
+
+    // 현재 차수 풀의 카테고리 가게가 3개 미만이면 다른 차수 풀에서 보강
+    if (filtered.length < 3) {
+      const otherCourses = ['1차', '2차', '3차+'].filter(c => c !== q1Val);
+      const extra = [];
+      otherCourses.forEach(c => {
+        const otherKey = c + '-' + q2Val;
+        const otherPool = STORES[otherKey] || [];
+        extra.push(...filterByCat(otherPool));
+      });
+      // 중복 제거 (가게명 기준)
+      const seen = new Set(filtered.map(s => s.name));
+      extra.forEach(s => { if (!seen.has(s.name)) { filtered.push(s); seen.add(s.name); } });
+    }
+
+    // 카테고리 가게를 최소 1개라도 찾았으면 그걸 풀로 사용. 아예 없으면 원본 풀 유지(폴백).
+    if (filtered.length > 0) pool = filtered;
+  }
 
   const nowHour = new Date().getHours();
   const rf = refine !== undefined ? refine : currentRefineFilter;
