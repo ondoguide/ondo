@@ -168,8 +168,8 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
   flex:1;
   background:transparent; color:var(--brown-2);
   border:1px solid var(--border-md); border-radius:3px;
-  padding:13px 16px; font-family:var(--ko); font-size:13px; font-weight:400;
-  cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+  padding:13px 14px; font-family:var(--ko); font-size:13px; font-weight:400;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:background .18s;
 }
 .btn-map-entry:active { background:var(--cream-mid); }
@@ -1870,14 +1870,19 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--cream); 
       지금 시작하기
       <span class="btn-arrow">→</span>
     </button>
-    <!-- 지도 탐색 직행 버튼 -->
+    <!-- 보조 진입점: 지도 탐색 + 인스타그램 (한 줄 반반) -->
     <div class="intro-aux-row">
       <button class="btn-map-entry" onclick="goExplore()">
         <div class="btn-map-entry-left">
           <div class="btn-map-entry-icon">🗺</div>
-          <span>부산 전체 탐색</span>
+          <span>전체 탐색</span>
         </div>
-        <span style="font-size:11px;opacity:.4;">→</span>
+      </button>
+      <button class="btn-map-entry" onclick="window.open('https://www.instagram.com/ondo.guide/','_blank')">
+        <div class="btn-map-entry-left">
+          <div class="btn-map-entry-icon">◉</div>
+          <span>인스타그램</span>
+        </div>
       </button>
     </div>
     <span class="intro-note">5초면 충분해요</span>
