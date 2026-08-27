@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ONDO · Busan</title>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-932FXBJVFT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-932FXBJVFT');
+
+  // 유입 경로 추적: 명함(?from=card) / 배너(?from=board) 등
+  try {
+    var ondoFrom = new URLSearchParams(location.search).get('from');
+    if (ondoFrom) {
+      gtag('event', 'ondo_source_visit', { source_channel: ondoFrom });
+    }
+  } catch(e) { /* 구형 브라우저 등에서 실패해도 페이지는 정상 작동 */ }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Sans+KR:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -7779,34 +7795,6 @@ const EX_STORES = [
     "left": 50,
     "px": 50,
     "py": 50
-  },
-  {
-    "name": "테츠아지",
-    "category": "izakaya",
-    "sub": "izakaya",
-    "catLabel": "이자카야",
-    "review": "녹진하고 담백한 나베와 곁들이는 한잔",
-    "addr": "수영구 광남로 188 1층 테츠아지",
-    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjA0MjNfMjUy%2FMDAxNzc2OTQ5MzY4NjI3.rsMsTye5ZeqAM3qBwrBFOYx7AeWflG5Hdm0Q9rsLkU4g.JGbEAVyb2mO1twVvyP5CCSfcR4oES8KMY6Xad27iBwsg.JPEG%2F1000036978.jpg.jpg%3Ftype%3Dw1500_60_sharpen",
-    "walk": "",
-    "open": true,
-    "tags": [
-      "2차-설레는 날"
-    ]
-  },
-  {
-    "name": "스시사카바 하토바",
-    "category": "izakaya",
-    "sub": "izakaya",
-    "catLabel": "이자카야",
-    "review": "사시미와 함께 곁들이는 생맥주 한잔",
-    "addr": "수영구 민락로14번길 5 1층",
-    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250827_60%2F17562935380869ARcQ_JPEG%2FKakaoTalk_20250825_091248347.jpg",
-    "walk": "",
-    "open": true,
-    "tags": [
-      "2차-설레는 날"
-    ]
   }
 ];
 const EX_SUB_MAP  = {"dining": [["all", "전체"], ["korean", "Korean"], ["japanese", "Japanese"], ["chinese", "Chinese"], ["western", "Western"], ["etc", "etc"]], "cafe": [["all", "전체"], ["cafe", "Cafe"], ["bakery", "Bakery"], ["brunch", "Brunch"]], "bar": [["all", "전체"], ["bar", "Bar"], ["korean", "소주/막걸리"], ["japanese", "이자카야"]]};
