@@ -20,7 +20,7 @@
 (function(){
 'use strict';
 // 실제 카카오톡 채널 채팅 URL을 입력하면 채널 열기 버튼이 표시됩니다.
-var CHANNEL_URL='';
+var CHANNEL_URL='https://pf.kakao.com/_xlUJxon/chat';
 var q=new URLSearchParams(location.search),r=q.get('r')||'',v=q.get('v')||'';
 var $=function(id){return document.getElementById(id)};
 function show(id){['s-start','s-wait','s-ok','s-no','s-err'].forEach(function(s){$(s).classList.toggle('hide',s!==id)});}
