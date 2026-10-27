@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>ONDO 방문 인증</title>
+<style>
+  :root { --bg:#F5EFE6; --ink:#2A2622; --sub:#7A6F64; --line:#E2D8CB; --accent:#B5653A; --ok:#3F7A55; --card:#FFFDF9; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif; }
+  main { max-width:420px; margin:0 auto; padding:40px 20px 32px; min-height:100dvh; display:flex; flex-direction:column; }
+  .brand { letter-spacing:.32em; font-weight:600; font-size:15px; }
+  .brand small { display:block; letter-spacing:0; font-weight:400; color:var(--sub); font-size:12px; margin-top:4px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:28px 22px; margin-top:36px; }
+  h1 { font-size:22px; line-height:1.4; margin:0 0 10px; font-weight:700; }
+  p { margin:0 0 10px; line-height:1.6; color:var(--sub); font-size:15px; }
+  button, a.btn { display:block; width:100%; border:0; border-radius:14px; padding:17px; font-size:17px; font-weight:700; text-align:center; text-decoration:none; cursor:pointer; margin-top:18px; font-family:inherit; }
+  .primary { background:var(--ink); color:#F5EFE6; }
+  .secondary { background:transparent; color:var(--ink); border:1px solid var(--line) !important; }
+  button:disabled { opacity:.55; }
+  .code { font-size:34px; letter-spacing:.2em; font-weight:800; text-align:center; padding:16px; border:1px dashed var(--accent); border-radius:14px; color:var(--accent); margin:16px 0 4px; }
+  .ok { color:var(--ok); font-weight:700; }
+  .fine { font-size:12px; color:var(--sub); margin-top:auto; padding-top:28px; text-align:center; line-height:1.6; }
+  .hide { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">ONDO<small>부산에서 지금 갈 한 곳</small></div>
+
+  <section class="card" id="s-start">
+    <h1>추천받은 가게에<br>도착하셨나요?</h1>
+    <p>아래 버튼을 누르면 위치로 방문을 확인하고, 바로 커피 쿠폰을 드려요 ☕</p>
+    <button class="primary" id="go">도착했어요</button>
+  </section>
+
+  <section class="card hide" id="s-wait">
+    <h1>위치 확인 중…</h1>
+    <p>위치 사용을 묻는 창이 뜨면 ‘허용’을 눌러 주세요.</p>
+  </section>
+
+  <section class="card hide" id="s-ok">
+    <h1><span class="ok">방문 인증 완료!</span><br><span id="ok-name"></span></h1>
+    <p>아래 버튼으로 온도 카톡에 이 코드를 보내 주시면 커피 쿠폰을 바로 보내드려요.</p>
+    <div class="code" id="code"></div>
+    <a class="btn primary hide" id="chat" href="#">온도 카톡으로 코드 보내기</a>
+    <button class="secondary" id="copy">코드 복사</button>
+    <p style="margin-top:14px">맛있게 드세요. 다음에 또 고민되면 온도에게 물어봐 주세요 🙂</p>
+  </section>
+
+  <section class="card hide" id="s-err">
+    <h1 id="err-title"></h1>
+    <p id="err-body"></p>
+    <button class="primary" id="retry">다시 시도</button>
+  </section>
+
+  <div class="fine">위치는 가게와의 거리 확인에만 쓰고, 좌표는 저장하지 않아요.<br>ondoguide.com</div>
+</main>
+<script>
+(function () {
+  // 카카오톡 채널 채팅 주소 (예: https://pf.kakao.com/_xxxxxx/chat). 비워 두면 버튼이 숨겨지고 코드 복사만 보여요.
+  var CHANNEL_URL = '';
+
+  var q = new URLSearchParams(location.search);
+  var r = q.get('r') || '', v = q.get('v') || '';
+  var $ = function (id) { return document.getElementById(id); };
+  function show(id) { ['s-start','s-wait','s-ok','s-err'].forEach(function (s) { $(s).classList.toggle('hide', s !== id); }); }
+  function err(title, body) { $('err-title').textContent = title; $('err-body').textContent = body; show('s-err'); }
+
+  if (!r || !v) { err('링크가 올바르지 않아요', '온도 카톡에서 받은 링크를 다시 눌러 주세요.'); $('retry').classList.add('hide'); }
+
+  function done(res) {
+    $('ok-name').textContent = res.name || '';
+    $('code').textContent = res.code;
+    if (CHANNEL_URL) { $('chat').href = CHANNEL_URL; $('chat').classList.remove('hide'); }
+    show('s-ok');
+  }
+
+  function check() {
+    if (!navigator.geolocation) { err('위치를 확인할 수 없어요', '이 브라우저는 위치 기능을 지원하지 않아요. 온도 카톡에 "도착했어요"라고 보내 주세요.'); return; }
+    show('s-wait');
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      fetch('/api/checkin', { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ r: r, v: v, lat: pos.coords.latitude, lng: pos.coords.longitude, acc: pos.coords.accuracy }) })
+        .then(function (x) { return x.json(); })
+        .then(function (res) {
+          if (res.ok) return done(res);
+          if (res.why === 'far') return err('아직 가게와 거리가 있어요', (res.name ? res.name + '에서 ' : '가게에서 ') + '약 ' + res.d + 'm 떨어져 있어요. 도착하신 뒤 다시 눌러 주세요.');
+          if (res.why === 'accuracy') return err('위치가 정확하지 않아요', '실내에서는 위치가 흔들릴 수 있어요. 창가나 입구 쪽에서 다시 눌러 주세요.');
+          if (res.why === 'expired') return err('인증 기간이 지났어요', '추천 후 48시간 안에만 인증할 수 있어요. 온도 카톡으로 말씀해 주세요.');
+          err('잠시 문제가 생겼어요', '조금 뒤 다시 눌러 주시거나, 온도 카톡에 "도착했어요"라고 보내 주세요.');
+        })
+        .catch(function () { err('연결이 불안정해요', '잠시 뒤 다시 눌러 주세요.'); });
+    }, function (e) {
+      if (e.code === 1) err('위치 권한이 꺼져 있어요', '휴대폰 설정에서 이 브라우저(카카오톡 등)의 위치 접근을 허용한 뒤 다시 눌러 주세요.');
+      else err('위치를 찾지 못했어요', '잠시 뒤 다시 눌러 주세요.');
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+  }
+
+  $('go').onclick = check;
+  $('retry').onclick = check;
+  $('copy').onclick = function () {
+    var t = $('code').textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $('copy').textContent = '복사했어요'; }, function () { $('copy').textContent = '코드: ' + t; });
+  };
+})();
+</script>
+</body>
+</html>
