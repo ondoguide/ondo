@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4eee4">
+<meta name="description" content="직접 다녀온 광안리의 장소 중 지금에 맞는 한 곳을 골라드립니다.">
+<title>온도 | 광안리에서 지금 갈 한 곳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* 운영자가 수정하는 장소 목록입니다. ID는 지도·체크인 서버와 연결되므로 변경하지 마세요. */
+const VENUES = [
+  {
+    "id": "v01",
+    "name": "30년 전통 수타 손짜장",
+    "location": "민락동, 버스 차고지 옆",
+    "verdict": "제가 먹어 본 짬뽕 중 국물이 가장 진한 중국집입니다.",
+    "reason": "짜장과 탕수육도 만족스러웠습니다. 면 하나씩에 요리 하나를 곁들이기 좋고, 남자 친구들끼리 든든하게 먹기 좋은 동네 중국집입니다.",
+    "order": "짬뽕, 짜장, 미니 탕수육(12,000원). 2인이면 면 2 + 미니 탕수육 1",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 10,000~15,000원",
+    "wait": "19:30~20:00 추천, 웨이팅 거의 없음",
+    "companion": "동성 친구, 특히 남자끼리",
+    "occasion": "날씨 상관없이 배고플 때 언제든",
+    "drawback": "형광등 조명이 밝아 데이트 분위기로는 민망할 수 있음",
+    "next": "바로 옆 부산항 먹태클럽에서 가볍게 2차",
+    "visited": "2026.10.4",
+    "parking": "",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "chinese",
+    "photo": "",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1170,
+        1200
+      ]
+    ]
+  },
+  {
+    "id": "v02",
+    "name": "민생주",
+    "location": "광안리 해변, 민락 회센터 바로 옆",
+    "verdict": "제철 해산물과 탑처럼 쌓아 주는 튀김이 별미인 곳입니다.",
+    "reason": "신선한 제철 해산물과 맛있는 튀김을 함께 먹을 수 있음",
+    "order": "제철 해산물, 탑처럼 쌓아 주는 튀김",
+    "avoid": "딱히 없음",
+    "price": "약 20,000~25,000원",
+    "wait": "19:30~20:30 추천. 웨이팅 약 1시간, 캐치테이블로 원격 대기 가능",
+    "companion": "연인, 남자끼리 모두 괜찮음",
+    "occasion": "비 오는 날만 피하기(해산물)",
+    "drawback": "의자가 다소 불편하고 가게가 시끄러운 편",
+    "next": "2차로 쿠치가에서 사이드 메뉴에 술, 또는 근처 부산항 먹태클럽에서 가볍게 한잔",
+    "visited": "2026-09 말(정확한 날짜 미상)",
+    "parking": "",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTAyMjhfNjcg%2FMDAxNzQwNzMxNzA5OTMz.Ip0iEoVSlo3NRbGq8DCliMhx4VIUgI8RqTogmqjxpJYg.8nWlURYKErjXOOFYnPC4RiABbFq8kfgUiDKNQgalmQcg.JPEG%2FKakaoTalk_20250228_164008284_17.jpg%2F1440x1440",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1170,
+        1230
+      ]
+    ]
+  },
+  {
+    "id": "v03",
+    "name": "새벽집",
+    "location": "광안리 끝자락, 해변 뷰가 보이는 해변로 일렬",
+    "verdict": "술 마신 뒤 속을 풀기 좋은 국밥집입니다.",
+    "reason": "24시간 영업과 가성비. 언제든 콩나물국밥으로 해장 가능",
+    "order": "시래기 된장국밥, 콩나물국밥",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 9,000~11,000원",
+    "wait": "술 마신 뒤 마지막 코스로. 웨이팅 거의 없음",
+    "companion": "동성 친구끼리. 술 좋아하는 연인의 해장 마무리로도 좋음",
+    "occasion": "날씨 상관없이 술 마신 뒤 속이 허할 때",
+    "drawback": "형광등 조명이 밝아 연인끼리는 다소 부담스러울 수 있음",
+    "next": "저녁으로 먹었다면 마른 안주가 있는 야키토리 야수무에서 2차",
+    "visited": "2022년경 (현재 영업시간·가격 재확인 필요)",
+    "parking": "",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250503_30%2F1746239971571tenJa_JPEG%2F1000029376.jpg",
+    "moods": [],
+    "recommendedTimes": []
+  },
+  {
+    "id": "v04",
+    "name": "쿠치가",
+    "location": "민락 회센터 옆, 민생주 바로 옆",
+    "verdict": "사시미와 사이드가 고르게 맛있는 이자카야입니다.",
+    "reason": "언급한 모든 메뉴가 맛있어서, 민락에서 가장 자주 가고 가장 자신 있게 추천하는 이자카야. 사시미와 사이드 모두 수준이 고르게 높음",
+    "order": "오차즈케, 사시미 모리아와세, 고등어 봉초밥, 안심카츠, 카라미소 포테이토 스시",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 20,000~25,000원",
+    "wait": "18:00 오픈 직후 추천. 이후엔 웨이팅 약 30분. 다찌석보다 4인석이 편하니 오픈런으로 4인석",
+    "companion": "연인, 2인",
+    "occasion": "맑거나 선선한 날(비 오는 날은 피하기)",
+    "drawback": "인기가 많아 웨이팅이 있는 편",
+    "next": "부산항 먹태클럽, 야키토리 로만, 야키토리 야수무 등 가벼운 2차",
+    "visited": "2026-09 중순",
+    "parking": "",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "japanese",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMThfMzAw%2FMDAxNzY4NzMxMzc5NzEx.fDpfww_5VPPJQVMReZKpX4-k9MU8E3EAgvntRAphKesg.gXoDxN0_LN2mF1pfgj9zYar2XYsI7x57Ops1TURkXvEg.JPEG%2FA374CBFD-EC04-4AB4-B27E-626F3FC8822D.jpeg%3Ftype%3Dw1500_60_sharpen",
+    "moods": [],
+    "recommendedTimes": []
+  },
+  {
+    "id": "v05",
+    "name": "디에이블 광안점",
+    "location": "민락 회센터 끝자락",
+    "verdict": "광안대교 전망을 보며 파스타를 즐기는 곳입니다.",
+    "reason": "뷰가 아름답고, 평일엔 예약으로 창가석을 잡을 수 있음. 분위기와 음식 모두 좋음",
+    "order": "디에이블 파스타(꾸덕한 로제 좋아하면), 함께 먹기 좋은 목살 김치 필라프",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 19,000~24,000원",
+    "wait": "웨이팅 많지 않음. 토요일 저녁 드론쇼 시간에 가면 드론쇼를 잘 볼 수 있음",
+    "companion": "연인, 2인",
+    "occasion": "화창한 날, 토요일 드론쇼 하는 날, 기념일·특별한 데이트",
+    "drawback": "높은 층이라 엘리베이터를 타야 해서 번거롭고, 주말엔 이용객이 많아 주차가 다소 어려움",
+    "next": "같은 건물 카페 프랭크 커피바",
+    "visited": "2026-08 말",
+    "parking": "",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "western",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250930_248%2F17592285318464KmHw_JPEG%2FKakaoTalk_20241016_164331552_01.jpg",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": []
+  },
+  {
+    "id": "v06",
+    "name": "소랑",
+    "location": "민락 해변공원에서 도보 3분",
+    "verdict": "레트로한 가정집 분위기에서 토시살과 육사시미를 즐기는 곳입니다.",
+    "reason": "조용한 무드의 분위기에 수준 높은 고기 질을 자랑합니다. 메인 요리, 사이드 요리 모두 수준급입니다.",
+    "order": "육사시미, 짜빠게티와 파김치",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 19,000~24,000원",
+    "wait": "웨이팅 많지 않으나, 주말에는 웨이팅 살짝 있음",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "날씨 상관없이 배고플 때 언제든",
+    "drawback": "2층에 위치하여 계단으로 오르내려야 함.",
+    "next": "인근 이자카야 야수무, 혹은 간단한 마른 안주와 맥주를 즐기기 좋은 다이린",
+    "visited": "2026-10 초순",
+    "parking": "",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "",
+    "moods": [
+      "편안하게",
+      "특별하게"
+    ],
+    "recommendedTimes": []
+  },
+  {
+    "id": "v08",
+    "name": "야끼토리 로만",
+    "location": "부산 일본인학교 맞은편",
+    "verdict": "여러 종류의 야키토리를 가볍게 즐길 수 있는 술집입니다.",
+    "reason": "꼬치의 객단가 자체가 낮아 배부른 상태에서 방문해도, 안주와 분위기, 술을 동시에 즐길 수 있습니다.",
+    "order": "야끼토리 3종",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 10,000~15,000원",
+    "wait": "20:00~22:00 추천, 웨이팅 약 30분~1시간",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "인근에서 1차를 했고, 라이트한 2차를 즐기고 싶은 날",
+    "drawback": "가게가 시끄러운 편",
+    "next": "인근 이자카야 야수무, 혹은 간단한 마른 안주와 맥주를 즐기기 좋은 다이린",
+    "visited": "2026 여름 경",
+    "parking": "",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "japanese",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240706_35%2F1720207337709QmjQ2_JPEG%2FIMG_7457.jpeg",
+    "moods": [
+      "편안하게",
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1200,
+        1320
+      ]
+    ]
+  },
+  {
+    "id": "v09",
+    "name": "스시사카바 하토바",
+    "location": "민락 해변공원에서 도보 3분",
+    "verdict": "신선한 사시미와 초밥을 골라 먹는 이자카야입니다.",
+    "reason": "요리 주문한 이후 부족할 때 스시를 하나씩 추가로 선택해 주문할 수 있어, 다양하고 선도 높은 초밥을 수준 높게 즐길 수 있는 이자카야",
+    "order": "하토바 2인 사시미(회가 진짜 맛있어요.), 각종 초밥류, 카츠산도",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 20,000~25,000원",
+    "wait": "웨이팅 많지 않으나, 주말에는 웨이팅 살짝 있음",
+    "companion": "연인, 2인 (다찌석 위주)",
+    "occasion": "비 오는 날만 피하기(해산물)",
+    "drawback": "가게 자체가 협소해 다찌석 위주라 2인 이상 방문 시 대화에 좀 어렵습니다. 4인 테이블 2개 있는 경쟁 치열",
+    "next": "인근 야끼토리 로만 (육고기 + 물고기 둘 다 즐기기)",
+    "visited": "2026 여름 경",
+    "parking": "",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "japanese",
+    "photo": "",
+    "moods": [],
+    "recommendedTimes": []
+  },
+  {
+    "id": "v10",
+    "name": "소년 광안본점",
+    "location": "민락 해변공원에서 도보 3분",
+    "verdict": "한식과 퓨전 요리를 안주로 든든하게 즐기는 술집입니다.",
+    "reason": "이자카야 위주인 술집에 보석 같은 곳으로 맛있는 퓨전 한식 요리를 안주로 마음껏 즐길 수 있음",
+    "order": "마늘 닭전과 푹 고운 닭죽 (닭전 요리의 희소성, 맛도 Excellent",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 19,000~24,000원",
+    "wait": "17:00~19:00, 웨이팅 많은 편, 1차 술집으로 어울리니 오픈런 추천",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "퓨전 한식을 즐기고 싶거나, 막걸리를 먹고 싶은 날",
+    "drawback": "가게 자체가 협소함, 웨이팅이 심함, 대화 소리가 다소 시끄러운 편",
+    "next": "인근 야끼토리 로만 (육고기 + 물고기 둘 다 즐기기)",
+    "visited": "2026 겨울 경",
+    "parking": "",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240926_191%2F1727278118641sbt7D_JPEG%2FIMG_4722.jpeg",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1020,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v11",
+    "name": "톤쇼우 광안점",
+    "location": "민락 해변공원에서 도보 4분",
+    "verdict": "광안리에서 프리미엄 돈카츠를 맛볼 수 있는 곳입니다.",
+    "reason": "부산에서 탄생한 프리미엄 돈가스 맛집으로, 관광 목적으로 온 타지인이 한 번쯤 즐기기 좋은 수준 높은 퀄리티의 일식 돈카츠",
+    "order": "버크셔 K 로스카츠, 히레카츠, 일식 카레",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 15,000~19,000원",
+    "wait": "15:00~16:00, 웨이팅이 매우 많은 편, 식사 시간 피해서 웨이팅 추천, 현장 예약 불가능",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "프리미엄 일식 카츠를 음미하고 싶은 배가 많이 고픈 날",
+    "drawback": "웨이팅이 매우 심함",
+    "next": "시즌즈 광안리 (디저트 카페), 프랭크커핀바 광안점 (느좋 카페)",
+    "visited": "2024 겨울 경",
+    "parking": "불가 (인근 공영주차장: 민락씨랜드시장공영주차장)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "japanese",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250227_102%2F1740627233546XNzYA_JPEG%2F%25B8%25F0%25B5%25D2%25C4%25AB%25C3%25F7.jpg",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        900,
+        960
+      ]
+    ]
+  },
+  {
+    "id": "v12",
+    "name": "프랭크커핀바 광안점",
+    "location": "민락 회센터에서 도보 3분",
+    "verdict": "광안리 뷰를 즐기는 우드 톤 카페입니다.",
+    "reason": "대전에서 내려온 카페로, 앤틱한 월넛 우드 톤 인테리어가 돋보입니다. 높은 곳에서 광안리 전체를 바라볼 수 있습니다.",
+    "order": "프랭크커피, 피스타치오 티라미수",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 6,000~10,000원",
+    "wait": "17:00~18:30, 일몰 시간에 광안리 수평선을 조망하는 것을 추천, 웨이팅 없는 편",
+    "companion": "연인, 2인",
+    "occasion": "비가 오지 않고, 가시거리가 좋은 날",
+    "drawback": "엘리베이터 없이 도달하기 힘들고, 엘베 수요가 많아 로비 체류 시간이 김",
+    "next": "나가하마만게츠 광안리점",
+    "visited": "2026 여름 경",
+    "parking": "가능 (바다마루지하주차장출입구)",
+    "tags": "",
+    "category": "cafe",
+    "subcategory": "cafe",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMTBfMjU5%2FMDAxNzY4MDMwNzY3OTEx.taWBbIdHg2-cZWTPcJsddqRsT5ZOcbaEBLLf7QdLbe8g.dbI9o5Bn9eNJesP3tphYcN44SYZvHYw_-C3O33r0OrMg.JPEG%2F3.jpg",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1020,
+        1110
+      ]
+    ]
+  },
+  {
+    "id": "v13",
+    "name": "나가하마만게츠 광안리점",
+    "location": "민락 테넌바움에서 도보 2분",
+    "verdict": "특별한 돈코츠 라멘을 사골과 비법 소스로 맛낸 곳입니다.",
+    "reason": "돈코츠 라멘을 좋아한다면, 후기가 좋을 수밖에 없는 깊은 국물과 면, 세트 메뉴가 있어 남자 손님도 배부르게 먹을 수 있음",
+    "order": "나가하마라멘, 나가하마라멘 교자세트",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 12,000~19,000원",
+    "wait": "12:00~13:00, 웨이팅이 많은 편, 면 요리(탄수화물)라 점심 때 추천",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "날씨 상관없이 돈코츠 라멘이 끌린다면 언제든",
+    "drawback": "다찌석 위주라 동반자와 소통이 다소 불편, 웨이팅이 심해 대기 시간 발생",
+    "next": "Etalee",
+    "visited": "2025 겨울 경",
+    "parking": "불가 (인근 공영주차장: 민락씨랜드시장공영주차장)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "japanese",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTZfMTE2%2FMDAxNzY4NTU5MDk4MzMx.1v7_TsupkgqxOI0OjQYTI6t9luiQYE8mX7G82HmAB34g.GYgrpjq0u-7QvO9KR0MdO0E4tKm1i9n2MswZpNyrxQAg.JPEG%2F20260113_110633.jpg.jpg%3Ftype%3Dw1500_60_sharpen",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        720,
+        780
+      ]
+    ]
+  },
+  {
+    "id": "v14",
+    "name": "Etalee",
+    "location": "민락 행정복지센터 도보 1분",
+    "verdict": "따뜻하고 바삭한 에그타르트를 즐길 수 있는 카페입니다.",
+    "reason": "식사 후 출출하거나, 디저트가 당길 때, 부담 없이 즐길 수 있는 에그타르트 특화 카페",
+    "order": "에그타르트",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 3,000~10,000원",
+    "wait": "14:00~17:00, 웨이팅 없는 편, 식사 후, 카페 방문할 시간에 추천",
+    "companion": "연인, 2인",
+    "occasion": "날씨 상관없이 에그타르트 먹고 싶을 때 언제든",
+    "drawback": "매장 조명이 다소 밝고, 에그타르트 따뜻할 때 먹어야 가장 맛있음 (나오는 시간대 확인 요망)",
+    "next": "고하순 광안직영점 (카페 후, 든든한 고기 위주 저녁 식사로 추천)",
+    "visited": "2026 9월 중순",
+    "parking": "불가 (인근 공영주차장: 민락씨랜드시장공영주차장)",
+    "tags": "",
+    "category": "cafe",
+    "subcategory": "cafe",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTJfMjE1%2FMDAxNzY4MjIyMDYyMzQ3.x4xaostpCXm7DLATZrKqbOqzgdvxj5d8dIMFK1WuE3sg.nB7jvDOAJVqpn6CdtYsVNTKL7aeMf4hDWoWBVqLXNwcg.JPEG%2F20260111_110453.jpg.jpg%3Ftype%3Dw1500_60_sharpen",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        840,
+        1020
+      ]
+    ]
+  },
+  {
+    "id": "v15",
+    "name": "고하순 광안직영점",
+    "location": "민락 행정복지센터 도보 2분",
+    "verdict": "목살과 삼겹살에 깔끔한 밑반찬을 곁들이는 곳입니다.",
+    "reason": "고기 질이 좋고, 직접 구워주는 곳이라 편하게 식사가 가능한 곳, 밑반찬이 깔끔해 어른들 모시고 가기도 좋은 곳",
+    "order": "목살, 김치치즈볶음밥, 삼겹살",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "18:00~19:00, 웨이팅이 적당히 있는 편, 고기류라 저녁으로 추천",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "퀄리티 좋고, 구워주는 고기를 먹고 싶을 때 언제든",
+    "drawback": "층수가 3층이라 계단 이동 소요가 있음",
+    "next": "용호상회 광안1호점",
+    "visited": "2026 여름 경",
+    "parking": "가능 (인근 공영주차장: 민락씨랜드시장공영주차장)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA1MTdfMTgg%2FMDAxNzQ3NDYwOTA1ODQ5.kYahzf_tmxzrkLO7S8xZRmt1pXvsbQA5BIg7XOtn8Mcg.UlzO2X_hNhZGTKeVEtSo2dEJsZGnZ1rlNVCoP71QYdMg.JPEG%2FIMG_6801.jpg",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1080,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v16",
+    "name": "용호상회 광안1호점",
+    "location": "민락 해변공원에서 도보 1분",
+    "verdict": "오래된 팥빙수 이야기와 단골층이 있는 부산의 디저트 카페입니다.",
+    "reason": "용호동에서 막걸리를 판매하던 분이 막걸리 온도를 일정하게 유지하기 위해 시작한 팥빙수 사업이 카페로 이어진 곳입니다. 용호동 매장은 여러 블루리본을 받았고, 여름에는 찾는 사람이 많은 편입니다. 오래된 역사와 두터운 고객층이 특징입니다.",
+    "order": "팥빙수, 호두과자 (팥이 들어간 디저트)",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 5,000~10,000원",
+    "wait": "15:00~16:00, 웨이팅이 거의 없는 편, 식사 후 디저트가 당기는 시간",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "날씨 상관없이 배고플 때 언제든",
+    "drawback": "매장이 다소 협소하여, 단체 손님 방문이 살짝 어려움",
+    "next": "고하순 광안직영점 (카페 후, 든든한 고기 위주 저녁 식사로 추천)",
+    "visited": "2026 10월 중순",
+    "parking": "불가 (인근 공영주차장: 민락해변공원 노상 공영 주차장 (부산 수영구 민락수변로 16))",
+    "tags": "",
+    "category": "cafe",
+    "subcategory": "cafe",
+    "photo": "",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        900,
+        960
+      ]
+    ]
+  },
+  {
+    "id": "v17",
+    "name": "부산항 먹태클럽",
+    "location": "민락 행정복지센터 도보 3분",
+    "verdict": "야장과 다찌에서 수입 병맥주와 마른 안주를 즐기는 맛집입니다.",
+    "reason": "식사 후 가볍게 수입 병맥주와 마른 안주를 즐기기 좋습니다. 선선한 날에는 야장 자리에 앉기 좋았습니다.",
+    "order": "수입 병맥주(호가든, 스텔라), 부산항 먹태구이",
+    "avoid": "뽀득 뽀득 소시지",
+    "price": "약 10,000~15,000원",
+    "wait": "20:00~22:00 추천, 웨이팅 약 10~30분",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "야장석이 많아 비가 오지 않는 날, 배가 부르고, 안주를 많이 못 먹을거 같은 날",
+    "drawback": "야장석에 의자가 다소 불편함",
+    "next": "민생주 (라이트하게 한잔하고, 본격적으로 해산물 먹기 좋은 곳)",
+    "visited": "2026 10월 초순",
+    "parking": "불가",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "bar",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240112_223%2F1705052204303Li5DQ_JPEG%2FKakaoTalk_20240112_145957230_05.jpg",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1200,
+        1320
+      ]
+    ]
+  },
+  {
+    "id": "v18",
+    "name": "83해치",
+    "location": "부산 수영경찰서 광안지구대 도보 30초",
+    "verdict": "따뜻한 조명 아래 고기와 사이드까지 즐기기 좋은 곳입니다.",
+    "reason": "반찬이 깔끔하고, 실내 배연 설비가 잘되어 있음, 고기도 직접 구워주고, 사이드 퀄리티까지 수준급",
+    "order": "목살, 된장술밥, 삼겹살",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "20:00~22:00 추천, 웨이팅 약 1시간~1시간30분",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "퀄리티 좋고, 구워주는 고기를 먹고 싶을 때 언제든, 밑반찬 가짓수가 많은 고깃집을 선호할 때, 사이드 퀄리티를 많이 보는 경우",
+    "drawback": "웨이팅이 매우 심하고, 내부가 시끄러워 소통에 다소 불편함이 있음",
+    "next": "용호상회 광안1호점",
+    "visited": "2026 5월 초순",
+    "parking": "불가 (인근 공영주차장: 민락씨랜드시장공영주차장)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA0MDlfMjQ1%2FMDAxNzQ0MTI2MjU1Mzc5.txNSCH5rKHqN5oIo9_90dG832aQbaY8PmnlZDV0IPuEg.rlJfTfNK9xXy2ICqkbIwNsLiWqt5Byfw4NWXs39x_b0g.JPEG%2F20250408_223738.jpg%3Ftype%3Dw1500_60_sharpen",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1200,
+        1320
+      ]
+    ]
+  },
+  {
+    "id": "v19",
+    "name": "화륵",
+    "location": "부산 일본인학교 도보 1분",
+    "verdict": "깔끔한 식기와 반찬에 한우 함박을 내는 한식집입니다.",
+    "reason": "감도 있는 인테리어와 식기 구성이 깔끔하고, 한우 함박에 집중하는 곳입니다. 알배추로 만든 샐러드도 신선했습니다.",
+    "order": "한우 숯불 함박 정식, 알배추 시저 샐러드",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~32,000원",
+    "wait": "17:00~17:30, 웨이팅이 적당히 있는 편이라 오픈런 추천, 이른 저녁으로 깔끔한 한식이 당기는 시간",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "날씨에 상관없이 퀄리티 높은 함박을 경험하고 싶은 날",
+    "drawback": "다찌석 위주라 동반자와 소통이 다소 불편, 남자 고객에게는 양이 다소 적을 수 있어 추가 함박을 시켜야할 수도 있음",
+    "next": "소년 광안본점 (한식으로 시작해서 한식주점으로 끝나는 코스)",
+    "visited": "2025 겨울 경",
+    "parking": "불가 (인근 민영주차장: 안전 민영주차장 (매장에서 도보 3~4분 거리) - 부산 수영구 민락동 174-5)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240330_281%2F1711762094702jfFc8_JPEG%2FDSC00282.jpeg",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1020,
+        1050
+      ]
+    ]
+  },
+  {
+    "id": "v20",
+    "name": "테츠아지",
+    "location": "동방 오거리 도보 3분",
+    "verdict": "제가 다섯 번 이상 찾은, 맛과 분위기가 좋은 일식 주점입니다.",
+    "reason": "시켜본 일식 위주의 음식 퀄리티가 모두 매우 뛰어남, 내부 조도와 분위기가 좋아 연인과 친구들끼리 소통하기 좋음. 분위기와 맛을 모두 잡은 맛집",
+    "order": "토리나베, 히레카츠, 수제 가라야게",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 20,000~25,000원",
+    "wait": "19:30~20:00 추천, 웨이팅 거의 없음",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "날씨에 상관없이 2차 술집으로 퀄리티 높은 일식당(이자카야)을 경험하고 싶은 날",
+    "drawback": "가게가 협소하고, 다찌석 위주라 동반자와 소통이 다소 불편, 2인석, 4인석 각각 1개씩 마련되어 있으나 웨이팅이 늘어나면 쟁탈전이 심해질 것으로 예상",
+    "next": "골든킴 부산하우스",
+    "visited": "2026 10월 중순",
+    "parking": "불가 (인근 민영주차장: 동방스카이주차장)",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "japanese",
+    "photo": "",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1170,
+        1200
+      ]
+    ]
+  },
+  {
+    "id": "v21",
+    "name": "치킨버거클럽 광안점",
+    "location": "동방 오거리 도보 4분",
+    "verdict": "치킨버거가 당길 때마다 제가 다시 찾는 전문점입니다.",
+    "reason": "제가 다섯 번 이상 찾은 치킨버거 전문점입니다. 방문 당시 전포동점보다 대기가 적었고, 바삭한 튀김옷과 소스, 푹신한 번을 광안리에서도 즐길 수 있었습니다.",
+    "order": "더티 화이트 (달짝지근한 버거를 좋아하는 사람) / BLT (짭짤한 버거를 좋아하는 사람)",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 9,000~19,000원",
+    "wait": "18:00~19:00 추천, 웨이팅 거의 없음",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "날씨에 상관없이 프렌차이즈 버거 대신 수준 높은 수제 버거를 먹고 싶은 날",
+    "drawback": "메인 상권과 살짝 떨어져 있음에도 주차 지원이 불가능함",
+    "next": "수채화 사랑",
+    "visited": "2026.10.21",
+    "parking": "불가 (인근 민영주차장: 민락골목시장 주차장: 부산 수영구 광남로 218-4 민락골목시장 고객편의시설)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "western",
+    "photo": "",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1080,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v22",
+    "name": "듀플릿",
+    "location": "동방 오거리 도보 3분",
+    "verdict": "마당과 독채 공간에서 특별한 분위기를 즐기는 카페입니다.",
+    "reason": "민락동에서 마당에 파라솔과 의자석이 완비되어 있고, 1,2층 모두 쓸 수 있는 독채 구성이라, 방문 시 감도 있고, 특별한 무드의 분위기와 경험을 연출할 수 있는 경쟁력 있는 공간",
+    "order": "퍼지 브라우니, 딸기 수건 케이크",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 6,000~10,000원",
+    "wait": "12:30~13:30 (여름 제외) 채광 좋은 낮 / 19:30~20:30 (일몰 후) 경관 조명이 들어왔을 때",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "야외에서 분위기를 즐기고 싶다면 맑고 춥지 않은 날, 연말 저녁 특별한 무드를 연출하고 싶은 날",
+    "drawback": "야외 마당석 포장이 일정하지 않아 의자 거치가 다소 불편, 골목에 있어 접근성이 다소 떨어짐",
+    "next": "골든킴 부산하우스",
+    "visited": "2026 8월 초순",
+    "parking": "가능 (인근 민영주차장: 동방스카이주차장)",
+    "tags": "",
+    "category": "cafe",
+    "subcategory": "cafe",
+    "photo": "",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        750,
+        810
+      ],
+      [
+        1170,
+        1230
+      ]
+    ]
+  },
+  {
+    "id": "v23",
+    "name": "평화김해뒷고기 광안리점",
+    "location": "민락 해변공원에서 도보 3분",
+    "verdict": "육즙 가득한 뒷고기와 사이드를 부담 없이 즐기는 곳입니다.",
+    "reason": "값 비싼 상권에서 가성비 좋은 고기를 많이 먹을 수 있는 부담 없는 뒷고기 맛집",
+    "order": "국내산 평화뒷고기, 치즈김치볶음밥",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 19,000~24,000원",
+    "wait": "18:00~19:00, 웨이팅이 적당히 있는 편, 고기류라 저녁으로 추천",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "든든하게 뒷고기로 영양 보충 후, 치즈와 함께 맛있는 김치 볶음밥을 먹고 싶은 날",
+    "drawback": "가게가 시끄럽고, 의자 받침이 없어 오래 앉아있으면 허리가 아픔",
+    "next": "부산항 먹태클럽, 야키토리 로만, 야키토리 야수무 등 가벼운 2차",
+    "visited": "2026 1월 초순",
+    "parking": "불가 (인근 민영주차장: 형제 주차장 (부산 수영구 민락로6번길 8 형제주차장))",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1080,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v24",
+    "name": "해성막창 광안리점",
+    "location": "민락 해변공원에서 도보 1분",
+    "verdict": "대창과 막창, 곱창전골을 소주와 곁들이기 좋은 곳입니다.",
+    "reason": "해운대 본점에서 건너온 곳으로, 대창과 막창 등 기름진 안주를 좋아할 때 부담 없이 찾기 좋습니다. 방문하며 음식 맛이 일관되게 유지된다고 느꼈습니다.",
+    "order": "곱창전골",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "17:00~19:00, 웨이팅 많은 편, 1차 술집으로 어울리니 오픈런 추천",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "동물성 안주를 좋아하는 애주가들이 소주와 페어링이 좋은 안주를 찾고 싶은 날 / 고퀄리티의 곱창전골이나 막창, 대창이 끌리는 날",
+    "drawback": "매장 조명이 다소 밝고, 시끌 시끌한 음식점 타입의 분위기라 소통이 다소 어려움",
+    "next": "야끼토리로만",
+    "visited": "2026 1월 초순",
+    "parking": "가능 (인근 공영주차장: 민락해변공원 노상 공영 주차장 (부산 수영구 민락수변로 16))",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTEwMjZfOTQg%2FMDAxNzYxNDcyMjY0NjU1.z72ba_d8xGIqRKKcHlou1a7gTEIDn_00fWZ7BnRTFxAg.8xST9ltUyUpbHXgQcA-pK604esbNLx895BSpWBTs6fgg.JPEG%2F900%EF%BC%BF20251022%EF%BC%BF195612.jpg%2F900x675",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1020,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v25",
+    "name": "개미집 광안리점",
+    "location": "민락 해변공원에서 도보 3분",
+    "verdict": "부산에서 오래 자리한 낙곱새 맛집입니다.",
+    "reason": "50년 역사를 자랑하고, 재방문율이 높음, 부산에서 오래 살아남은 낙곱새 원조 맛집",
+    "order": "낙곱새",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 13,000~20,000원",
+    "wait": "12:00~13:00, 웨이팅이 적당히 있는 편, 사리 추가하려면 점심시간 추천",
+    "companion": "동성 친구, 2~4인",
+    "occasion": "해산물(낙지, 새우)과 곱창을 동시에 먹고 싶은 날, 낙곱새 비빔밥을 먹고 싶은 날",
+    "drawback": "매장 조명이 다소 밝고, 시끌 시끌한 음식점 타입의 분위기라 소통이 다소 어려움",
+    "next": "용호상회 광안1호점",
+    "visited": "2026 8월 초순",
+    "parking": "가능 (건물 안 1층 주차장 활용)",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221123_21%2F1669179741768lL86k_JPEG%2F20220222_%25B9%25CC%25B6%25E4007.JPG",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        720,
+        780
+      ]
+    ]
+  },
+  {
+    "id": "v26",
+    "name": "나막집 광안민락점",
+    "location": "민락 해변공원에서 도보 4분",
+    "verdict": "맑은 곰탕 국물의 담백한 고기 칼국수집입니다.",
+    "reason": "칼국수의 탁한 국물과 강한 조미료 맛, 들깨를 싫어하는 사람들을 위한 완벽한 대안, 깔끔하고, 속이 편안한 칼국수를 맛볼 수 있는 곳",
+    "order": "고기 칼국수, 삼겹구이",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 13,000~20,000원",
+    "wait": "12:00~13:00, 웨이팅이 많은 편, 면 요리(탄수화물)라 점심 때 추천",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "자극적인 음식 말고, 맑은 곰탕 국물 베이스의 칼국수를 먹고 싶은 날",
+    "drawback": "매장이 다소 협소하여, 단체 손님 방문이 살짝 어려움",
+    "next": "프랭크커핀바 광안점",
+    "visited": "2025 9월 중순",
+    "parking": "가능 (타워더모스트광안 (부산 수영구 민락수변로17번길))",
+    "tags": "미쉐린 가이드 선정",
+    "category": "dining",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDNfMTk3%2FMDAxNzU5NDU0ODk0NDgx.y0HLKzQUlce5jT9H41v94af0Y_rgKoWLeSnIU81brk0g.Trr7wpbCQO_vfZHX-hVj4XHcos5102EVQLkOlIyBybog.JPEG%2FKakaoTalk_Image_2025-10-03-10-28-00.jpeg",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        720,
+        780
+      ]
+    ]
+  },
+  {
+    "id": "v27",
+    "name": "좋은느낌포차",
+    "location": "부산 수영경찰서 광안지구대 도보 1분",
+    "verdict": "한식 안주와 술을 늦은 시간까지 부담 없이 즐기는 곳입니다.",
+    "reason": "안주 종류가 다양하고 주변 상권에 비해 비교적 저렴한 한식 위주 안주가 즐비함, 안주 가격이 착해 가격 부담이 적은 맛집",
+    "order": "닭도리탕, 땡초부추전",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 13,000~20,000원",
+    "wait": "19:30~20:00 추천, 웨이팅 거의 없음",
+    "companion": "동성 친구, 2~4인",
+    "occasion": "지갑이 홀쭉한 데, 한식 안주와 소주 한잔 하고 싶은 날",
+    "drawback": "매장이 다소 협소하여, 단체 손님 방문이 살짝 어려움, 조명과 분위기가 다소 시끄러워 연인과 방문은 비추천",
+    "next": "호이호이",
+    "visited": "2026 9월 중순",
+    "parking": "불가 (인근 민영주차장: 대동민영주차장 (부산 수영구 광안해변로295번길 52))",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMDhfMjEg%2FMDAxNzI4Mzk0ODE3NDAx.Cq80ODNBM5ykCPOdD3Flco9zxT7JUYV-gbbIjXOrxVIg.cVzahGg_LAllIdIFZArHdSpJjS1Q_rneyQnkXuqI1Gcg.JPEG%2F1728394816814.jpg",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1170,
+        1200
+      ]
+    ]
+  },
+  {
+    "id": "v28",
+    "name": "호이호이",
+    "location": "부산 수영경찰서 광안지구대 도보 2분",
+    "verdict": "늦은 시간까지 일식과 양식 퓨전 요리를 즐기는 주점입니다.",
+    "reason": "일식과 양식 퓨전 요리를 다루는 몇 안 되는 주점으로, 양식 일식을 동시에 별미로 즐길 수 있고, 주변에서 가장 마감 시간이 늦어 부담 없이 놀 수 있는 주점",
+    "order": "호이호이 특제 테바사키, 훈연 차슈 크림파스타",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 19,000~24,000원",
+    "wait": "20:00~22:00 추천, 웨이팅 약 10~30분 / 01:00~05:00 추천, 야간 웨이팅 거의 없음",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "밤 늦게까지 퓨전 일식과 양식을 즐기며 술 마시고 싶은 날",
+    "drawback": "매장이 다찌석 위주로 소통에 어려움이 있고, 4인 테이블석이 1개 뿐이라 여러명에서 방문하기 불리함",
+    "next": "저수지",
+    "visited": "2026 7월 초순",
+    "parking": "불가 (인근 민영주차장: 대동민영주차장 (부산 수영구 광안해변로295번길 52))",
+    "tags": "심야 식당 (새벽 3시 이후까지 영업)",
+    "category": "bar",
+    "subcategory": "etc",
+    "photo": "",
+    "moods": [
+      "편안하게"
+    ],
+    "recommendedTimes": [
+      [
+        1200,
+        1320
+      ],
+      [
+        60,
+        300
+      ]
+    ]
+  },
+  {
+    "id": "v29",
+    "name": "돈까스의정원 광안본점",
+    "location": "부산 일본인학교 도보 2분",
+    "verdict": "겉은 바삭하고 속은 촉촉한 흑돈카츠를 맛볼 수 있는 곳입니다.",
+    "reason": "톤쇼우 웨이팅으로 지친 관광객 현지인들의 완벽한 대안이 되어주는 두꺼운 일식 돈카츠의 풍미를 느끼게 해주는 맛집",
+    "order": "지리산 버크셔 로스카츠 <지등심>",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 15,000~19,000원",
+    "wait": "17:00~17:30, 웨이팅이 적당히 있는 편이라 오픈런 추천, 이른 저녁으로 깔끔한 돈카츠가 당기는 시간",
+    "companion": "동성 친구, 연인, 2인",
+    "occasion": "두툼하고 육즙 가득한 수준 높은 돈카츠와 카레를 즐기고 싶은 날",
+    "drawback": "매장이 다찌석 위주로 3인 이상 방문 시 소통의 어려움이 있음",
+    "next": "사랑은연필로쓰세요 광안점",
+    "visited": "2025 9월 중순",
+    "parking": "가능 (인근 민영주차장: 바다 주차장 (부산 수영구 민락로6번길 9-1))",
+    "tags": "",
+    "category": "dining",
+    "subcategory": "japanese",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDhfMTEy%2FMDAxNzY3ODYzNTI4NjI4.uG5jQNRc0nCcp15JUzu7_9DKb-Q0R8QW8P7HFlc4Yw0g.iSB-E7NTFE3WfK7hkEeO5A3Si5ob9lEgNDohqHAOyaAg.JPEG%2FIMG_4047.jpeg",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1020,
+        1050
+      ]
+    ]
+  },
+  {
+    "id": "v30",
+    "name": "그린파치",
+    "location": "민락 해변공원에서 도보 4분",
+    "verdict": "제철 회와 퓨전 안주를 함께 즐기기 좋은 이자카야입니다.",
+    "reason": "인테리어 감도가 훌륭하고, 회의 신선도가 수준급, 다양한 회를 신선하게 맛볼 수 있는 프리미엄 이자카야",
+    "order": "모둠 숙성 사시미, 제철 회",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "17:00~19:00, 웨이팅 많은 편, 1차 술집으로 어울리니 오픈런 추천",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "신선한 해산물이랑 페어링이 좋은 청하가 땡기는 날",
+    "drawback": "매장이 다소 시끄러운 편",
+    "next": "이자카야 야수무 광안점",
+    "visited": "2025 7월 중순",
+    "parking": "불가 (인근 민영주차장: 제일주차장 (부산 수영구 광안로61번길 65 제일주차장))",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "japanese",
+    "photo": "",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1020,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v31",
+    "name": "루베르부산",
+    "location": "민락 해변공원에서 도보 5분",
+    "verdict": "회와 육사시미, 여러 장르의 안주를 즐기는 퓨전 주점입니다.",
+    "reason": "한 곳에서 다양한 장르(한식, 양식, 일식) 음식을 즐길 수 있는 술집",
+    "order": "육사시미, 생새우회",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "19:00~20:00, 웨이팅 적은 편, 밥+술하기 좋은 곳",
+    "companion": "동성 친구, 연인, 2~4인",
+    "occasion": "한식, 양식, 일식 중 뭘 먹을지 모르겠을때 여러 장르의 안주를 한 곳에서 경험하고 싶은 날",
+    "drawback": "매장이 다소 시끄러운 편",
+    "next": "다이린 광안점",
+    "visited": "2026 10월 초순",
+    "parking": "불가 (인근 민영주차장: 제일주차장 (부산 수영구 광안로61번길 65 제일주차장))",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "etc",
+    "photo": "",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1140,
+        1200
+      ]
+    ]
+  },
+  {
+    "id": "v32",
+    "name": "주청광장 광안점",
+    "location": "민락 해변공원에서 도보 5분",
+    "verdict": "한식 안주의 기본에 충실한 주점입니다.",
+    "reason": "퓨전이 아닌 정통 한식 안주에 집중한 숨은 맛집, 시킨 메뉴 모두 만족스러운 정통 한식 주점",
+    "order": "칼칼 된장술밥, 수육튀김",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "19:30~20:00 추천, 웨이팅 거의 없음",
+    "companion": "동성 친구, 2~4인",
+    "occasion": "비 올때는 전 종류, 오지 않을 땐 술밥과 수육튀김, 정통 한식이 땡기는 날",
+    "drawback": "매장이 다소 시끄럽고, 의자가 불편함",
+    "next": "테츠아지",
+    "visited": "2024 10월 중순",
+    "parking": "불가 (인근 민영주차장: 제일주차장 (부산 수영구 광안로61번길 65 제일주차장))",
+    "tags": "",
+    "category": "bar",
+    "subcategory": "korean",
+    "photo": "https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2024_10_26_2452%2F9PpPXTa1Hr_01.jpg",
+    "moods": [],
+    "recommendedTimes": [
+      [
+        1170,
+        1200
+      ]
+    ]
+  },
+  {
+    "id": "v33",
+    "name": "외딴섬",
+    "location": "동방 오거리 도보 3분",
+    "verdict": "따뜻하고 아담한 분위기에서 한식 안주를 즐기는 곳입니다.",
+    "reason": "동방오거리 수영 방향에 있는 한식 주점입니다. 독특하고 아기자기한 인테리어와 따뜻한 조도가 안락합니다.",
+    "order": "꽃게알탕, 땡초 부추전",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 25,000~29,000원",
+    "wait": "18:00~19:00 추천, 웨이팅이 심해 오픈런 추천",
+    "companion": "연인, 2~4인",
+    "occasion": "국물 안주 위주 구성으로 날씨가 쌀쌀해지는 환절기나 겨울 중 한 날",
+    "drawback": "매장이 협소해 대화 소리가 남한테 들릴 가능성이 있음, 다찌석이 있어 소통이 다소 불편",
+    "next": "물망초",
+    "visited": "2025 1월 말",
+    "parking": "불가 (인근 민영주차장: 민락골목시장 주차장: 부산 수영구 광남로 218-4 민락골목시장 고객편의시설)",
+    "tags": "심야 식당 (새벽 3시 이후까지 영업)",
+    "category": "bar",
+    "subcategory": "korean",
+    "photo": "",
+    "moods": [
+      "편안하게",
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        1080,
+        1140
+      ]
+    ]
+  },
+  {
+    "id": "v34",
+    "name": "까사부사노 테라스",
+    "location": "광안리 만남에 광장에서 도보 3분",
+    "verdict": "광안대교를 바라보며 에스프레소를 즐기는 카페입니다.",
+    "reason": "낮에는 광안리에서 펼쳐지는 윤슬을, 밤에는 광안대교의 경관 조명과 야경을 즐기기 테라스가 딸린 무드있는 뷰 맛집",
+    "order": "에스프레소",
+    "avoid": "없음(지금까지 시킨 메뉴 모두 만족)",
+    "price": "약 4,000~10,000원",
+    "wait": "09:00~10:00 윤슬이 이쁜 시간 / 17:30~18:30 노을이 이쁜 시간 /.20:00~ 야경이 이쁜 시간",
+    "companion": "연인, 2~4인",
+    "occasion": "광안리 뷰를 온전히 누리면서 에스프레소 한잔 하고 싶을 때, 저녁에 테라스에서 술 한잔 하고 싶을 때",
+    "drawback": "테라스석이 빨리 차고, 사람이 많아 내부에서는 대화가 힘듦",
+    "next": "도우개러지 피자",
+    "visited": "2026 9월 말",
+    "parking": "불가 (인근 공영주차장: 민락해변공원 노상 공영 주차장 (부산 수영구 민락수변로 16))",
+    "tags": "카페+ 바",
+    "category": "cafe",
+    "subcategory": "cafe",
+    "photo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250324_98%2F1742813103117Cmnh5_JPEG%2F20240418_084011.jpg",
+    "moods": [
+      "특별하게"
+    ],
+    "recommendedTimes": [
+      [
+        540,
+        600
+      ],
+      [
+        1050,
+        1110
+      ]
+    ]
+  }
+];
+/* 기존 지도 목록은 방문 검증 추천 목록과 별도로 관리합니다. */
+const EXPLORE_PLACES = [{"id":"e001","name":"남천 삼계탕","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA4MDNfMTQ1%2FMDAxNjU5NTI1OTk0MjM3.ot4uBo4RA32-6Gxtr6NH--rLCMrmHohoOngU6WHzm9Eg.qoniHuzpSGzxuHQmGG7LSUTY92ekYnwXPbtOn6ycg3cg.JPEG.jinjinbb%2F20220729_194443.jpg","lat":35.1459664947611,"lng":129.112346325906,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e002","name":"다이도코로","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMjZfMjUz%2FMDAxNzYxNDgyOTQwNzcw.VgQNrTEAkz295w_ZX1_HnleFw7Wc87pJHnRSn5DmKWEg.pF76zLUyH3nSoHtI2w13hODzkc5Nno3F62_xBmxdOzIg.JPEG%2F3%25C0%25CE%25BC%25BC%25C6%25AE.jpg","lat":35.1466155755633,"lng":129.112538647547,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e003","name":"다케다야","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240918_79%2F1726627456716MDU8F_JPEG%2F%25B3%25AF%25B6%25AF%25BF%25C0%25B8%25AE.jpg","lat":35.1466569818034,"lng":129.112851305849,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e004","name":"남천동고기집 정을담은식탁","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fnaverbooking-phinf.pstatic.net%2F20260104_126%2F1767533522192xuqVz_JPEG%2Fimage.jpg","lat":35.1476,"lng":129.1177,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e005","name":"어가 가이텐스시 남천점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMThfMTMz%2FMDAxNzY4NzMxODA1Mzg0.Ol2XPKeZm3vnPZwbMUUx_DtYZ4ieguY8oHYoFeKwFRMg.EzUIe2D9US5JgC4rbbg5EbwNjfFUCP7jAwE5dmqIqr0g.JPEG%2F20260118_121236.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1468,"lng":129.1135,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e006","name":"따뜻한밥상","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzEwMjRfMTgy%2FMDAxNjk4MTE4Mjk2NDg5.s7Y6b4zqAqNW8HDNswBsGbA6o4cuYFlB5zCp7xGCW84g.EjiSWIfrMoCt207YhQZoRkbm1dOXWyG16TkaP-KYdEUg.JPEG%2F9C868E6B-445A-4770-8AE5-12123549C640.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.151504,"lng":129.117182,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e007","name":"고옥","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240314_1%2F1710411827018Tovh8_JPEG%2FDSC01453.JPG","lat":35.1455,"lng":129.1112,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e008","name":"안목","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjZfNjUg%2FMDAxNzY2NzM2MjQwNDI3.q8FI4Ju03OFR44paHfJColP6OQoIpM3O7kHe27pHo3Yg.V0b9L1rejpy7TpISpT1EcT4enu60avFXi4BHar0M6g4g.JPEG%2FKakaoTalk_20251226_165630408_18.jpg","lat":35.154219,"lng":129.116149,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e009","name":"난파센","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA3MjBfMTc0%2FMDAxNzUzMDAxNTY4ODQx.78ehTCrBSHbyHubfkRdPPu35-hzNB5Y1_RST3JYSy_Mg.l9OoEXFzb42fPqNg5lcRiiXrFIBLHOdaoQOcBzF9feMg.JPEG%2F1000016835.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1467800930067,"lng":129.11338770004528,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e010","name":"광안리남매","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250407_149%2F1743984768142RaLz1_JPEG%2F%25B0%25F8%25BF%25AC%25BB%25E7%25C1%25F8.jpg","lat":35.14671584997849,"lng":129.11407394569267,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e011","name":"비비재","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjZfMjE5%2FMDAxNzY2NzIzMDU5NTQw.8DE11rRDcqh5wPN-potKbL-Fjs5hdkWnucGL5dcD8FYg.xJfjxME2DjyhB6aiPwwoumnkzcO-tATw3C4jX82ZMjAg.JPEG%2F20251212_122314.jpg","lat":35.1479384815057,"lng":129.11145265244,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e012","name":"시골통돼지볶음 부산남천점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA1MDVfMTAy%2FMDAxNjgzMjg3MzY1MDQy.q0ATB0zsTi4bIZ94OOpjEFOqBbHuGJmrrbE9rVwn94Eg.7mLe8UynsG8Go1OtkEzgyap3bQAH7ubRmcAy_433jpYg.JPEG%2F20230505_190224.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1482796588381,"lng":129.111576671048,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e013","name":"백일평냉","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMDRfMTAx%2FMDAxNzYyMjI4Njk3MjQ0.MPhYnuUHAOJXckJqhd8gh5vCCAi1LiHHr_OWJgcfK3Ig.-uw6S6bATwJp8wk7zLf3UfbeypsL6ClPadfmYb_YYZ0g.JPEG%2FDSCF0830.JPG","lat":35.1485560183374,"lng":129.111645254415,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e014","name":"자유의지 부산혼술바 광안리점","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250331_171%2F174340345990560yk0_JPEG%2FIMG_1371.jpeg","lat":35.1493231934227,"lng":129.111835144233,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e015","name":"죽림숯불돼지구이","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2025_11_22_438%2FfY10zryy84_03.jpg","lat":35.1487815831035,"lng":129.11317944015,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e016","name":"파코포코 밀스","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20241217_11%2F1734423039381LAjB6_JPEG%2FIMG_4467.JPG","lat":35.1482155153099,"lng":129.113290973458,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e017","name":"초힛사츠","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMTRfNyAg%2FMDAxNzYzMDc5NDQ4Mjgw.PJXeMMuUjCrIyfnFwidz0TElMOHShzUjcjwJuEjQprwg.rSjC9v4S865L67QjzbgqgsmJTaw9i--s10cgFRy2lbYg.JPEG%2FKakaoTalk_20251114_084307978_01.jpg","lat":35.1486488384739,"lng":129.113556723826,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e018","name":"타코 사운즈 클럽","category":"dining","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjNfMTM0%2FMDAxNzY5MTYyNDIzMTU5.FPCrSlhzM9zP2XkfSviOrPVT0ZX2MCa2lgH3M8enAr4g.MukqkDvZy30Xj6TdxZcX6fTb8honZjky7P6pmTBgU48g.JPEG%2F6C383CC1-F20D-495D-A7FB-23A273020EB6.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1486488384263,"lng":129.113556723814,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e019","name":"동경밥상 본점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240409_94%2F1712649519847GsyJz_JPEG%2FIMG_3757.jpeg","lat":35.1472,"lng":129.1145,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e020","name":"오코메","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251123_178%2F17638297977425NTsg_JPEG%2FIMG_8857.jpeg","lat":35.1472,"lng":129.1148,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e021","name":"미까뚜까","category":"dining","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMTNfMjcx%2FMDAxNzY1NjMwNjY3Nzkx.TRxf3rwUHvEH5FlxHwX5tyjVM5Dn3L0kCA7zNNqIMUwg.nLsThe9UZJ4wNt_zscfoZn-js7CTU325hxPOFvKG6Nog.JPEG%2F1000368824.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1481354620567,"lng":129.114005348311,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e022","name":"두루미 광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjZfMjQz%2FMDAxNzY5MzkwNDgzODEz.VKMUyQFHhe9V2QchdDfvPrqXxbH7eDz1viJGz5YsVIAg.IKHyiv0vK3cmW_cVwBdSxfgPDF3d9Fqcw_h6doz3nfsg.JPEG%2FKakaoTalk_20260126_092919410_18.jpg","lat":35.154703179025674,"lng":129.11930932205232,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e023","name":"잔나비객잔","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250629_98%2F1751193924887eXjti_JPEG%2F1000013218.jpg","lat":35.148074770693455,"lng":129.11417822631958,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e024","name":"미투게더","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMDRfMTQ3%2FMDAxNzY3NTIwNjAzMDQ4.-s3l26ZM_EGkyUQ7O3b0cXLy4sQfT6oJ6zV0ndnuWDAg.P0dOUKeChVUsick7UV-jHjpdGyc60sj43ueQFpSv7s4g.JPEG%2F20260104_185539.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.14791350281061,"lng":129.11438251331404,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e025","name":"광안리 성수","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEwMjRfMTQx%2FMDAxNzYxMzAxMTY5NzY5.wIFyOOL9V8O12_P7R2KAsPsjdfEIhAmgIWJsJtPgtEMg.lm8_eun-PyzVKp0kYVcOnXvKtrdDmEWqDZoXS3-Cei0g.JPEG%2F1000022171.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1481929044728,"lng":129.114276736,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e026","name":"아키와와","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDhfMjc5%2FMDAxNzY3ODc2NDkwMzQ5.-jOLe1mY9k2Aw6KqeRkZP_JtJRAkfZ-30fmvvKCQfksg.JNDdCU6IzIiiBQc4ntNHITdLxff9hctDLS0d2RLDANYg.JPEG%2FIMG%25A3%25DF3770.jpg","lat":35.1460923623578,"lng":129.114119254273,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e027","name":"아일드블루","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250728_109%2F1753707403889myIg3_JPEG%2FP20250725_140718000_C0D49500-8FEC-47E8-A373-507A2DF2E919.JPG","lat":35.146080027995204,"lng":129.11451609694663,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e028","name":"신센 본점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250430_49%2F1746023521593lJiSo_JPEG%2F1000006912.jpg","lat":35.14683427848521,"lng":129.11363924996706,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e029","name":"허거스","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251001_196%2F1759302880142U2dV1_JPEG%2FKakaoTalk_20250515_144103578_06.jpg","lat":35.1460310775285,"lng":129.114326123661,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e030","name":"고베 규카츠","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjVfMjcx%2FMDAxNzY5MzUwOTMxMDY0.PuPPyHju9qdHayQ1xUt0whj6R9-uxqTOIV0Dd6OpCYIg.Q0aqf4DsK6AZ0TRjk7BC2SHDxRpUi7XvJ3UO9UF6DJwg.JPEG%2FDSC08718.jpg","lat":35.1485745325528,"lng":129.114251501879,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e031","name":"간빠진새","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMThfMjQ5%2FMDAxNzYzNDU3Nzc3ODgx.pgZLdzNMK-7qV_cwgzdvlEDkx-fK6KqwbLpaxBF8Ow8g.ek8Tenz25xqc_AjzdOGf9TVGZLfvZFUKpLPNoLBv7TEg.JPEG%2FDSCF1313.jpg","lat":35.1490456790884,"lng":129.114208834948,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e032","name":"본스치킨 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250903_149%2F1756884121219ynogI_JPEG%2FKakaoTalk_20250903_162025106.jpg","lat":35.1616059005947,"lng":129.115242828999,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e033","name":"주옥같은인생","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDhfNTkg%2FMDAxNzU5OTM0MTcyMzE1.Lm2QcxS4zGNgROc2l2PRVydSrPqopithvgRGFQGn0iMg.PMpbYx9a6JNAiO4aoW1ymKdCt4wesW-yDDjOo7us0Gsg.JPEG%2FKakaoTalk_20251008_231556659_18.jpg","lat":35.1488606156215,"lng":129.113814551072,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e034","name":"바리우마","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMjZfNTkg%2FMDAxNzY0MTM1MTI0NDQz.E1H-AOmjWZ0DtkDIqbCZoCiyK_CZQGpTzWPF760a-rwg.ASlfogWy0ZKQLNQn7ghWXDQwaF6JDe7saJfEOGFlIxQg.JPEG%2FKakaoTalk_20251126_121253296_06.jpg","lat":35.1488606155739,"lng":129.11381455106,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e035","name":"지즈","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250623_42%2F1750669037298iHOKm_JPEG%2FIMG_3748.jpeg","lat":35.14922697422784,"lng":129.11321838894938,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e036","name":"세홍집","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTVfMTg4%2FMDAxNzY1Nzk0MjY4MjE5.WafmxQrkLGBUnHrYmakpjYXd1Tpz8aOshVhhrWiELxYg.-oGgFKq6E4bmPMIVaADR17EjOqAJy5QTObTLMFpgi3sg.JPEG%2FIMG_8295.jpg","lat":35.1463,"lng":129.1121,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e037","name":"코코노이","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjhfMTMy%2FMDAxNzU5MDIzNzQ3ODg3.bg-I4_vE01zrZOdsG-0HSO0epv9JLeaWSF9ewwtjH6sg.nU98pO-F6y542YWDeQ7_BDXp7yVPXXAlA1H_sMg2BCQg.JPEG%2F7.jpg","lat":35.1498901280845,"lng":129.112397292934,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e038","name":"또돗 부산혼술바 광안리점","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDZfMTIy%2FMDAxNzY3Njg4OTY4NDMz.OXOP-kDlm7VwGNbuYBwh3LCwDh7tMDpDyxkT2VWccwgg.TLtG3npUpa5qk512lNxZFY8jIBQTqCSyFlso8MpJ-Gsg.JPEG%2F20251224_205948.jpg","lat":35.1469,"lng":129.113,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e039","name":"테파스","category":"dining","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMjhfMTQz%2FMDAxNzY2ODg4NDY2MDYy.1su-YJ6wDRGgGMG5xvBH0PTeenShWe2_z8phQ-Z9j2kg.XPcNORKDjiHlKqASkdTS8TaqtYxi-zJjGdsc5HJGZHAg.JPEG%2FB9EBB614-7AF9-4918-A94A-A3CC82660A35.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1509989123636,"lng":129.112531292223,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e040","name":"카페이플","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA2MDJfMTMz%2FMDAxNzQ4ODY1MjYxMTAz.BWC3tJBTEX2z-r8XhI1DLI0WjPEgreV668OYz9doZx8g.nHpFtz5jR-ym5gwGzRgjD5zJBCjMaau3_hhCLSDXuQUg.JPEG%2F20250602_205112.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1501797790611,"lng":129.113511844027,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e041","name":"바로해장","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250428_118%2F1745809952723IXQLX_JPEG%2FDSC06634.jpg","lat":35.15027505227939,"lng":129.11476510350138,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e042","name":"반주","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240108_202%2F17046773026106mVVY_JPEG%2FDSC06089.jpg","lat":35.1553,"lng":129.1185,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e043","name":"탐정사무소","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjFfODMg%2FMDAxNzY4OTc0MTU3NDc4.XVG0xIfO6_qc6fw7lmXEHTTRS6HAqtJ2m_MN_veShb4g.0upNT_aZSVnRP9rhtayohtYDYavx-ADqwCbF_fqH0DAg.JPEG%2FIMG%25A3%25DF8093.JPG","lat":35.1495280605095,"lng":129.114400157391,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e044","name":"류센소 광안직영점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230807_40%2F1691393475805wDdnS_JPEG%2FIMG_7710.jpeg","lat":35.1496735833826,"lng":129.114684801548,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e045","name":"박내장 광안리본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240919_87%2F1726712433513XXgKV_JPEG%2F0E4A4826.jpg","lat":35.1496846787615,"lng":129.11461706354,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e046","name":"고향카츠 광안본점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240420_180%2F1713591907926ofhMB_JPEG%2F0402_%25B0%25ED%25C7%25E2%25C4%25AB%25C3%25F712333.jpg","lat":35.1508734201826,"lng":129.113939042326,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e047","name":"코펜하겐","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjJfMjk5%2FMDAxNzY5MDY2NDQ0MDUw.IrofL15N7wm5iJfVpNZvZf-w8Q55wD3lmAWwpuHnj6Ug.7w7AulrbmLOtc95OvttrY_3i8UiUaQpl3ELPpfNyyhEg.JPEG%2FIMG_5967.JPEG","lat":35.15100759798282,"lng":129.11420255013866,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e048","name":"오프더레코드 광안리","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MDZfMjA3%2FMDAxNzU0NDg1NzE2ODM2.eDvn6FoX8STfdJY-ByhisnIKUR1eqyItIqN8_2oAtHog.ql07A4TOH0hcr4Z8scY48z7NiNtNRoVieddORUyLCIUg.JPEG%2F20250620_215006.jpg","lat":35.1506205707867,"lng":129.114537053356,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e049","name":"히떼로스터리 광안점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA1MjBfMjI0%2FMDAxNzQ3NzMxMjA4Mzk0.ezpW2nLe9WfSzzO4d0wmnKxBsJFvhBosM52uvFAgT9wg.HGP52AnP1JROz9bvhaYuQvUi3Ibp7LvXkZFOYIv3oS4g.JPEG%2FIMG%25A3%25DF7844.JPG","lat":35.1506205708342,"lng":129.114537053368,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e050","name":"송계옥 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250927_22%2F1758948424713IFBL1_JPEG%2F1.jpg","lat":35.1506143996481,"lng":129.114529213296,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e051","name":"돌닭 광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250411_240%2F1744351804322cXLtp_JPEG%2FGRP_7376.jpg","lat":35.1507195003989,"lng":129.11459995952265,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e052","name":"고짚 광안리직영점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251212_145%2F1765527877237uCvPp_JPEG%2FKakaoTalk_20250919_190440065_05.jpg","lat":35.1513002228029,"lng":129.11550701561134,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e053","name":"석암생소금구이 부산광안리","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250620_38%2F1750398754697em7ze_JPEG%2F3.jpg","lat":35.1502629295207,"lng":129.115562445423,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e054","name":"까사 부사노 광안점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fnaverbooking-phinf.pstatic.net%2F20251013_56%2F1760351415241pyEkv_JPEG%2FIMG_8927.JPG","lat":35.1505714847838,"lng":129.1159544524405,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e055","name":"리코리카","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjJfOTMg%2FMDAxNzY5MDUxODg0MTYz.wdgPe2u1TgWpHmyIbJt8XY-40Y1TDfwRe1RbFW_hVUUg.KceW7H8KZ0oz-UgD7QynQ6DrScvZPLgUOjP2Bvm8Irsg.JPEG%2F1000111695.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.15,"lng":129.1155,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e056","name":"프레스케차","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTExMjJfMTcw%2FMDAxNzYzNzg4MjA2MTEz.xJ-LH7L6X5Ih2KjPv-D62EhoAineWZrUVJl699235kUg.obquycTD8HX7x4rIQkXas4uFxG0zqu4EZCCK2QGhUvcg.JPEG%2FIMG_9705.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.15179016313817,"lng":129.1148010307889,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e057","name":"초필살돼지구이 광안직영점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA5MzBfMTc3%2FMDAxNzU5MjQyNDUxMTAx.46kredm7jaAV-TdiK8Fd6cry1aS2PdHhWEvpK8DoFb8g.u-_GmNoF3sfsxV2kPo9UAqdhb33HJ9Kbh5JV6-lzhCYg.JPEG%2F7CE8D0F5-E309-4B40-8E40-9974ABD3378E.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.15124388070005,"lng":129.11589506308508,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e058","name":"해파리 광안리","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MTZfMjQ5%2FMDAxNzU1MzIzMTU2MzIx.FIF8nsZPpbbEblO4CQT_8DVo3hMe-zT6BXvrz2Z68hYg.I5o1Fuf2NjatH9PCBvOvLAX2Gh2XKNqZBPjzHkpSBhgg.JPEG%2F20250814_230434.jpg","lat":35.1512017381282,"lng":129.116140841734,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e059","name":"OK도매횟집 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMTZfMjUg%2FMDAxNzYzMjk5MjkzNjIx.MilCf2OcBjUdnlyAqIJy-RwSxj8a6ebIf_Y9CSEwDlog.9lP2TxwIPEfQeuar5llTfYaSf442mlER8X592d_ISpMg.JPEG%2FKakaoTalk_20251116_222048333.jpg","lat":35.1512637746208,"lng":129.11620060027067,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e060","name":"고낙온","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjZfMTA2%2FMDAxNzY5NDA0NjE1ODMw.GiP4-mZbg7IvltA-a1CN3OaMaNjnK5tED8yNeJDTqYcg.WBkOXPK5EJ3cuml7G1FT2aRu9IYbdhd77Gcrp3DMZ80g.JPEG%2F6E849A8C-015E-468B-B192-E9B23713BF6E.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1518722360014,"lng":129.116911992084,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e061","name":"상수시","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTZfMTg0%2FMDAxNzY1ODcwNTM0OTUw.eRVtOYQvCtuJWpXmE_QqFwlBae1ClCkU-nJBKtle9YAg.x2zBBTGdNwkMGxDmOG0h8ukfgyuuiC6aIrsAo9P1WK0g.JPEG%2F20251205_225825.jpg","lat":35.153138747119,"lng":129.113535727588,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e062","name":"식감","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251122_130%2F176378748218112gNy_JPEG%2F0E4A7186.jpg","lat":35.152743237359,"lng":129.11616211835,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e063","name":"한다솥 본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2021_04_27_2909%2F43944edd-a74f-11eb-8f19-505dac8c385b_01.jpg%3Ftype%3Dr152%23152x114%23m","lat":35.1524751213808,"lng":129.116859586838,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e064","name":"애취","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250504_135%2F1746356166297LsTJY_JPEG%2F%25B0%25F8%25BD%25C9%25C3%25A4-%25C7%25D7%25C1%25A4%25B1%25B8%25C0%25CC.jpeg","lat":35.1476,"lng":129.1142,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e065","name":"카페센터","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDNfMTcg%2FMDAxNzY3NDQ0OTU1MDk5.JcUxJVZTqdKFg3Tmp48DBkRPdzNl4NScC-UP8kQmtxog.Jhf5dXclCASQP5-Z4xLft75BVw2w6sAW71s0ZENWMFQg.JPEG%2FIMG%25A3%25DF8808.jpg","lat":35.1538,"lng":129.1148,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e066","name":"헬멧","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA4MDlfMjQ1%2FMDAxNzU0NzM1NDg0NDU0.TddhUkp9ZCBmcDiyyHqerPPsswVRIGfqd0mrfbmIliAg.fN5M-UZ9hbllE7RoieGcbrAy_kV5YgXDxGujHWGn0fgg.JPEG%2F75D062C7-C82C-4477-A1B5-363808C6801C.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1537508148683,"lng":129.114712438061,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e067","name":"웜코브","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMzFfMjQ2%2FMDAxNzY3MTkwMTU5MjYy.OfNqB1J0yJ7z4bpdb-ASc1fwqt9WSiIqrsISP6uWQ6kg.0DC5yaShjmwrd27YlfXZOgsGx8SvuZFd2xUGLlmSsZAg.JPEG%2FR0002374.jpg","lat":35.15457818084221,"lng":129.11501584870672,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e068","name":"완뚝순두부 부산광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250701_260%2F1751339940053iiA95_JPEG%2F1.jpg","lat":35.1536474806116,"lng":129.117686557082,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e069","name":"마초스테이크 부산직영점","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MjFfMTk2%2FMDAxNzUzMDI5MDkzNzUx.bT2UXozfhE0zYMrsnUBQVTGRe5XwKI4ZFMYRmw0RGuEg.4s2IRaKubbwMn4EgCKvPTbJ24m8gY_Z-SfKCZ3KeAUgg.JPEG%2FDSC00184.jpg","lat":35.1541013784229,"lng":129.11770271268,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e070","name":"모로가도","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA2MzBfMTMg%2FMDAxNzUxMjkzNjY1MDc1.CLHIq5c1MtIuGlVxOEG8MjOzmrRT_HoXYsn7Kd7aaRMg.WUP6kpEFsE0YF_dFWDwtb9xv9SBP5o4bz1FTu4YoWk8g.JPEG%2FDSCF3168-%25C7%25E2%25BB%25F3%25B5%25CA-%25B3%25EB%25C0%25CC%25C1%25EE_%25B0%25A8%25BC%25D2.jpg","lat":35.154869884207514,"lng":129.1177643312085,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e071","name":"브뤼셀프라이 광안리점","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250917_129%2F1758082731103yWYkc_JPEG%2FKakaoTalk_20241122_121700379_08.jpg","lat":35.1561,"lng":129.122,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e072","name":"베르크로스터스","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250516_133%2F17473786596136ukVu_JPEG%2F27.jpg","lat":35.1561654475022,"lng":129.112983110924,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e073","name":"헷츠","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20241124_168%2F1732456101329A0ikA_JPEG%2FIMG_6400.jpeg","lat":35.15748257179097,"lng":129.11248719445456,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e074","name":"매드독스 광안리점","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250218_269%2F1739808878557qA6RO_JPEG%2F%25BF%25AC%25C3%25E2%25BC%25A62%25C5%25A9%25B1%25E2%25BA%25AF%25C8%25AF.jpg","lat":35.1546173463285,"lng":129.11978549427,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e075","name":"주인 혼술바","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjhfMTI3%2FMDAxNzU5MDM5NjYzNDYw.NVJPZUCX3ByeX7X2STO5EdZGJP7KORJeidiFo02Ao0Yg.B8Xr34torly4h9iIydSF_IEliyuUJDb4hod60i-uyM0g.JPEG%2Fbatch_IMG_0089.JPG","lat":35.154721383090326,"lng":129.11940196308007,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e076","name":"도우개러지 피자 광안점","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240121_234%2F1705815976172ESXFR_JPEG%2FKakaoTalk_20230828_175241626.jpg","lat":35.154759492261,"lng":129.119747487554,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e077","name":"나수브","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjRfMjgw%2FMDAxNzY5MjM0NTYyNjYx.yUq5dk6U2gbmsFLBHAbSDJDIqnjmoNwjlG6ksHYCtzAg.qb1IjWmjzagTsQaXf54dc6O2f4YGn3ExVORUVkNLFHog.JPEG%2F20260124_150144.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1528,"lng":129.12,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e078","name":"까사부사노 테라스","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250324_98%2F1742813103117Cmnh5_JPEG%2F20240418_084011.jpg","lat":35.155164527479194,"lng":129.12116467612103,"address":"","location":"광안리 만남에 광장에서 도보 3분","visited":true,"venueId":"v34","verdict":"광안대교를 바라보며 에스프레소를 즐기는 카페입니다."},{"id":"e079","name":"도새기","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjFfMjQ5%2FMDAxNzY2MjkyMzQ0NTEw.13wGRHXs3fRqArTK-YdCT2MJrTsfLkzjaitUUhKrTXIg.QnTe3QY7BLtVRL4quYGuqGwBTL8GUZG6JXUvHgpC7pUg.JPEG%2FIMG%25A3%25DF8052.jpg","lat":35.1548625182509,"lng":129.119164230134,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e080","name":"블렌딩바 부산혼술바 광안리점","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260115_72%2F1768442571035vyPnD_JPEG%2F%25C5%25A9%25B1%25E2%25BA%25AF%25C8%25AF1_%252826%2529.jpg","lat":35.1549109419646,"lng":129.119383839026,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e081","name":"닭동가리 광안리점","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251212_150%2F1765528558892CQPgv_PNG%2F%25BE%25C6%25C6%25AE%25BA%25B8%25B5%25E5_4%2528%25C5%25A9%25B1%25E2%25C1%25B6%25C1%25A4%2529.png","lat":35.1549937057585,"lng":129.119700897292,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e082","name":"불필요 광안본점","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251216_100%2F1765853610571M65sx_JPEG%2F20.jpg","lat":35.1549540286724,"lng":129.119908345222,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e083","name":"오징어랑해물이랑","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMDFfMjcy%2FMDAxNzYxOTg0ODA3NzQw.Kq5IUxvg2r5glCzKpPpRiCWPsuZx4Fny1ct46NzfKdQg.uKiIzC0VbQ7w6uHWKpZHi51unGgrpIPWjP0PiHh-z8Qg.JPEG%2FKakaoTalk_20251031_024038505_16.jpg","lat":35.1549737266091,"lng":129.120018581445,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e084","name":"광안목 광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjJfMTI1%2FMDAxNzY5MDg0NDczODMy.UCPAjtIhuypkQi0jpN6ofvsPDI0RHseJAqg7r2R_T2Mg._Ws4v31i5YFZRymcIY322LzfevHLX2CA0brmo7X3SXwg.JPEG%2FKakaoTalk_20260122_204340323_24.jpg","lat":35.154958108238525,"lng":129.11843923301439,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e085","name":"덴","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMjRfMTI1%2FMDAxNzYzOTk2MTEzOTQw.zrMeN189XRZvyypxo3unppgncii5Tmf-WnLPvlVYo48g.nG4lhBHHeIsFjKrUHVwR2PEYZ0Gr_LuVRLAdlr-8kVMg.JPEG%2FKakaoTalk_20251124_232648450_29.jpg","lat":35.1553118775725,"lng":129.11799743575673,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e086","name":"부산식","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDZfMjA2%2FMDAxNzUxNzY4MzU4MTI5.B61RDIL_CadXEwkpg-XUoMv0vLZquPYcL8jFGmNg-rkg.y4a7vXV3gg-SVIb16dqonbq_LeoBG2gXDA0sisKvOIgg.JPEG%2F20250627-_DSC4947.jpg","lat":35.1554889561503,"lng":129.118229159521,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e087","name":"고갓 광안리본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjZfNjcg%2FMDAxNzY5NDIxOTA4MjUx.MC8gkNeIlA3tFT-aVXbkUYuAeZvF459hDMY4H65uug8g.K5Fwk4Q0IopN8Do5Ddw6NfO5v8aK-nMLRtK3jYmm3q8g.JPEG%2F1769421628479.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1553603544409,"lng":129.118574752031,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e088","name":"광안술잔","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231214_237%2F1702549075399KhqrN_JPEG%2FKakaoTalk_20231213_113421779.jpg","lat":35.15529486784062,"lng":129.1186092629989,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e089","name":"리쿠리식당 광안리점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMDNfMTI0%2FMDAxNzY0NzM4ODU2MjUw.nyKbkDzzhQpOY9f2qa-bHD8P0jE-LEq1X_SFwFr_owIg.gfm3tz70q7ggF6Wa8s7HC6_bLJWCJNtOiqPS2zx6ItQg.JPEG%2FDSC06855.JPG","lat":35.1563696311403,"lng":129.119914360311,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e090","name":"꿀꺽하우스","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA4MDNfMyAg%2FMDAxNzU0MjIyNTc1NDg3.D7AzOwJceZhs9uM52z1irqHnoDizTJYqow_Ne4oIHJYg.MjRfXz1K8Xq8DqFwXnPhYgh6a8eq7RZlhK99HtA0QKUg.JPEG%2FD599188B-A93D-412E-BA2B-A4437759302B.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1571759625254,"lng":129.120080128547,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e091","name":"주청광장 광안점","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fimage.nmv.naver.net%2Fblog_2024_10_26_2452%2F9PpPXTa1Hr_01.jpg","lat":35.1560728157353,"lng":129.12127165461,"address":"","location":"민락 해변공원에서 도보 5분","visited":true,"venueId":"v32","verdict":"한식 안주의 기본에 충실한 주점입니다."},{"id":"e092","name":"표류","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251218_208%2F17660189468570fffX_JPEG%2F%25C7%25A5%25B7%25F9_%25B8%25C5%25C0%25E5_%25BB%25E7%25C1%25F8.jpg","lat":35.1559028866542,"lng":129.121609587523,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e093","name":"끄티집 광안점","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTExMTVfNDQg%2FMDAxNzYzMjE2NTg5NzE2.set5Y4zel9SJJ4n5-sSQWdNoHqM5J02GLjchQhS2JS0g.clwljue0jA0PaO28gmdUBfjcVezEOoFSbBeUkg_qIHQg.JPEG%2F21F9FDAD-2C1F-4DAA-A9F9-F048B26B5EBD.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1561258713725,"lng":129.12153527886548,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e095","name":"이자카야 야수무 광안점","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250122_185%2F1737539368227zslK8_JPEG%2FIMG_1223.jpeg","lat":35.153,"lng":129.1205,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e096","name":"듀플릿 부산 광안점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjNfMjA5%2FMDAxNzY2NDk3MDQ3MzAz.MwM1oO-w3TyVP1sB-75L6ngId2C3PurLE_yFaKKuYhYg.ckkCZa7KKU8duZnF2ZPx5xZz2ikxaaURjFEYSM1JBkEg.JPEG%2F20251211_203337.jpg","lat":35.1584818169314,"lng":129.120383959542,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e097","name":"시즌즈 광안리","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjdfOTUg%2FMDAxNzY5NDg3OTI0MzQ3.erq-aUz1yIfnlwvSGa0dGJeZ_6yCqJQc_oDsLjsweEog.eIq3C-aDKZhVJXlR8ajsj6naMKDe48DEGSSkuelBjg8g.JPEG%2F20260127_131405.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1567650861601,"lng":129.121209531835,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e098","name":"시시토리","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTVfMTc0%2FMDAxNzY1Nzk5NTA0NTM4.pqVraWl5rzErDrCvvpH20zJ68j0fqGG-RKsfVt_efSgg.BBr6Lf_hdLTP2VnZdFytmVdpOysZ5oSopmeK54RWBnIg.JPEG%2F20251203%25A3%25DF180136.jpg","lat":35.1566398212606,"lng":129.121312714218,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e099","name":"송헌집","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjVfMjUg%2FMDAxNzU4NzYxODM3ODc3.X7HLYlJqWSFTReUbv2NhUxl0pZWyL0MYmNxOCgg1DtAg.8VRFvpGQZMnH9Y2gpMTAUwExnvIHsIUgrR4wVSx4PiQg.JPEG%2F2903F498-37B6-4E3A-AC7C-2FAB9CF0B7F2.jpg","lat":35.1565520222494,"lng":129.121437717475,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e100","name":"화륵","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240330_281%2F1711762094702jfFc8_JPEG%2FDSC00282.jpeg","lat":35.1572264730726,"lng":129.121724068274,"address":"","location":"부산 일본인학교 도보 1분","visited":true,"venueId":"v19","verdict":"깔끔한 식기와 반찬에 한우 함박을 내는 한식집입니다."},{"id":"e101","name":"치플레 광안리","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjJfMTEz%2FMDAxNzY5MDY2MjU0MjM3.iHtXgCPQ6htZiDjzQtV9Vzh6nH4mWku2-s5bEb_QrXAg.UPbS8FspA6hlCjHp7cJ4971KC3w1fklT18m2-A-XuXUg.JPEG%2F1000044163.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1571575074128,"lng":129.121957094559,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e102","name":"미미락락","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjJfMTg4%2FMDAxNzY5MDcxMjY1MDMz.GFucYghSGvuwjejxj2n6PfGltIiNoxSkNurTfLvTwJog.arXZVunQ5LT9VFieWNtJFzeoDbSKBp124jQhtpKL43cg.JPEG%2FIMG%25A3%25DF2274.jpg","lat":35.15649051009559,"lng":129.12211971923722,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e103","name":"소년 광안본점","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240926_191%2F1727278118641sbt7D_JPEG%2FIMG_4722.jpeg","lat":35.1566806878174,"lng":129.12237483832,"address":"","location":"민락 해변공원에서 도보 3분","visited":true,"venueId":"v10","verdict":"한식과 퓨전 요리를 안주로 든든하게 즐기는 술집입니다."},{"id":"e104","name":"사랑은연필로쓰세요 광안점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251119_161%2F176356381416845pmt_JPEG%2FA7407716.JPG","lat":35.1567420010259,"lng":129.122269995923,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e105","name":"술바지","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260105_98%2F1767582174911m9Vu5_JPEG%2FKakaoTalk_20260105_114820183_02.jpg","lat":35.1552,"lng":129.1165,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e106","name":"야끼토리 로만","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240706_35%2F1720207337709QmjQ2_JPEG%2FIMG_7457.jpeg","lat":35.1570654998296,"lng":129.121910813174,"address":"","location":"부산 일본인학교 맞은편","visited":true,"venueId":"v08","verdict":"여러 종류의 야키토리를 가볍게 즐길 수 있는 술집입니다."},{"id":"e107","name":"골목포차","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA2MDJfMTU0%2FMDAxNzQ4ODI2OTQ2ODc3.ZkM4CYYUJoaKyaSb2zs-O7CPVMs3CroR508Y7CccdVIg.PiEoiLPzdPX4xy8qkLgDb0b8IrIJUKwLLxkQghy0hbYg.JPEG%2F20250502_183618.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.159393015723865,"lng":129.11444922061256,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e108","name":"공리주택바","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250603_294%2F1748950613561djsKs_JPEG%2FEB61DB60-2266-470B-98BA-C8A3EC15F550.jpeg","lat":35.1587249399094,"lng":129.116788929214,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e109","name":"도토리식당","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMjVfNiAg%2FMDAxNzY2NjU2NDI0NjUw.VHlO5mkU7TuKgU6TR--HyFinU3AQIIa10WEEMX4REjsg.unWx3MgjG3VH5_qqP4WZuaVoOpc2epxjFnvc0WEJvJgg.JPEG%2FIMG_8799.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1597060156824,"lng":129.114535233351,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e110","name":"우리포차 본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250524_273%2F1748068967350IYCIA_JPEG%2F%25C0%25ED%25B9%25E6%25BE%25EE_%25BB%25E7%25C1%25F8_%25B0%25A1%25B7%25CE.JPG","lat":35.16194499711784,"lng":129.11088966281616,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e111","name":"징기스 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231112_4%2F1699783392903hNPOm_JPEG%2Ftemp_file.jpg","lat":35.155897725304236,"lng":129.12252127834418,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e112","name":"우문현답","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjZfMjY4%2FMDAxNzY5NDExMzE4MjY0._sl3HfRIQ_AJMTLoMLYcvFccoqjI876b9a_2x4Jvx0Qg.e7JgaI2EBmCrH1AWNpp5Gd8Z1SgK4tkQIjiCog-EFkEg.JPEG%2FIMG_0063_2.jpg","lat":35.1560585123484,"lng":129.122242362176,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e113","name":"앞산큰골집 부산광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251031_254%2F1761871774627aQdwu_JPEG%2F1000028601.jpg","lat":35.1556954954454,"lng":129.122593928897,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e114","name":"새벽집","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250503_30%2F1746239971571tenJa_JPEG%2F1000029376.jpg","lat":35.1558103340787,"lng":129.12288000634,"address":"","location":"광안리 끝자락, 해변 뷰가 보이는 해변로 일렬","visited":true,"venueId":"v03","verdict":"술 마신 뒤 속을 풀기 좋은 국밥집입니다."},{"id":"e115","name":"해성막창 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTEwMjZfOTQg%2FMDAxNzYxNDcyMjY0NjU1.z72ba_d8xGIqRKKcHlou1a7gTEIDn_00fWZ7BnRTFxAg.8xST9ltUyUpbHXgQcA-pK604esbNLx895BSpWBTs6fgg.JPEG%2F900%EF%BC%BF20251022%EF%BC%BF195612.jpg%2F900x675","lat":35.1558094054483,"lng":129.123035793238,"address":"","location":"민락 해변공원에서 도보 1분","visited":true,"venueId":"v24","verdict":"대창과 막창, 곱창전골을 소주와 곁들이기 좋은 곳입니다."},{"id":"e116","name":"런던샷","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzEyMDFfNyAg%2FMDAxNzAxNDM4MjQ2NDEy.sEKVJvQZSbEkeRIY987OupUWPR_gM-S1g2kVHVEcATsg.oxupUv-nJhoKNGeDNEnJjeDTnBcKHzDZ2JV-ho6hc7Ug.JPEG%2F20231201_204040.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1558141827009,"lng":129.12327731478,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e117","name":"청호가든 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250515_23%2F1747239843785DCXQA_JPEG%2FNINE0682.jpg","lat":35.1564209707337,"lng":129.123670548261,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e118","name":"슈슈크레페 광안리 본점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMDhfMjA4%2FMDAxNzY1MTkxODE2MzY0.Su7qsZedNJTICL67e7FmPHCERY0xO-mN5C-Ep-oM5WIg.XbT1Zc1k87J1Xyy37PZ7I5hMGI2sfndmENaGO6AiaiUg.JPEG%2FKakaoTalk_20251208_140016512_18.jpg","lat":35.156726391079324,"lng":129.1240855772685,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e119","name":"월계수","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDEyMDZfMTUy%2FMDAxNzMzNDU5ODQxNDg1.kdRsg6ax9TXmVw2HoqW7UgV71pgK__rLVUECYZDkJfQg.KC7N6vp4ScN2f0zVOGv8xeDtgVEFPd-OcpWhoQXk8uUg.JPEG%2FB6D7A948-9280-409E-BC7D-20A16C844BDC.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.15624839042227,"lng":129.12272021748055,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e120","name":"돈까스의정원 광안본점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDhfMTEy%2FMDAxNzY3ODYzNTI4NjI4.uG5jQNRc0nCcp15JUzu7_9DKb-Q0R8QW8P7HFlc4Yw0g.iSB-E7NTFE3WfK7hkEeO5A3Si5ob9lEgNDohqHAOyaAg.JPEG%2FIMG_4047.jpeg","lat":35.156342064551,"lng":129.122774223434,"address":"","location":"부산 일본인학교 도보 2분","visited":true,"venueId":"v29","verdict":"겉은 바삭하고 속은 촉촉한 흑돈카츠를 맛볼 수 있는 곳입니다."},{"id":"e121","name":"광안리 모래","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMDhfMTA1%2FMDAxNzY1MTg0MTg3OTEw.iX7NS0PlQh2ruPhtr-eHX3DMSCDa4mDdw-ZSbogVKGIg.dEzXKsyOEDziilVGTXnIDb6R4t7laF2DBaKLYcFeXE4g.JPEG%2FKakaoTalk_20251208_173725207_15.jpg","lat":35.15682783241312,"lng":129.12277148597312,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e122","name":"소연옥 부산광안점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTZfMjM2%2FMDAxNzY4NTM0NjU2MzQx.cSIhcXyXPkeSj6ecu0v1jn8bYvs9FeoMf9lmU5ixwxMg.vrSv0P5cdT7MM6pzIsxoBV2D8aqRVHHLTvGUIDPzdcYg.JPEG%2F882065CD-4BDB-4494-8554-3DBB1A89ED6E.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1571661176752,"lng":129.122237124453,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e123","name":"아카미","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTAyMDZfMjk4%2FMDAxNzM4ODUyNjEzNTA5.IRQXnqip1oz1kPX7o3yl9jKJMZq4l09xaTnq6Jv-PCMg.g3FVf3Q2ccs3jE0JotEtvrgEOhEXB3p89M8BH3L_m-Ug.JPEG%2FIMG_1569.jpg%2F900x674","lat":35.157401762883545,"lng":129.12231457046224,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e124","name":"니나노 광안점","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fnaverbooking-phinf.pstatic.net%2F20251223_70%2F1766419414500Wblhy_JPEG%2Fimage.jpg","lat":35.1578551975007,"lng":129.1227169871279,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e125","name":"몽화","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTA2MjBfOTgg%2FMDAxNzUwNDIyNjMxMjc4.dXVj_OxArVGVsEXEwpkdPOyxyoMFdZXvmbOnO_g-tCUg.XPHTqs0NJWNsDt--ZEGMGXsYphULcU9FeJiXN4ByLCEg.JPEG%2FIMG%EF%BC%BF7673.jpg%2F900x676","lat":35.1578632984497,"lng":129.122820342779,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e126","name":"장","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTJfMjQ5%2FMDAxNzY1NTAwMDg0Mzcy.-SUbf28sIIXmiNAK5uSnz96pcpTBGBn6aKmroWCqeDQg.vk7D2K7LsoKXELIUzOVunw4jA7RE5GHm4UmDqluUWg0g.JPEG%2FIMG%25A3%25DF5308.jpg","lat":35.1580247216835,"lng":129.123173476638,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e127","name":"아마ama","category":"dining","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA4MjRfMjI5%2FMDAxNjkyODc3NTM5NjAw.I_fFhYxxdp_SXZQei-rB44RPCPPX3E0nVBhUpuaR0oEg.eqyk8qgUCQ9ENIsE1sIWCFmRTWryZynDgzy2t9YT1rkg.JPEG%2F376A7415-49CE-43A8-B55E-EE09B2B4C531.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1593814781029,"lng":129.121498041609,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e128","name":"와루가키노아소비","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTA1MDhfNzkg%2FMDAxNzQ2NjcxNDkyNDc3.bbESRUEld0phzQ2FCEdQ1nPRVcqRCvWNSkpHCTwjigQg.HVcM4cisrHcWxFQTHSmqaO7TMmNNCA5QXllNhtNUhT4g.JPEG%2Foutput_4283312308.jpg%2F900x676","lat":35.1567380982255,"lng":129.123520786086,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e129","name":"부산항 먹태클럽","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240112_223%2F1705052204303Li5DQ_JPEG%2FKakaoTalk_20240112_145957230_05.jpg","lat":35.1542,"lng":129.1222,"address":"","location":"민락 행정복지센터 도보 3분","visited":true,"venueId":"v17","verdict":"야장과 다찌에서 수입 병맥주와 마른 안주를 즐기는 맛집입니다."},{"id":"e130","name":"부산혼술바민지영","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMzFfNDQg%2FMDAxNzY3MTY5MTMyNzY2.VF-woBIme4Anu7WLfHR9CqZbU1P4e9vxLpJt0VoijNsg.NK8ZQtyCSU12NDwHksUQEbFwMxX-dApOtZL7YLtguk8g.JPEG%2F20251226_214353.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.156,"lng":129.1225,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e131","name":"철공소 막고기 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA2MzBfNTgg%2FMDAxNzUxMjgyOTQwMDI0.mTO1Pb-FbnrFqReOIHSg18m6BfroXmf7ZiSb3TfSGJUg.g7vpJoz4cjQdYQl7XoH7RkidC0Obs8-H5AaRaNYFcZYg.JPEG%2FFD615F6F-19CF-4A31-B7BB-193434E90A81.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1568598505598,"lng":129.124696937958,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e132","name":"브런치식당 소보","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220803_131%2F1659480029355qQHrf_JPEG%2FB254C8AB-B974-41E4-B3B0-4734BF81EBB2.jpeg","lat":35.15703161855125,"lng":129.12476833993534,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e133","name":"언더더코너","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTExMjhfOTcg%2FMDAxNzY0MzM0OTQ4OTMy.qtLsZ2rSr3LZ6as_b3ULtKnkSbproAxiG349ukWKEjMg.P9swDEgWr2N_J2NFKDdBbPkMpMT5imx7jC5J95KOawQg.JPEG%2FIMG_7836.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1572890676133,"lng":129.124630196093,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e134","name":"디라이크","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250209_254%2F1739092675211e868a_JPEG%2F1000022716.jpg","lat":35.1583574978311,"lng":129.124084103529,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e135","name":"무모","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjZfMjg5%2FMDAxNzY2NzU0NjU3NDAy.GMz-epekSWfulYsFk3U1W65GJM0-5KgCZzkcc1VXf34g.Y0gKnw54T-KnHwRu7VKghmbamitkElWVkntKLBkKgDog.JPEG%2FIMG%25A3%25DF2078.JPG","lat":35.158547571190226,"lng":129.12439628988506,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e136","name":"푸안 광안점","category":"dining","subcategory":"chinese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251228_256%2F1766892724614GdFcw_JPEG%2FKakaoTalk_20251228_121325174.jpg","lat":35.1585934752268,"lng":129.124604873168,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e137","name":"카마와루","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250820_62%2F1755618022245VO231_JPEG%2FIMG_6225.jpeg","lat":35.1585798605399,"lng":129.124713151468,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e138","name":"레인즈","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA2MjZfOSAg%2FMDAxNzUwODY5NTcwNjE2.73JpHjo_iDfHLK_f1u8RDlUe_Cl8jV4kR2MwwOzUn70g.nZwczUwIi3bzFCHSrVI72fxzQSMq2Kyjedu5HFsaucsg.JPEG%2FKakaoTalk_20250625_232419465_26.jpg","lat":35.1584609058944,"lng":129.12497011614,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e139","name":"고하순 광안직영점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA1MTdfMTgg%2FMDAxNzQ3NDYwOTA1ODQ5.kYahzf_tmxzrkLO7S8xZRmt1pXvsbQA5BIg7XOtn8Mcg.UlzO2X_hNhZGTKeVEtSo2dEJsZGnZ1rlNVCoP71QYdMg.JPEG%2FIMG_6801.jpg","lat":35.1566036529329,"lng":129.125020552307,"address":"","location":"민락 행정복지센터 도보 2분","visited":true,"venueId":"v15","verdict":"목살과 삼겹살에 깔끔한 밑반찬을 곁들이는 곳입니다."},{"id":"e140","name":"Etalee","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTJfMjE1%2FMDAxNzY4MjIyMDYyMzQ3.x4xaostpCXm7DLATZrKqbOqzgdvxj5d8dIMFK1WuE3sg.nB7jvDOAJVqpn6CdtYsVNTKL7aeMf4hDWoWBVqLXNwcg.JPEG%2F20260111_110453.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1567859716916,"lng":129.125209637461,"address":"","location":"민락 행정복지센터 도보 1분","visited":true,"venueId":"v14","verdict":"따뜻하고 바삭한 에그타르트를 즐길 수 있는 카페입니다."},{"id":"e141","name":"개미집 광안리점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221123_21%2F1669179741768lL86k_JPEG%2F20220222_%25B9%25CC%25B6%25E4007.JPG","lat":35.1553759542543,"lng":129.125142229118,"address":"","location":"민락 해변공원에서 도보 3분","visited":true,"venueId":"v25","verdict":"부산에서 오래 자리한 낙곱새 맛집입니다."},{"id":"e142","name":"나막집 광안민락점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDNfMTk3%2FMDAxNzU5NDU0ODk0NDgx.y0HLKzQUlce5jT9H41v94af0Y_rgKoWLeSnIU81brk0g.Trr7wpbCQO_vfZHX-hVj4XHcos5102EVQLkOlIyBybog.JPEG%2FKakaoTalk_Image_2025-10-03-10-28-00.jpeg","lat":35.154233476705414,"lng":129.1260561324429,"address":"","location":"민락 해변공원에서 도보 4분","visited":true,"venueId":"v26","verdict":"맑은 곰탕 국물의 담백한 고기 칼국수집입니다."},{"id":"e143","name":"프랭크커핀바 광안점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMTBfMjU5%2FMDAxNzY4MDMwNzY3OTEx.taWBbIdHg2-cZWTPcJsddqRsT5ZOcbaEBLLf7QdLbe8g.dbI9o5Bn9eNJesP3tphYcN44SYZvHYw_-C3O33r0OrMg.JPEG%2F3.jpg","lat":35.1532352353572,"lng":129.124656426036,"address":"","location":"민락 회센터에서 도보 3분","visited":true,"venueId":"v12","verdict":"광안리 뷰를 즐기는 우드 톤 카페입니다."},{"id":"e144","name":"디에이블 광안점","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250930_248%2F17592285318464KmHw_JPEG%2FKakaoTalk_20241016_164331552_01.jpg","lat":35.1532343346657,"lng":129.12465640262192,"address":"","location":"민락 회센터 끝자락","visited":true,"venueId":"v05","verdict":"광안대교 전망을 보며 파스타를 즐기는 곳입니다."},{"id":"e145","name":"민생주","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fblogfiles.pstatic.net%2FMjAyNTAyMjhfNjcg%2FMDAxNzQwNzMxNzA5OTMz.Ip0iEoVSlo3NRbGq8DCliMhx4VIUgI8RqTogmqjxpJYg.8nWlURYKErjXOOFYnPC4RiABbFq8kfgUiDKNQgalmQcg.JPEG%2FKakaoTalk_20250228_164008284_17.jpg%2F1440x1440","lat":35.1561368324537,"lng":129.124302866402,"address":"","location":"광안리 해변, 민락 회센터 바로 옆","visited":true,"venueId":"v02","verdict":"제철 해산물과 탑처럼 쌓아 주는 튀김이 별미인 곳입니다."},{"id":"e146","name":"쿠치가","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMThfMzAw%2FMDAxNzY4NzMxMzc5NzEx.fDpfww_5VPPJQVMReZKpX4-k9MU8E3EAgvntRAphKesg.gXoDxN0_LN2mF1pfgj9zYar2XYsI7x57Ops1TURkXvEg.JPEG%2FA374CBFD-EC04-4AB4-B27E-626F3FC8822D.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1562318174954,"lng":129.12423072256,"address":"","location":"민락 회센터 옆, 민생주 바로 옆","visited":true,"venueId":"v04","verdict":"사시미와 사이드가 고르게 맛있는 이자카야입니다."},{"id":"e147","name":"서리단 광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250801_72%2F1754016694310UcTEW_JPEG%2FP20250627_155618000_F527F0A6-CD5F-4BD6-8C9B-1C4A056C14BE.jpeg","lat":35.1563879020158,"lng":129.124682467117,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e148","name":"톤쇼우 광안점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250227_102%2F1740627233546XNzYA_JPEG%2F%25B8%25F0%25B5%25D2%25C4%25AB%25C3%25F7.jpg","lat":35.156441958257815,"lng":129.12478591921425,"address":"","location":"민락 해변공원에서 도보 4분","visited":true,"venueId":"v11","verdict":"광안리에서 프리미엄 돈카츠를 맛볼 수 있는 곳입니다."},{"id":"e149","name":"나가하마만게츠 광안리점","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTZfMTE2%2FMDAxNzY4NTU5MDk4MzMx.1v7_TsupkgqxOI0OjQYTI6t9luiQYE8mX7G82HmAB34g.GYgrpjq0u-7QvO9KR0MdO0E4tKm1i9n2MswZpNyrxQAg.JPEG%2F20260113_110633.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1572,"lng":129.1215,"address":"","location":"민락 테넌바움에서 도보 2분","visited":true,"venueId":"v13","verdict":"특별한 돈코츠 라멘을 사골과 비법 소스로 맛낸 곳입니다."},{"id":"e150","name":"83해치","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA0MDlfMjQ1%2FMDAxNzQ0MTI2MjU1Mzc5.txNSCH5rKHqN5oIo9_90dG832aQbaY8PmnlZDV0IPuEg.rlJfTfNK9xXy2ICqkbIwNsLiWqt5Byfw4NWXs39x_b0g.JPEG%2F20250408_223738.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1575505194909,"lng":129.125804506804,"address":"","location":"부산 수영경찰서 광안지구대 도보 30초","visited":true,"venueId":"v18","verdict":"따뜻한 조명 아래 고기와 사이드까지 즐기기 좋은 곳입니다."},{"id":"e151","name":"오스테리아 윤","category":"dining","subcategory":"western","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250325_214%2F1742830804014h4Iih_JPEG%2FP20250308_145101000_5AB8E946-192D-4CC8-A2B3-AFBDD45B321F.jpeg","lat":35.1575578601146,"lng":129.125797016858,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e152","name":"코듀로이 펠라즈","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMjZfMjEz%2FMDAxNzY0MTA5NDYwMjUx.568t57lf5K793zg57wm81DGZqKkX7ba-IbZWafgweBsg.1shRkRAzdUdBPnTdnP1PkWLH47ekdbVgvlhNIDbhCeUg.PNG%2Fimage.png","lat":35.1571256366291,"lng":129.125829658873,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e153","name":"칠월","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251119_159%2F1763539709276CGSqt_JPEG%2FKakaoTalk_Photo_2025-11-18-13-56-25_010.jpeg","lat":35.15761053562363,"lng":129.12541433829327,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e154","name":"부산혼술바제주아홉 광안리점","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMjdfMjI4%2FMDAxNzY0MjIyNjIxNTgx.q4X9jAiFOrrpWcumi8k854hshym1l8EZ0B4v7CS6NLcg.gomL5qhfL7qpouaQJnu8JTptLTStrO5nLM9mycIKZ6Yg.JPEG%2F20251126%25A3%25DF203528.jpg","lat":35.1575486388458,"lng":129.12534689060445,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e155","name":"수달바 광안","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMTlfMjcw%2FMDAxNzY4ODE4Njk2ODIw.nxCFuJYSveugKt0Swcf-BrMwIbfXILCpasT47vSWXlcg.3X0knlUM_NskD3SMILZ1_cmgxqYidYFV0an5sAC-bpgg.JPEG%2FIMG_0014.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.157826732336744,"lng":129.1251621016047,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e156","name":"좋은느낌포차","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMDhfMjEg%2FMDAxNzI4Mzk0ODE3NDAx.Cq80ODNBM5ykCPOdD3Flco9zxT7JUYV-gbbIjXOrxVIg.cVzahGg_LAllIdIFZArHdSpJjS1Q_rneyQnkXuqI1Gcg.JPEG%2F1728394816814.jpg","lat":35.1579522660429,"lng":129.125095141373,"address":"","location":"부산 수영경찰서 광안지구대 도보 1분","visited":true,"venueId":"v27","verdict":"한식 안주와 술을 늦은 시간까지 부담 없이 즐기는 곳입니다."},{"id":"e157","name":"우연한서점","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220313_215%2F1647154999960PrkK4_JPEG%2F6F03BC8A-1F6F-4E88-BBB4-5BEC9ADBD7CB.jpeg","lat":35.1578604209559,"lng":129.127862305458,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e158","name":"야키토리 해공","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240326_242%2F171145318186661tFV_JPEG%2FDSC_9417.JPG","lat":35.15823671287849,"lng":129.1271149769829,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e159","name":"아웃트로바이비토","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MjJfMTUx%2FMDAxNzU4NTM2MzQwMjIx.3LF8p8J_3Oat_hZ_jERaCMe5AQBWEb8RNa_TX13JG6Eg.HpSEdD4ZeSp-kKP3Y03EuExSLgagFjWfNb3CLWE1zyAg.JPEG%2FKakaoTalk_20250922_150755249_06.jpg","lat":35.1583472041128,"lng":129.127853041419,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e160","name":"미락슈퍼","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTAzMTVfMjUy%2FMDAxNzQyMDM2NzE3Nzg2.X9t19AdTwL1eHY6-LGhxzAUClGKlCB4UQZTnLSDS2J4g.Ehgw6BwDC4hK5Bqg_zMo47YOzphyG0O_zDAIrVfVa2cg.JPEG%2FDE8F2FD2-72BD-48AE-A9A6-57C9E6D971AB.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.15890513931976,"lng":129.1259988727465,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e161","name":"닭서방 롱다리치킨 광안점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA1MDZfMTMw%2FMDAxNjgzMzc3OTk5OTIw.8sxV3AQzV6m8EXM0owx2Qd-JkqhIUFQ8e3HeGc6Hl0wg._AyniC52m1w8n5Y6QdqB6P-6xcq2Xr3aTg0Ss7nPon4g.JPEG%2FIMG_0701.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1505,"lng":129.1108,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e162","name":"수영산8193","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMTNfNjcg%2FMDAxNzYyOTk0NjUwNzU3.qybsRFIgWDQlmH15X3qQPbJy7MtJrLhT5oYCZniSi2gg.vxZbrUxBPsnrq44lHmcQCA6o7NmMKGUdEQS1mDaKEbkg.JPEG%2FKakaoTalk_Photo_2025-11-13-09-43-19_004.jpeg","lat":35.164274164266885,"lng":129.11823535430426,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e163","name":"신도마켓","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230129_60%2F1674977681858cB6XA_JPEG%2FKakaoTalk_20230129_161242433.jpg","lat":35.1644193381587,"lng":129.118178764384,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e164","name":"엄용백 돼지국밥 수영본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180612_148%2F1528782902709xhF1Y_JPEG%2FaTFwZ888YEwJx4ejAbChb23Z.JPG.jpg","lat":35.166229078304795,"lng":129.11723804853906,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e165","name":"카보드 부산수영","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTExMjBfMTMw%2FMDAxNzYzNjMzMTAwNTM0.xZctKS1zbtLFcFzjE8QOT_ClsqiWSgdXZaVR6lLsh7Ug.pBu-sGNT7RzfNkG3r2ju-97zXjHPWwq1mlOgCllbg3og.JPEG%2F20251120_182044.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1658699265034,"lng":129.11757551345,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e166","name":"자갈치횟집","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F%2F20160806_230%2F1470415336280m4VLv_JPEG%2F1470415268796.jpg","lat":35.16658190246521,"lng":129.1171078266056,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e167","name":"두부완당","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220207_221%2F1644208921112O8AUM_JPEG%2F20220207_131632.jpg","lat":35.1598,"lng":129.1148,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e168","name":"디시","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTAxMTdfMTkx%2FMDAxNzM3MTExMDI2MDk0.Y7fJYBDVVTluCBkWeE3Fvs2S27o5rkL_nMGHOOfxvgIg.GKpcl0WbDR7bJRlxxZZ_DD2FbSQdlEgSle-pBsfNLhMg.JPEG%2F1000007575.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1535,"lng":129.1178,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e169","name":"두바이 수영점","category":"bar","subcategory":"bar","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAxMjRfODAg%2FMDAxNzY5MjYwNTEzMjU3.uNkPXyIEtdrFKQrKUmAB-sXYhRcKqVJTUkvmk9JzG4Yg.hEmb5IgrwmMgKNnLxKEOHKzUgg-mnDaSkcBOTCcXQcwg.JPEG%2FF8357139-81AB-4114-80F2-4D7537E05F80.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1674747869285,"lng":129.118971349925,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e170","name":"마포통구이 수영직영점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA3MTlfMjcy%2FMDAxNzIxMzg4NTY4NDc0.2r4ieiQC6fICxaMBzJz5VxNqWWccIVJKg5y177rcMEsg.9tjrRsqB2MzcJ3BJjkQOJUfg-f8Rxr0x677IRzrWzQ4g.JPEG%2F20240717_223849.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1635,"lng":129.1158,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e171","name":"국이네낙지볶음","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20201117_126%2F1605593155642zMIJR_JPEG%2FnWALLtbXHMpgHEky0XntKnEM.JPG.jpg","lat":35.1672,"lng":129.1095,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e172","name":"유명갈매기 수영본점","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250910_69%2F1757483049775u9wMw_JPEG%2F1757482961546.jpg","lat":35.16829822919453,"lng":129.11124485975282,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e173","name":"탄수호","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMTNfMjM4%2FMDAxNzY1NjIyNjYzMjg5.M4kj8kQ4ws5TyTO1om9_M28PiriAVjUI1B5jDPz9jucg.WW6PuHFxKtukBdqVk-PeZsnsaZeWx9ZNGRhsCROXk78g.JPEG%2F20251213_184633.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1705058395624,"lng":129.111928598564,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e174","name":"아메리칸빌리지","category":"dining","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250413_247%2F1744543319004HhSqE_JPEG%2FDSC01580.jpg","lat":35.157,"lng":129.1255,"address":"","location":"","visited":false,"venueId":"","verdict":""},{"id":"e175","name":"젠닌 해운대본점","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210505_170%2F1620225842419xaIFh_JPEG%2Fry_EWW_uT3OXigx4bSibhWGb.jpg","lat":35.16237326812824,"lng":129.1621061805082,"address":"부산 해운대구 구남로29번길 32","location":"","visited":false,"venueId":"","verdict":""},{"id":"e176","name":"해삼멍게말미잘","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250518_241%2F1747566781366D29a8_JPEG%2FP20250508_232632000_38037348-5BF5-4DFC-9C30-E301D1762943.jpg","lat":35.1656633202685,"lng":129.118156164131,"address":"부산 수영구 감포로 81-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e177","name":"어부남","category":"dining","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260330_148%2F1774855847874L51CA_JPEG%2FIMG_5540.jpeg","lat":35.156950211827,"lng":129.124426066814,"address":"부산 수영구 민락로6번길 40","location":"","visited":false,"venueId":"","verdict":""},{"id":"e178","name":"호이호이","category":"bar","subcategory":"etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260113_138%2F1768296185095NHpzD_JPEG%2FDSC00025.jpg","lat":35.1581456357799,"lng":129.124859865629,"address":"부산 수영구 광안해변로295번길 39","location":"부산 수영경찰서 광안지구대 도보 2분","visited":true,"venueId":"v28","verdict":"늦은 시간까지 일식과 양식 퓨전 요리를 즐기는 주점입니다."},{"id":"e179","name":"키위","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230704_267%2F1688474431119pBrFi_JPEG%2FC6E2AE8F-5CEC-431C-8870-76DD518F2522.jpeg","lat":35.13703830304678,"lng":129.10455497300788,"address":"부산 남구 수영로346번길 46","location":"","visited":false,"venueId":"","verdict":""},{"id":"e180","name":"동백","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240903_211%2F1725294926986DqJH8_JPEG%2F20240827_214705.jpg","lat":35.136140898754,"lng":129.101691732688,"address":"부산 남구 용소로19번길 19","location":"","visited":false,"venueId":"","verdict":""},{"id":"e181","name":"너와나우리","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA3MThfNzkg%2FMDAxNzIxMzEzNjA4NjIw.Q97eJs38nqCAoXemspfKpgMbqThTUssEP6hYpp7QDmkg.iK2IomPhhqg3q-EtcM2L2llyzlI3PLylkCMqmDOsObIg.JPEG%2F20240716_182004.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1352814422149,"lng":129.088076814125,"address":"부산 남구 수영로 195-8","location":"","visited":false,"venueId":"","verdict":""},{"id":"e182","name":"어부","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260102_173%2F1767328630026c8DJi_JPEG%2FIMG_1082.jpeg","lat":35.11734829684497,"lng":129.0346860893811,"address":"부산 동구 영초윗길 25","location":"","visited":false,"venueId":"","verdict":""},{"id":"e183","name":"야키토리초량","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260219_132%2F1771460055263qlEzm_JPEG%2FIMG_6428.jpeg","lat":35.12089214757194,"lng":129.03884122085393,"address":"부산 동구 홍곡로 8","location":"","visited":false,"venueId":"","verdict":""},{"id":"e184","name":"니시나리","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjA0MTBfMTUw%2FMDAxNzc1ODE2MzQyNTc5.hFrHQbYfh_SeV3XAYUBOWXSo8UsqYsU0zfqgLceAi78g.X-fUkz8LpN4u16AYEJzd9x0049_YGm73l9KorVeYCpsg.JPEG%2F1000090159.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1191578483641,"lng":129.040687757668,"address":"부산 동구 초량로14번길 6-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e185","name":"외딴섬","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231223_249%2F1703335280449v27LH_JPEG%2F947AB337-C91A-4064-B625-04B3DDCEBF7B.jpeg","lat":35.1598898295967,"lng":129.120874803116,"address":"부산 수영구 감포로 12","location":"동방 오거리 도보 3분","visited":true,"venueId":"v33","verdict":"따뜻하고 아담한 분위기에서 한식 안주를 즐기는 곳입니다."},{"id":"e186","name":"코듀로이펠라즈","category":"bar","subcategory":"cocktail","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240718_30%2F1721298157517Psk2K_JPEG%2FIMG_8461.jpeg","lat":35.1571256366291,"lng":129.125829658873,"address":"부산 수영구 민락본동로11번길 53","location":"","visited":false,"venueId":"","verdict":""},{"id":"e187","name":"이세계","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230127_64%2F1674757651766mw4sT_JPEG%2F8136FD7F-CC22-4A0A-863C-BF98C41334AB.jpeg","lat":35.158180271346,"lng":129.060907936701,"address":"부산 부산진구 동천로107번길 25","location":"","visited":false,"venueId":"","verdict":""},{"id":"e188","name":"간바레쿠","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240810_224%2F1723265677056Rc7LF_JPEG%2FIMG_9665.JPG","lat":35.0992167357762,"lng":129.035971103249,"address":"부산 중구 해관로 4","location":"","visited":false,"venueId":"","verdict":""},{"id":"e189","name":"휴케라","category":"dining","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjA0MTJfMjQ5%2FMDAxNzc1OTU5NDQxODg3.y-FpcR_NqwqsKeAC00tilDZ00ZMwTItx7QPoJ4rYmW8g.QZVFoEK4WFXzLlYFWYLpThJhVuoXOWSPkqV6-cKsYlMg.JPEG%2F73261110-FB1A-4555-828B-018D04D60FC6.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1000727371323,"lng":129.035012093559,"address":"부산 중구 광복로97번길 15-2","location":"","visited":false,"venueId":"","verdict":""},{"id":"e190","name":"어가","category":"bar","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjFfMjk2%2FMDAxNzc0MDUwMzA0MzY3.y6Q-OzsftoaYdFcllO8M5RYosqBKRMCx0BDmz9XT6qgg.XtLRKuJDlF0imBVGn2scuRqnH3bRPKwyt3HjnAcSFWEg.JPEG%2Foutput%25A3%25DF3665336137.jpg","lat":35.13612255362447,"lng":129.09134872209287,"address":"부산 남구 못골로 81","location":"","visited":false,"venueId":"","verdict":""},{"id":"e191","name":"또똣 부산혼술바 광안리점","category":"bar","subcategory":"cocktail","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMDdfMTgg%2FMDAxNzcwNDI5NjU0NjEy.d37nVXJ2hZ7KJ_i3Gl5xPbH49O--HdBK6tUlwdWnsfsg.kqJVI4llnOtJil51PTSx9wvVGDAE5jmJP34BRyFZxbwg.JPEG%2F%252814%2529.jpg","lat":35.15041521990141,"lng":129.11225835975395,"address":"부산 수영구 남천바다로9번길 16","location":"","visited":false,"venueId":"","verdict":""},{"id":"e192","name":"설중","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjAyMjdfMjMy%2FMDAxNzcyMjAxNzMzNTEx.yF7viOfcb8yzn8je8Rf2bSJ8WiST7ce8YGnr5QZM7JYg.b1CIjIKC-lGXXr5l-PmBrpf_3PI9bJ6fuSc36PfVB8kg.JPEG%2F2137487F-7727-44DC-B32E-909BC9681F69.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.0990616040116,"lng":129.025760833833,"address":"부산 중구 보수대로24번길 7","location":"","visited":false,"venueId":"","verdict":""},{"id":"e193","name":"뮤직올로지","category":"bar","subcategory":"bar_etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250829_208%2F1756442852235zGNWR_JPEG%2FDSC_3841.jpeg","lat":35.1715719450981,"lng":129.11590050367462,"address":"부산 수영구 수미로26번길 77","location":"","visited":false,"venueId":"","verdict":""},{"id":"e194","name":"복동이네오지상","category":"dining","subcategory":"japanese","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240717_287%2F1721183554854zn94R_JPEG%2FIMG_5888.jpeg","lat":35.159838672380104,"lng":129.06158074747137,"address":"부산 부산진구 서전로9번길 49","location":"","visited":false,"venueId":"","verdict":""},{"id":"e195","name":"2관","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260212_100%2F17708914731512TRDl_PNG%2F8FA17E7A-4AF2-4AD6-B506-8AFF55AB6D3C.png","lat":35.1570633289596,"lng":129.061725767299,"address":"부산 부산진구 동천로95번길 9-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e196","name":"허거스 HUGUS","category":"bar","subcategory":"beerhall","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251001_108%2F1759302895910kTxSl_JPEG%2FKakaoTalk_20250515_144103578_13.jpg","lat":35.1460310775285,"lng":129.114326123661,"address":"부산 수영구 광남로48번길 49","location":"","visited":false,"venueId":"","verdict":""},{"id":"e197","name":"보야지비스트로","category":"bar","subcategory":"bar_etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250207_297%2F1738893720664VcoHv_JPEG%2FKakaoTalk_20250207_020617264_21.jpg","lat":35.1553339268225,"lng":129.067597490753,"address":"부산 부산진구 전포대로210번길 38","location":"","visited":false,"venueId":"","verdict":""},{"id":"e198","name":"우라마치사카바","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260308_25%2F1772962018874t37oQ_JPEG%2FIMG_8409.jpeg","lat":35.1652777931398,"lng":128.984789505949,"address":"부산 사상구 광장로87번길 64","location":"","visited":false,"venueId":"","verdict":""},{"id":"e199","name":"소수","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251223_239%2F1766417645397aDDwO_JPEG%2FIMG_9771.jpeg","lat":35.1365468596449,"lng":129.101614409702,"address":"부산 남구 용소로13번길 18","location":"","visited":false,"venueId":"","verdict":""},{"id":"e200","name":"요행","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230820_246%2F1692520167965xxJQl_JPEG%2FIMG_9086.jpeg","lat":35.1561322459262,"lng":129.067392755468,"address":"부산 부산진구 서전로68번길 41-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e201","name":"야키맨션","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230329_40%2F1680069875965t7SuE_JPEG%2FKakaoTalk_20230329_143051019_18.jpg","lat":35.1593253293073,"lng":129.061403191618,"address":"부산 부산진구 서전로9번길 38","location":"","visited":false,"venueId":"","verdict":""},{"id":"e202","name":"데구르르","category":"cafe","subcategory":"bar_etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250516_133%2F1747324465681HjRrg_JPEG%2F8C27FCB9-3D3A-44BD-82D5-1DE186115AC1.jpeg","lat":35.15752030645257,"lng":129.06632071481852,"address":"부산 부산진구 서전로 60-5","location":"","visited":false,"venueId":"","verdict":""},{"id":"e203","name":"카보드 이자카야","category":"bar","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250128_229%2F17380347088180hJ7Y_JPEG%2F1000012956.jpg","lat":35.1658699265034,"lng":129.11757551345,"address":"부산 수영구 무학로49번길 109","location":"","visited":false,"venueId":"","verdict":""},{"id":"e204","name":"망미코너스","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250617_80%2F1750132431897VNSjJ_JPEG%2FIMG_1198.jpeg","lat":35.1750725188534,"lng":129.107759821472,"address":"부산 수영구 과정로42번길 1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e205","name":"장소","category":"dining","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjA0MDZfMjgw%2FMDAxNzc1NDYyMDA3NzQ5.oV0ZvcUyvi2lxt-w_OutH8i5tcg9P2ly7YhYxjRAzUwg.jpzrI0sUUwpDC8O0jMA7n9QShtEBHi9SWw4X1SelmkUg.JPEG%2F2EDAD78C-297D-495C-B284-5C545AA4CF5E.jpeg%3Ftype%3Dw1500_60_sharpen","lat":35.1723894032463,"lng":129.111144334226,"address":"부산 수영구 망미번영로70번길 26","location":"","visited":false,"venueId":"","verdict":""},{"id":"e206","name":"칠월칠석","category":"cafe","subcategory":"cafe","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250814_26%2F1755129889069yTs2E_JPEG%2FKakaoTalk_20250814_064803864_03.jpg","lat":35.1743392812269,"lng":129.111724861398,"address":"부산 수영구 수미로 9-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e207","name":"니사","category":"bar","subcategory":"cocktail","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230920_127%2F1695219001333DGrO7_JPEG%2FIMG_9607.jpeg","lat":35.1565763356829,"lng":129.064603724836,"address":"부산 부산진구 전포대로223번길 10","location":"","visited":false,"venueId":"","verdict":""},{"id":"e208","name":"해피피플","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260318_128%2F1773845090749kN47I_JPEG%2F%25B8%25C5%25BF%25EE%25B5%25EE%25B0%25A5%25BA%25F1%25C2%25F2.jpg","lat":35.1568387149588,"lng":129.066550362335,"address":"부산 부산진구 동성로71번길 31","location":"","visited":false,"venueId":"","verdict":""},{"id":"e209","name":"야스미","category":"dining","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250703_143%2F17514871113251DSQ2_JPEG%2FIMG_0632.jpeg","lat":35.1591136230776,"lng":129.067267408581,"address":"부산 부산진구 서전로67번길 30","location":"","visited":false,"venueId":"","verdict":""},{"id":"e210","name":"주도","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTA3MThfNTgg%2FMDAxNzUyODE5NzI3NDY0.24niJrRiY7Qn44hijwEV0b7AZORTZAtuTs94IyWSsSgg.uxfJYlLpYa07MiCNTZO5NAxICnRNjVlZf7J6qdRxdBQg.JPEG%2F20250717_222231.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.1002970332138,"lng":129.025873647915,"address":"부산 중구 부평1길 18-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e211","name":"밤온","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251012_80%2F1760252897930sU8ye_JPEG%2FIMG_0775.jpeg","lat":35.10038157006852,"lng":129.02712360154794,"address":"부산 중구 중구로29번길 13-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e212","name":"만재","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230530_164%2F1685445307339bjxbq_JPEG%2F1645604493404.jpg","lat":35.1005373964175,"lng":129.026858808002,"address":"부산 중구 중구로29번길 18","location":"","visited":false,"venueId":"","verdict":""},{"id":"e213","name":"아웃풋","category":"dining","subcategory":"bar_etc","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA5MTBfNTkg%2FMDAxNzI1OTY2OTEwOTcw.Xi4S4HLvSKgRofloRGWjd-Dc7j6hpEOR_9vXB_QAmrkg.W1QMoZxZ4Y5baGlYO-PtuhapNxU0ZnHZYtUCmRPbvvAg.JPEG%2F%25BE%25C6%25BF%25F4%25C7%25B2_1.jpg","lat":35.1563495403404,"lng":129.059717279969,"address":"부산 부산진구 서전로10번길 36","location":"","visited":false,"venueId":"","verdict":""},{"id":"e214","name":"파동","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231122_47%2F1700643270526rRUmh_JPEG%2FIMG_4253.jpeg","lat":35.1558803987999,"lng":129.065991744739,"address":"부산 부산진구 전포대로216번길 7","location":"","visited":false,"venueId":"","verdict":""},{"id":"e215","name":"고리","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260319_207%2F1773899225964c5Ptf_PNG%2FKakaoTalk_Photo_2026-03-19-14-38-32_003.png","lat":35.1567354855126,"lng":129.066209786353,"address":"부산 부산진구 서전로58번길 23","location":"","visited":false,"venueId":"","verdict":""},{"id":"e216","name":"삼편주","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231210_220%2F1702185008927YrYSl_JPEG%2F1000020943.jpg","lat":35.1568307015895,"lng":129.06654467316,"address":"부산 부산진구 동성로71번길 31","location":"","visited":false,"venueId":"","verdict":""},{"id":"e217","name":"그레이 전포점","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250508_79%2F1746714048635ANGAh_JPEG%2FIMG_0201.jpeg","lat":35.15492130686386,"lng":129.0673269958629,"address":"부산 부산진구 동성로49번길 17","location":"","visited":false,"venueId":"","verdict":""},{"id":"e218","name":"태태태","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMDZfMTc3%2FMDAxNzY3NjYzNjU1NTc2.ahvVLqb7En_Isj96_8Fnu3Nh59HDQjrcP44dq-b6iZYg.HfmsNA9fy7Wzyw8Cq5jhJQEXFrF_K7wIRrz7pdybge8g.JPEG%2FIMG%25A3%25DF4497.jpg","lat":35.1570441665781,"lng":129.059886221997,"address":"부산 부산진구 서전로10번길 22-9","location":"","visited":false,"venueId":"","verdict":""},{"id":"e219","name":"수달바","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240815_22%2F17237283934207EOq7_JPEG%2F%25B0%25E6%25BA%25CF%25BD%25C4%25C7%25D1%25BF%25EC%25C0%25B0%25BB%25E7%25BD%25C3%25B9%25CC.jpg","lat":35.1569381918499,"lng":129.061453772573,"address":"부산 부산진구 중앙대로680번가길 80-11","location":"","visited":false,"venueId":"","verdict":""},{"id":"e220","name":"다람쥐술방","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250830_193%2F1756548587827KFJhe_JPEG%2FIMG_3025.jpeg","lat":35.1567301174575,"lng":129.061289414609,"address":"부산 부산진구 중앙대로680번가길 80-10","location":"","visited":false,"venueId":"","verdict":""},{"id":"e221","name":"세흥집","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260315_282%2F1773546437359Wgd67_JPEG%2F1773546287218.jpg","lat":35.1498028477919,"lng":129.112286415259,"address":"부산 수영구 남천바다로 13","location":"","visited":false,"venueId":"","verdict":""},{"id":"e222","name":"광안리성수","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250218_181%2F1739858370789fOVg7_JPEG%2F2024_01_16_18_59_IMG_2601.JPG","lat":35.1481929044728,"lng":129.114276736,"address":"부산 수영구 남천바다로 38-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e223","name":"주인혼술바","category":"bar","subcategory":"cocktail","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260302_147%2F1772452767909qMjOU_JPEG%2FIMG_6197.jpeg","lat":35.154721383090326,"lng":129.11940196308007,"address":"부산 수영구 광안로61번길 10","location":"","visited":false,"venueId":"","verdict":""},{"id":"e224","name":"풍악","category":"bar","subcategory":"bar_etc","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fnaverbooking-phinf.pstatic.net%2F20240412_196%2F1712923350850MMzJy_JPEG%2Fimage.jpg","lat":35.1014376650893,"lng":129.031219062567,"address":"부산 중구 광복중앙로24번길 4","location":"","visited":false,"venueId":"","verdict":""},{"id":"e225","name":"고상","category":"bar","subcategory":"korean","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240726_192%2F1721989166819gnIpo_JPEG%2FIMG_9381_%25281%2529.jpeg","lat":35.1560903616333,"lng":129.067945820647,"address":"부산 부산진구 동성로61번길 26","location":"","visited":false,"venueId":"","verdict":""},{"id":"e226","name":"스티켓 직달사천","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251114_285%2F17631001810007rYmQ_JPEG%2FIMG_3544.JPG","lat":35.1562870095404,"lng":129.066931425534,"address":"부산 부산진구 서전로68번길 38-6","location":"","visited":false,"venueId":"","verdict":""},{"id":"e227","name":"예지","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMDVfMjMy%2FMDAxNzcwMjU4MDcyNzA0.MIgucCJBtqKt6c3nfJBhWW0ls2rdy7Vxk-RbMerJYsIg.795PzrMciRKhbKLz2hWHo6KM9cqrHTFpYzSg0zoUM3Ag.JPEG%2FIMG%25A3%25DF7488.jpg","lat":35.1570901814504,"lng":129.066178158854,"address":"부산 부산진구 서전로58번길 15","location":"","visited":false,"venueId":"","verdict":""},{"id":"e228","name":"복덕방 전포점","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250102_186%2F1735823446098KCHJa_JPEG%2FIMG_3567.jpeg","lat":35.1550265772828,"lng":129.064325351618,"address":"부산 부산진구 전포대로209번길 17-7","location":"","visited":false,"venueId":"","verdict":""},{"id":"e229","name":"마딛따","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250825_231%2F1756122897782yOoKg_JPEG%2FKakaoTalk_20250825_204332087_01.jpg","lat":35.1550737807584,"lng":129.067316590179,"address":"부산 부산진구 동성로49번길 20","location":"","visited":false,"venueId":"","verdict":""},{"id":"e230","name":"한날한시","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250319_217%2F1742317513213cO2EF_JPEG%2FIMG_1189.jpeg","lat":35.1557118374321,"lng":129.066680957998,"address":"부산 부산진구 전포대로216번길 20","location":"","visited":false,"venueId":"","verdict":""},{"id":"e231","name":"고향김치전골","category":"dining","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20171219_75%2F1513659580179u2jTO_JPEG%2FI18Pz4terpWpt4qeiFVVTUj1.jpg","lat":35.10052112943515,"lng":129.02653821528008,"address":"부산 중구 중구로29번길 26","location":"","visited":false,"venueId":"","verdict":""},{"id":"e232","name":"하버드","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260221_42%2F1771668784576ePFtQ_JPEG%2FIMG_9199.jpeg","lat":35.2189471141135,"lng":129.08348683792,"address":"부산 동래구 금강공원로 10-1","location":"","visited":false,"venueId":"","verdict":""},{"id":"e233","name":"노선","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250529_123%2F1748508115282o8XLx_JPEG%2FKakaoTalk_20250529_173518098.jpg","lat":35.2066417097997,"lng":129.078991316973,"address":"부산 동래구 온천천로 143","location":"","visited":false,"venueId":"","verdict":""},{"id":"e234","name":"골목집 동래점","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNjA0MTVfMjUz%2FMDAxNzc2MjU5NDk4OTE4.YGC-z-5RSoMyOqy5YzZuzKhDCzQRWd8Hqeq9J22jQBgg.TD5i49BVI5JoeK9AmW9FBmxdJj4SuwR8Ut6oxPLBDKMg.JPEG%2F1000058855.jpg.jpg%3Ftype%3Dw1500_60_sharpen","lat":35.2060633260192,"lng":129.07971658573,"address":"부산 동래구 충렬대로181번길 47-5","location":"","visited":false,"venueId":"","verdict":""},{"id":"e235","name":"야키토리이치에 동래점","category":"dining","subcategory":"izakaya","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240704_97%2F17200977771300X9is_JPEG%2F1720097719641.jpg","lat":35.2061788038094,"lng":129.080233371613,"address":"부산 동래구 명륜로129번나길 19","location":"","visited":false,"venueId":"","verdict":""},{"id":"e236","name":"단성무이 부산동래점","category":"bar","subcategory":"sojuhouse","photo":"https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20260413_178%2F1776022475505BfliV_JPEG%2F2855AA51-30E8-46EF-9A25-57093473FB3B.jpeg","lat":35.205776940393,"lng":129.079496279599,"address":"부산 동래구 명륜로129번다길 12","location":"","visited":false,"venueId":"","verdict":""},{"id":"v01","name":"30년 전통 수타 손짜장","category":"dining","subcategory":"chinese","photo":"","lat":null,"lng":null,"address":"","location":"민락동, 버스 차고지 옆","visited":true,"venueId":"v01","verdict":"제가 먹어 본 짬뽕 중 국물이 가장 진한 중국집입니다."},{"id":"v06","name":"소랑","category":"dining","subcategory":"korean","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 3분","visited":true,"venueId":"v06","verdict":"레트로한 가정집 분위기에서 토시살과 육사시미를 즐기는 곳입니다."},{"id":"v09","name":"스시사카바 하토바","category":"bar","subcategory":"japanese","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 3분","visited":true,"venueId":"v09","verdict":"신선한 사시미와 초밥을 골라 먹는 이자카야입니다."},{"id":"v16","name":"용호상회 광안1호점","category":"cafe","subcategory":"cafe","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 1분","visited":true,"venueId":"v16","verdict":"오래된 팥빙수 이야기와 단골층이 있는 부산의 디저트 카페입니다."},{"id":"v20","name":"테츠아지","category":"bar","subcategory":"japanese","photo":"","lat":null,"lng":null,"address":"","location":"동방 오거리 도보 3분","visited":true,"venueId":"v20","verdict":"제가 다섯 번 이상 찾은, 맛과 분위기가 좋은 일식 주점입니다."},{"id":"v21","name":"치킨버거클럽 광안점","category":"dining","subcategory":"western","photo":"","lat":null,"lng":null,"address":"","location":"동방 오거리 도보 4분","visited":true,"venueId":"v21","verdict":"치킨버거가 당길 때마다 제가 다시 찾는 전문점입니다."},{"id":"v22","name":"듀플릿","category":"cafe","subcategory":"cafe","photo":"","lat":null,"lng":null,"address":"","location":"동방 오거리 도보 3분","visited":true,"venueId":"v22","verdict":"마당과 독채 공간에서 특별한 분위기를 즐기는 카페입니다."},{"id":"v23","name":"평화김해뒷고기 광안리점","category":"dining","subcategory":"korean","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 3분","visited":true,"venueId":"v23","verdict":"육즙 가득한 뒷고기와 사이드를 부담 없이 즐기는 곳입니다."},{"id":"v30","name":"그린파치","category":"bar","subcategory":"japanese","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 4분","visited":true,"venueId":"v30","verdict":"제철 회와 퓨전 안주를 함께 즐기기 좋은 이자카야입니다."},{"id":"v31","name":"루베르부산","category":"bar","subcategory":"etc","photo":"","lat":null,"lng":null,"address":"","location":"민락 해변공원에서 도보 5분","visited":true,"venueId":"v31","verdict":"회와 육사시미, 여러 장르의 안주를 즐기는 퓨전 주점입니다."}];
+const KAKAO_MAP_KEY = "6b46dffd5f8fb1e5caacc8fcb4f6bac8";
+</script>
+<style>
+:root{color-scheme:light;--paper:#f4eee4;--ink:#3a2a20;--soft:#685747;--line:#cdbfae;--accent:#9a5632;--white:#fbf8f2;--serif:'Noto Serif KR',serif;--latin:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+button,a{font:inherit}button{color:inherit}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #7d4229;outline-offset:4px}button:disabled{cursor:not-allowed;opacity:.48}a{color:inherit}button{cursor:pointer}.frame{width:min(100% - 56px,1120px);margin:auto}.topbar{height:98px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.wordmark{text-decoration:none;font-family:var(--latin);font-weight:500;font-size:28px;letter-spacing:.18em;line-height:1;display:inline-flex;align-items:center;gap:10px}.mark{width:17px;height:17px;border:1px solid var(--ink);border-radius:50%;display:block}.topnote{font-size:11px;letter-spacing:.05em;color:var(--soft);text-align:right}.topnote b{font-weight:500;color:var(--ink)}
+main{min-height:calc(100svh - 159px)}.screen[hidden]{display:none!important}.screen{animation:page-in .48s cubic-bezier(.22,.7,.24,1) both}.screen.leaving{animation:page-out .24s ease both}.intro{min-height:calc(100svh - 159px);display:grid;grid-template-columns:1fr minmax(300px,.82fr);align-items:center;gap:8%;padding:62px 0 68px}.eyebrow{font-size:12px;color:var(--accent);letter-spacing:.07em;font-weight:600;margin:0 0 24px}.headline{font-size:clamp(35px,4.7vw,62px);font-weight:500;line-height:1.43;letter-spacing:-.07em;margin:0}.headline .line{display:block;animation:rise .7s both}.headline .line:nth-child(2){animation-delay:.16s}.headline em{font-style:normal;color:var(--accent)}.intro-copy{font-size:14px;line-height:1.95;color:var(--soft);margin:26px 0 34px;max-width:400px}.primary{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;border:1px solid var(--ink);background:var(--ink);color:var(--white);text-decoration:none;min-height:59px;padding:0 21px;font-size:14px;font-weight:600;transition:transform .18s,opacity .18s}.primary:hover{opacity:.88}.primary:active{transform:translateY(2px)}.primary .arrow,.text-action .arrow{display:inline-block;transition:transform .2s}.primary:hover .arrow,.primary:focus-visible .arrow,.text-action:hover .arrow{transform:translateX(4px)}.intro .primary{width:min(100%,330px)}.intro-small{font-size:11px;color:var(--soft);margin:15px 0 0}.cover{min-height:480px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);padding:26px 28px;background:rgba(255,252,246,.26);position:relative}.cover:before{content:"";position:absolute;inset:7px;border:1px solid rgba(205,191,174,.65);pointer-events:none}.cover-top,.cover-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.cover-top{font-size:11px;color:var(--soft)}.cover-index{font:italic 27px var(--latin);color:var(--accent)}.cover-body{padding:40px 4%;}.cover-small{font-size:12px;color:var(--soft);margin-bottom:22px}.cover-big{font-size:clamp(38px,4.5vw,62px);font-weight:400;line-height:1.5;letter-spacing:-.06em;margin:0}.cover-big strong{font-weight:600;color:var(--accent)}.cover-bottom{border-top:1px solid var(--line);padding-top:18px;font-size:11px;color:var(--soft)}.cover-bottom strong{font-weight:500;color:var(--ink)}.footer{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid var(--line);min-height:61px;color:var(--soft);font-size:11px}.footer span:last-child{white-space:nowrap}
+.question-wrap{max-width:700px;margin:0 auto;min-height:calc(100svh - 159px);padding:56px 0 78px}.back{border:0;background:none;padding:8px 0;font-size:12px;color:var(--soft)}.back .arrow{padding-right:8px}.question-meta{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);margin:50px 0 38px;padding-bottom:14px}.step{font:500 31px/1 var(--latin);letter-spacing:.04em}.step span{color:var(--soft);font-size:21px}.question-label{font-size:11px;color:var(--soft)}.question-title{font-size:clamp(27px,4vw,38px);font-weight:500;letter-spacing:-.055em;margin:0}.question-sub{font-size:13px;color:var(--soft);margin:10px 0 35px}.options{border-top:1px solid var(--ink)}.option{display:flex;width:100%;align-items:center;text-align:left;gap:22px;background:none;border:0;border-bottom:1px solid var(--line);padding:20px 4px;min-height:75px;position:relative}.option:after{content:"";position:absolute;left:0;bottom:-1px;background:var(--accent);height:2px;width:100%;transform:scaleX(0);transform-origin:left;transition:transform .25s}.option:hover:after,.option.selected:after{transform:scaleX(1)}.option .number{font:italic 19px var(--latin);color:var(--accent);width:25px}.option .label{font-size:16px;flex:1}.option .hint{color:var(--soft);font-size:11px}.option .option-arrow{color:var(--soft);font-size:17px;line-height:1;transition:transform .2s}.option:hover .option-arrow{transform:translateX(4px)}
+.loading-wrap{min-height:calc(100svh - 159px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0}.loading-kicker{color:var(--accent);font-size:12px;letter-spacing:.05em}.loading-title{font-weight:500;font-size:clamp(26px,4vw,38px);margin:13px 0 35px;letter-spacing:-.055em}.type-window{width:min(100%,360px);height:105px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}.type-name{font-size:21px;font-weight:500;animation:name-in .18s ease}.loading-caption{font-size:11px;color:var(--soft);margin-top:21px}
+.result-wrap{max-width:920px;margin:auto;padding:48px 0 130px}.result-top{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:17px;gap:20px}.result-label{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.04em}.result-index{font:italic 24px var(--latin);color:var(--accent)}.result-head{padding:42px 0 35px;display:grid;grid-template-columns:1fr 1fr;gap:15px 50px}.place-name{font-size:clamp(28px,4.6vw,46px);line-height:1.35;letter-spacing:-.06em;font-weight:600;margin:0}.place-location{color:var(--soft);font-size:13px;margin:12px 0 0}.selection-note{grid-column:1/-1;color:var(--soft);font-size:12px;margin:8px 0 0}.result-verdict{margin:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:38px 0 43px;display:grid;grid-template-columns:1fr 2fr;gap:25px}.section-title{font-size:12px;letter-spacing:.025em;font-weight:600;color:var(--accent);margin:0}.verdict-text{font-weight:500;letter-spacing:-.045em;font-size:clamp(23px,3.2vw,34px);line-height:1.65;margin:0}.result-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding:42px 0 15px}.field{margin-bottom:30px}.field p{font-size:14px;line-height:1.9;margin:10px 0 0}.details-list{border-top:1px solid var(--line)}.data-row{display:grid;grid-template-columns:105px 1fr;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);font-size:13px}.data-row dt{color:var(--soft)}.data-row dd{margin:0}.note-sheet{border:1px solid var(--line);background:rgba(251,248,242,.48);margin:7px 0 34px}.note-sheet summary{cursor:pointer;list-style:none;padding:18px 20px;font-size:14px;font-weight:600;display:flex;justify-content:space-between;gap:16px}.note-sheet summary::-webkit-details-marker{display:none}.note-sheet summary:after{content:'+';font:24px/1 var(--latin);color:var(--accent)}.note-sheet[open] summary:after{content:'−'}.note-sheet p{margin:0;padding:0 20px 19px;font-size:14px;line-height:1.9}.next-section{border-top:1px solid var(--line);padding-top:25px;margin-top:8px}.visit{font-size:11px;color:var(--soft);line-height:1.8;margin:35px 0 22px}.secondary-actions{display:flex;gap:24px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding:24px 0}.text-action{background:none;border:0;padding:7px 0;color:var(--ink);font-size:13px;text-decoration:none;font-weight:600}.text-action.subtle{font-weight:400;color:var(--soft)}.checkin{font-size:12px;color:var(--soft);line-height:1.9}.checkin a{text-underline-offset:4px}.sticky{position:fixed;z-index:5;left:0;right:0;bottom:0;background:rgba(244,238,228,.98);border-top:1px solid var(--line);padding:12px max(28px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(28px,env(safe-area-inset-left))}.sticky[hidden]{display:none}.sticky-inner{max-width:920px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:25px}.sticky-caption{font-size:11px;color:var(--soft)}.sticky .primary{width:min(320px,100%)}.revealed{animation:rise .48s both}.show-on-scroll{opacity:0;transform:translateY(10px)}.show-on-scroll.in-view{opacity:1;transform:none;transition:opacity .5s,transform .5s}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes page-in{from{opacity:.55;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}@keyframes page-out{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-14px)}}@keyframes name-in{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.category-label{font-size:12px;color:var(--soft);margin:0 0 10px}.category-options{display:flex;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:30px}.category-choice{flex:1;background:none;border:0;border-right:1px solid var(--line);padding:11px 5px;color:var(--soft);font-size:12px;min-height:45px}.category-choice:last-child{border-right:0}.category-choice[aria-pressed="true"]{background:var(--ink);color:var(--white)}.result-photo{margin:35px 0 0;overflow:hidden}.result-photo img{display:block;width:100%;max-height:470px;aspect-ratio:16/9;object-fit:cover}.result-photo figcaption{font-size:10px;color:var(--soft);margin-top:8px}
+.result-head,.result-verdict{display:block}.verdict-text{max-width:780px}.result-wrap{padding-bottom:230px}.checkin-strip{max-width:920px;margin:0 auto 12px;padding:12px 15px;background:#e7ddd0;border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}.checkin-strip[hidden]{display:none}.checkin-strip span{font-size:12px;color:var(--ink)}.checkin-strip a{font-size:13px;font-weight:600;color:#fff;background:#79472f;text-decoration:none;padding:0 14px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-height:44px}.result-note{color:var(--soft);font-size:12px;line-height:1.8}.mood-panel{margin-top:23px;border-bottom:1px solid var(--line)}.mood-panel summary{cursor:pointer;list-style:none;padding:14px 2px;font-size:12px;color:var(--soft)}.mood-panel summary::-webkit-details-marker{display:none}.mood-panel summary:after{content:' +';color:var(--accent)}.mood-panel[open] summary:after{content:' −'}.mood-panel .category-options{margin-bottom:10px}.mood-panel .category-label{line-height:1.7}
+.cover-shell{min-width:0}.cover{min-height:0;gap:20px;padding:25px 27px}.cover-media{position:relative;width:100%;height:255px;overflow:hidden;background:#e6ded1;display:flex;align-items:center;justify-content:center}.cover-media img{width:100%;height:100%;object-fit:cover;display:block}.cover-media img[hidden]{display:none}.cover-fallback{font-size:11px;color:var(--soft);padding:20px;text-align:center}.cover-body{padding:0 2px;min-height:98px}.cover-small{margin:0 0 7px;font-size:11px}.cover-big{font-size:clamp(22px,2.7vw,31px);font-weight:500;line-height:1.4;letter-spacing:-.055em}.cover-place{font-size:11px;color:var(--soft);margin:8px 0 0}.cover-bottom{padding-top:14px}.cover-controls{display:flex;align-items:center;gap:0;padding-top:12px}.cover-control{border:0;background:none;padding:8px 13px;color:var(--ink);font-size:11px;min-height:40px}.cover-control:first-child{padding-left:0}.cover-control:active{transform:translateY(1px)}.cover-control+.cover-control{border-left:1px solid var(--line)}.cover-control.pause{margin-left:auto;border-left:0;padding-right:0;color:var(--soft)}.cover-animated{animation:cover-in .55s both}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@keyframes cover-in{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.intro-aux{width:min(100%,400px);display:grid;grid-template-columns:1fr 1fr;margin-top:29px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.intro-aux-link{min-width:0;display:flex;align-items:center;gap:10px;min-height:61px;padding:12px 13px 12px 0;color:var(--ink);border:0;background:transparent;text-align:left;text-decoration:none;font-size:12px;letter-spacing:-.02em}.intro-aux-link+.intro-aux-link{border-left:1px solid var(--line);padding-left:17px}.intro-aux-link svg{flex:none;width:19px;height:19px;stroke:var(--accent)}.intro-aux-link .aux-arrow{margin-left:auto;color:var(--soft);transition:transform .2s}.intro-aux-link:hover .aux-arrow{transform:translateX(3px)}.intro-aux-link:active{transform:translateY(1px)}.intro-promise{margin:18px 0 0;font-size:11px;line-height:1.9;color:var(--soft)}
+.explore-wrap{padding:38px 0 95px}.explore-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin:45px 0 30px}.explore-kicker{color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.05em;margin:0 0 13px}.explore-title{font-size:clamp(31px,4.3vw,48px);font-weight:500;letter-spacing:-.065em;line-height:1.42;margin:0}.explore-desc{margin:15px 0 0;font-size:12px;line-height:1.95;color:var(--soft);max-width:570px}.explore-total{font:400 48px/1 var(--latin);color:var(--accent);white-space:nowrap}.explore-total small{font:400 11px var(--serif);color:var(--soft);margin-left:3px}.explore-filter-panel{border-top:1px solid var(--ink);border-bottom:1px solid var(--line);padding:17px 0 14px}.explore-search-row{display:flex;gap:12px;align-items:stretch}.explore-search{flex:1;display:flex;align-items:center;gap:10px;background:rgba(255,252,246,.35);border:1px solid var(--line);padding:0 14px;min-height:48px}.explore-search svg{width:17px;height:17px;stroke:var(--soft);flex:none}.explore-search input{width:100%;border:0;outline:0;background:none;color:var(--ink);font:400 13px var(--serif)}.explore-search:focus-within{outline:2px solid #7d4229;outline-offset:2px}.explore-select{min-width:152px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:0 12px;font:400 12px var(--serif)}.explore-filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px}.explore-chip{border:1px solid var(--line);background:transparent;padding:9px 16px;min-height:39px;font-size:12px;color:var(--soft)}.explore-chip[aria-pressed="true"]{background:var(--ink);color:var(--white);border-color:var(--ink)}.explore-visit-filter{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--soft);margin-left:auto;min-height:40px}.explore-visit-filter input{accent-color:var(--accent);width:16px;height:16px}.explore-grid{display:grid;grid-template-columns:minmax(250px,.7fr) minmax(0,1.3fr);gap:27px;padding-top:25px}.explore-list-panel{min-width:0}.explore-list-head{display:flex;justify-content:space-between;align-items:end;padding:2px 0 13px;border-bottom:1px solid var(--ink)}.explore-list-head strong{font-size:13px;font-weight:600}.explore-list-head span{font-size:11px;color:var(--soft)}.explore-list{margin:0;padding:0;list-style:none;max-height:630px;overflow:auto;overscroll-behavior:contain}.explore-list-button{width:100%;display:flex;gap:12px;align-items:center;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:16px 5px;min-height:72px}.explore-list-button:hover,.explore-list-button[aria-current="true"]{background:rgba(205,191,174,.22)}.explore-list-number{font:italic 18px var(--latin);color:var(--accent);width:26px;flex:none}.explore-list-text{flex:1;min-width:0}.explore-list-name{font-size:13px;font-weight:600;display:block}.explore-list-meta{font-size:10px;color:var(--soft);display:block;margin-top:3px}.explore-list-arrow{color:var(--soft);font-size:15px}.explore-empty{padding:34px 8px;font-size:13px;color:var(--soft)}.explore-map-panel{min-width:0}.explore-map-wrap{height:520px;position:relative;border:1px solid var(--line);background:#e7dfd3;overflow:hidden}.explore-map{width:100%;height:100%}.explore-map-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px;text-align:center;background:#e9e1d4;color:var(--soft);z-index:2;line-height:1.9;font-size:12px}.explore-map-cover[hidden]{display:none}.explore-map-cover strong{font-size:17px;color:var(--ink);font-weight:500;margin-bottom:7px}.explore-map-actions{position:absolute;z-index:3;top:13px;right:13px;display:flex;flex-direction:column;gap:5px}.explore-map-actions button{min-width:43px;min-height:43px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:18px}.explore-map-actions .locate{font-size:11px;padding:0 10px}.explore-map-message{margin:10px 0 0;font-size:10px;line-height:1.8;color:var(--soft)}.explore-detail{margin-top:16px;padding:20px;border:1px solid var(--line);background:rgba(255,252,246,.34);display:grid;grid-template-columns:1fr minmax(0,2fr);gap:20px}.explore-detail[hidden]{display:none}.explore-detail-img{width:100%;height:145px;object-fit:cover}.explore-detail-img[hidden]{display:none}.explore-detail.no-photo{display:block}.explore-detail-kicker{color:var(--accent);font-size:10px;letter-spacing:.04em;margin:0 0 6px}.explore-detail h2{font-size:21px;font-weight:600;line-height:1.4;letter-spacing:-.04em;margin:0}.explore-detail p{font-size:12px;color:var(--soft);line-height:1.9;margin:9px 0 0}.explore-detail a{display:inline-flex;margin-top:13px;color:var(--ink);font-size:12px;font-weight:600;text-underline-offset:4px;min-height:36px;align-items:center}.map-pin{width:20px;height:20px;border:2px solid #f7f2ea;border-radius:50%;background:#8c6855;box-shadow:0 1px 4px rgba(58,42,32,.35);padding:0}.map-pin.visited{width:23px;height:23px;background:#923f2a}.map-pin[aria-pressed="true"]{outline:3px solid rgba(146,63,42,.3);outline-offset:2px}.map-me{width:15px;height:15px;display:block;background:#3a2a20;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 5px rgba(58,42,32,.2)}
+.explore-legend{display:flex;gap:17px;flex-wrap:wrap;margin-top:13px;font-size:10px;color:var(--soft)}.explore-legend span{display:flex;align-items:center;gap:6px}.explore-legend i{display:block;width:9px;height:9px;border-radius:50%;background:#8c6855}.explore-legend .visited-dot{background:#923f2a}
+@media(max-width:700px){.frame{width:calc(100% - 44px)}.topbar{height:79px}.wordmark{font-size:25px}.topnote{font-size:10px}main{min-height:calc(100svh - 138px)}.intro{min-height:calc(100svh - 138px);display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:30px;padding:48px 0 42px}.intro-copy{margin:21px 0 25px}.headline{font-size:clamp(34px,9.4vw,43px)}.intro .primary{width:100%}.cover{min-height:0;padding:17px 19px;gap:15px}.cover:before{inset:5px}.cover-media{height:200px}.cover-body{min-height:76px;padding:0 2px}.cover-small{font-size:10px;margin-bottom:4px}.cover-big{font-size:24px;line-height:1.45}.cover-bottom{padding-top:10px;font-size:10px}.cover-index{font-size:22px}.footer{min-height:59px;font-size:10px}.question-wrap{min-height:calc(100svh - 138px);padding:33px 0 55px}.question-meta{margin:39px 0 30px}.question-sub{margin-bottom:28px}.option{min-height:68px;padding:16px 3px;gap:13px}.option .hint{font-size:10px}.loading-wrap{min-height:calc(100svh - 138px)}.result-wrap{padding:35px 0 120px}.result-head{display:block;padding:33px 0 25px}.selection-note{margin-top:14px}.result-verdict{display:block;padding:29px 0 33px}.result-verdict .section-title{margin-bottom:15px}.result-photo{margin-top:25px}.result-layout{display:block;padding:31px 0 6px}.field{margin-bottom:27px}.field p{font-size:13px}.data-row{grid-template-columns:88px 1fr;font-size:12px}.note-sheet{margin:7px 0 28px}.visit{margin-top:28px}.secondary-actions{gap:18px}.sticky{padding-left:22px;padding-right:22px}.sticky-caption{display:none}.sticky .primary{width:100%;min-height:56px}}
+@media(max-width:360px){.frame{width:calc(100% - 36px)}.headline{font-size:32px}.option .hint{display:none}.cover{min-height:180px}}
+@media(max-width:700px){.result-wrap{padding-bottom:calc(220px + env(safe-area-inset-bottom))}.checkin-strip{display:block;padding:8px 12px}.checkin-strip span{display:block}.checkin-strip a{display:flex;width:100%;margin-top:6px;font-size:13px;min-height:44px}}
+@media(max-width:700px){.intro-aux{width:100%;margin-top:23px}.intro-aux-link{font-size:11px;min-height:56px}.explore-wrap{padding:27px 0 70px}.explore-head{margin:35px 0 24px;align-items:start}.explore-title{font-size:31px}.explore-desc{font-size:11px}.explore-total{font-size:35px}.explore-search-row{flex-direction:column}.explore-select{height:43px;width:100%}.explore-filter-row{gap:6px}.explore-chip{padding:8px 11px}.explore-visit-filter{width:100%;margin-left:0}.explore-grid{display:flex;flex-direction:column;gap:25px;padding-top:18px}.explore-map-panel{order:0}.explore-list-panel{order:1}.explore-map-wrap{height:350px}.explore-list{max-height:440px}.explore-detail{grid-template-columns:100px 1fr;gap:13px;padding:14px}.explore-detail-img{height:115px}.explore-detail h2{font-size:17px}.explore-detail p{font-size:11px}.explore-detail a{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.show-on-scroll{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="frame">
+<header class="topbar"><a class="wordmark" href="https://ondoguide.com/go/" aria-label="온도 처음으로"><span class="mark" aria-hidden="true"></span>ONDO</a><div class="topnote"><b>부산 · 광안리</b><br><span id="topnote-copy">직접 다녀온 곳을 소개합니다</span></div></header>
+<main id="main">
+<section class="screen intro" id="screen-intro" aria-labelledby="intro-heading">
+ <div><p class="eyebrow">광안리에서, 지금 갈 한 곳</p><h1 class="headline" id="intro-heading"><span class="line">백 개 말고,</span><span class="line">지금 갈 <em>한 곳.</em></span></h1><p class="intro-copy">제가 직접 가본 곳 중에서<br>오늘의 자리에 맞는 한 곳을 골라드릴게요.</p><button class="primary" id="start" type="button">한 곳 추천받기 <span class="arrow" aria-hidden="true">→</span></button><p class="intro-small">질문 두 개면 충분해요.</p><div class="intro-aux"><button class="intro-aux-link" id="explore-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg><span>전체 지도 둘러보기</span><span class="aux-arrow" aria-hidden="true">→</span></button><a class="intro-aux-link" id="intro-instagram" href="https://www.instagram.com/ondo.guide/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.1" cy="6.9" r=".8" fill="currentColor" stroke="none"/></svg><span>온도의 인스타그램</span><span class="aux-arrow" aria-hidden="true">↗</span></a></div><p class="intro-promise">직접 다녀온 기록을 바탕으로<br>이유와 아쉬운 점까지 전합니다.</p></div>
+ <aside class="cover-shell" aria-label="온도가 다녀온 가게"><div class="cover" id="cover-card"><div class="cover-top"><span>온도가 기록한 광안리</span></div><div class="cover-media" id="cover-media"><img id="cover-photo" alt="" decoding="async"><span class="cover-fallback" id="cover-fallback" hidden>사진을 불러오지 못했어요.</span></div><div class="cover-body" id="cover-body"><div class="cover-small">제가 직접 다녀온 곳</div><p class="cover-big" id="cover-name"></p><p class="cover-place" id="cover-location"></p></div><div class="cover-bottom"><strong><span class="venue-count"></span>곳의 기록</strong><span>고민은 짧게, 시간은 따뜻하게.</span></div></div><div class="cover-controls" aria-label="가게 사진 보기"><button type="button" class="cover-control" id="cover-prev">← 이전</button><button type="button" class="cover-control" id="cover-next">다음 →</button><button type="button" class="cover-control pause" id="cover-pause" aria-pressed="false">일시정지</button><span class="sr-only" id="cover-status" aria-live="polite"></span></div></aside>
+</section>
+<section class="screen" id="screen-q1" aria-labelledby="q1-heading" hidden><div class="question-wrap"><button class="back" type="button" data-back="intro"><span class="arrow" aria-hidden="true">←</span> 처음으로</button><div class="question-meta"><div class="step">01 <span>/ 02</span></div><span class="question-label">첫 번째 질문</span></div><h1 class="question-title" id="q1-heading">누구와 함께인가요?</h1><p class="question-sub">오늘 함께하는 사람을 골라주세요.</p><div class="options" id="q1-options"><button class="option" type="button" data-q1="연인"><span class="number">01</span><span class="label">연인과</span><span class="hint">둘만의 시간</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="친구"><span class="number">02</span><span class="label">친구와</span><span class="hint">편안한 만남</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="그 외"><span class="number">03</span><span class="label">그 외</span><span class="hint">가족·혼자 등</span><span class="option-arrow" aria-hidden="true">→</span></button></div></div></section>
+<section class="screen" id="screen-q2" aria-labelledby="q2-heading" hidden><div class="question-wrap"><button class="back" type="button" data-back="q1"><span class="arrow" aria-hidden="true">←</span> 이전 질문</button><div class="question-meta"><div class="step">02 <span>/ 02</span></div><span class="question-label">두 번째 질문</span></div><h1 class="question-title" id="q2-heading">오늘은 어떤 자리인가요?</h1><p class="question-sub" id="q2-sub">지금 원하는 장소를 골라주세요.</p><div class="options" id="q2-options"><button class="option" type="button" data-q2="dining"><span class="number">01</span><span class="label">든든한 식사</span><span class="hint">맛있는 한 끼</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q2="bar"><span class="number">02</span><span class="label">가볍게 한잔</span><span class="hint">좋은 안주와 함께</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q2="cafe"><span class="number">03</span><span class="label">카페 · 디저트</span><span class="hint">잠시 쉬어가는 시간</span><span class="option-arrow" aria-hidden="true">→</span></button></div><details class="mood-panel" id="mood-panel"><summary id="mood-summary">분위기도 고르고 싶어요 · 선택 사항</summary><p class="category-label">분위기를 고른 뒤 위에서 장소 종류를 선택해 주세요.</p><div class="category-options" id="mood-options" aria-label="분위기 선택"><button class="category-choice" type="button" data-mood="" aria-pressed="true">상관없어요</button><button class="category-choice" type="button" data-mood="편안하게" aria-pressed="false">편안하게</button><button class="category-choice" type="button" data-mood="특별하게" aria-pressed="false">특별하게</button></div></details></div></section>
+<section class="screen" id="screen-loading" aria-labelledby="loading-heading" hidden><div class="loading-wrap"><p class="loading-kicker">온도가 고르고 있습니다</p><h1 class="loading-title" id="loading-heading">오늘에 어울리는 한 곳을.</h1><div class="type-window"><div class="type-name" id="type-name" aria-hidden="true"></div></div><p class="loading-caption">직접 다녀온 <span class="venue-count"></span>곳의 기록 중에서</p></div></section>
+<section class="screen" id="screen-result" aria-labelledby="place-name" hidden><div class="result-wrap"><div class="result-top"><div class="result-label">온도가 고른 오늘의 한 곳</div><div class="result-index">01</div></div><div class="result-head"><div><h1 class="place-name" id="place-name" tabindex="-1"></h1><p class="place-location" id="place-location"></p></div></div><div class="result-verdict"><p class="verdict-text" id="verdict"></p></div><figure class="result-photo" id="result-photo" hidden><img id="place-photo" alt="" loading="eager" decoding="async"></figure><div class="result-layout"><div id="result-story"></div><div><dl class="details-list" id="result-details"></dl></div></div><details class="note-sheet" id="drawback" open><summary>솔직히 아쉬운 점</summary><p id="drawback-text"></p></details><div class="next-section field" id="next-section"><h2 class="section-title">그다음 장소로는</h2><p id="next-text"></p></div><p class="result-note" id="result-note" hidden></p><p class="visit" id="visit"></p><div class="secondary-actions"><button class="text-action" id="reroll" type="button">다른 한 곳 보기 <span class="arrow" aria-hidden="true">→</span></button><button class="text-action subtle" id="restart" type="button">질문 다시 하기</button><button class="text-action subtle" id="explore-from-result" type="button">전체 지도 둘러보기</button></div><p class="checkin"><a id="talk" href="https://ondoguide.com/talk">안 맞으면 직접 물어보기</a></p></div></section>
+<section class="screen" id="screen-explore" aria-labelledby="explore-heading" hidden><div class="explore-wrap"><button class="back" id="explore-back" type="button"><span class="arrow" aria-hidden="true">←</span> 돌아가기</button><div class="explore-head"><div><p class="explore-kicker">온도가 모은 부산의 장소</p><h1 class="explore-title" id="explore-heading" tabindex="-1">오늘은 조금 더,<br>천천히 둘러봐도 좋아요.</h1><p class="explore-desc">직접 방문한 기록과 기존 지도 목록을 함께 보여드립니다. 방문 기록이 확인된 곳은 따로 표시해요.</p></div><div class="explore-total"><span id="explore-total"></span><small>개 기록</small></div></div><div class="explore-filter-panel"><div class="explore-search-row"><label class="explore-search"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></svg><span class="sr-only">가게 이름 또는 주소 검색</span><input id="explore-search" type="search" placeholder="가게 이름이나 주소를 검색하세요" autocomplete="off"></label><label class="sr-only" for="explore-subcategory">음식 종류</label><select class="explore-select" id="explore-subcategory"><option value="">음식 종류 전체</option></select></div><div class="explore-filter-row" id="explore-categories"><button class="explore-chip" type="button" data-explore-cat="all" aria-pressed="true">전체</button><button class="explore-chip" type="button" data-explore-cat="dining" aria-pressed="false">식사</button><button class="explore-chip" type="button" data-explore-cat="cafe" aria-pressed="false">카페</button><button class="explore-chip" type="button" data-explore-cat="bar" aria-pressed="false">한잔</button><label class="explore-visit-filter"><input id="explore-visited" type="checkbox">직접 방문 기록만 보기</label></div></div><div class="explore-grid"><div class="explore-list-panel"><div class="explore-list-head"><strong>장소 기록</strong><span id="explore-count" aria-live="polite"></span></div><ul class="explore-list" id="explore-list" aria-label="장소 목록"></ul></div><div class="explore-map-panel"><div class="explore-map-wrap"><div class="explore-map" id="explore-map" role="region" aria-label="부산 장소 지도"></div><div class="explore-map-cover" id="explore-map-cover" role="status"><strong id="explore-map-title">지도를 준비하고 있어요.</strong><span id="explore-map-copy">잠시만 기다려 주세요.</span><button class="text-action" id="explore-retry" type="button" hidden>지도 다시 불러오기 →</button></div><div class="explore-map-actions" aria-label="지도 조작"><button id="explore-zoom-in" type="button" aria-label="지도 확대" disabled>+</button><button id="explore-zoom-out" type="button" aria-label="지도 축소" disabled>−</button><button id="explore-locate" class="locate" type="button" disabled>내 위치</button></div></div><div class="explore-legend" aria-label="지도 표식 안내"><span><i class="visited-dot" aria-hidden="true"></i>직접 방문 기록</span><span><i aria-hidden="true"></i>기존 목록</span></div><p class="explore-map-message" id="explore-map-message">기존 좌표는 실제 위치와 다를 수 있어요. 좌표가 없는 장소는 목록에만 표시됩니다.</p><article class="explore-detail no-photo" id="explore-detail" aria-labelledby="explore-detail-name" tabindex="-1" hidden><img class="explore-detail-img" id="explore-detail-img" alt="" hidden><div><p class="explore-detail-kicker" id="explore-detail-kicker"></p><h2 id="explore-detail-name"></h2><p id="explore-detail-copy"></p><p id="explore-detail-location"></p><a id="explore-detail-link" target="_blank" rel="noopener noreferrer">네이버 지도에서 검색하기 ↗</a></div></article></div></div></div></section>
+</main>
+<footer class="footer"><span>고민은 짧게, 시간은 따뜻하게.</span><span>부산의 오늘을 고릅니다.</span></footer>
+</div>
+<div class="sticky" id="sticky" hidden><div class="checkin-strip" id="checkin-strip" hidden aria-live="polite"><span>가게 근처에 도착하면 여기를 눌러 주세요.</span><a id="checkin" href="https://ondoguide.com/c/">체크인하기 →</a></div><div class="sticky-inner"><span class="sticky-caption">방문 전 지도에서 최신 정보를 확인해 주세요.</span><a class="primary" id="map-link" href="https://ondoguide.com/m/" target="_blank" rel="noopener noreferrer">지도에서 확인하기 <span class="arrow" aria-hidden="true">→</span></a></div></div>
+<noscript><div style="padding:20px;border-top:1px solid #cdbfae;text-align:center">추천을 받으려면 브라우저에서 자바스크립트를 켜 주세요.</div></noscript>
+<script>
+'use strict';
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxyR6KFarFY0_MlgUckV_FgEaMJfSFdSxTTiq8xTGJnF2A-NprWWYPPpZpKwyo7scLz/exec";
+const LIVE = location.hostname === 'ondoguide.com';
+const params = new URLSearchParams(location.search);
+const attribution = Object.fromEntries(['from','utm_source','utm_campaign'].map(k => [k,(params.get(k)||'').slice(0,100)]));
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+const $ = id => document.getElementById(id);
+const state = {screen:'intro', q1:'', q2:'', mood:'', venue:null, token:'', locked:false, seen:[], pool:[], relaxedCompanion:false, relaxedMood:false, nowMinute:0};
+const coverPlaces=VENUES.filter(v=>v.photo);
+let coverPosition=0,coverPlaying=!reduced.matches,coverHovered=false,coverTimer=null;
+// 기존 네이버 검색 이미지가 실패하면 그 주소에 명시된 원본 사진을 한 번 더 시도합니다.
+function photoSources(photo){
+  const sources=[photo];
+  try{
+    const embedded=new URL(photo).searchParams.get('src');
+    if(embedded){
+      const direct=new URL(embedded.replace(/^http:\/\//i,'https://'));
+      if(direct.protocol==='https:' && /(^|\.)(pstatic\.net|naver\.net)$/i.test(direct.hostname) && direct.href!==photo)sources.push(direct.href);
+    }
+  }catch(e){}
+  return sources;
+}
+function loadPhoto(img,source,isCurrent,onSuccess,onFailure){
+  const sources=photoSources(source);let attempt=0;
+  img.onload=()=>{if(isCurrent())onSuccess();};
+  img.onerror=()=>{
+    if(!isCurrent())return;
+    attempt++;
+    if(attempt<sources.length)img.src=sources[attempt];
+    else onFailure();
+  };
+  img.src=sources[0];
+}
+function setCover(position,announce=false){
+  if(!coverPlaces.length)return;
+  coverPosition=(position+coverPlaces.length)%coverPlaces.length;
+  const venue=coverPlaces[coverPosition],img=$('cover-photo'),fallback=$('cover-fallback');
+  $('cover-name').textContent=venue.name;$('cover-location').textContent=venue.location||'';
+  img.hidden=true;fallback.hidden=false;fallback.textContent='사진을 불러오고 있어요.';img.alt=venue.name+'에 연결된 기존 사진';
+  loadPhoto(img,venue.photo,()=>coverPlaces[coverPosition].id===venue.id,
+    ()=>{img.hidden=false;fallback.hidden=true;img.classList.remove('cover-animated');void img.offsetWidth;img.classList.add('cover-animated');},
+    ()=>{img.hidden=true;fallback.hidden=false;fallback.textContent='사진을 불러오지 못했어요.';});
+  for(const id of ['cover-media','cover-body']){const el=$(id);el.classList.remove('cover-animated');void el.offsetWidth;el.classList.add('cover-animated');}
+  if(announce)$('cover-status').textContent=venue.name;
+}
+function scheduleCover(){
+  clearInterval(coverTimer);coverTimer=null;
+  if(coverPlaying&&!coverHovered&&state.screen==='intro'&&coverPlaces.length>1)coverTimer=setInterval(()=>setCover(coverPosition+1),6000);
+}
+function updateCoverButton(){const b=$('cover-pause');b.textContent=coverPlaying?'일시정지':'재생';b.setAttribute('aria-label',coverPlaying?'가게 사진 자동 넘김 일시정지':'가게 사진 자동 넘김 재생');b.setAttribute('aria-pressed',String(!coverPlaying));}
+$('cover-prev').addEventListener('click',()=>{setCover(coverPosition-1,true);scheduleCover();});
+$('cover-next').addEventListener('click',()=>{setCover(coverPosition+1,true);scheduleCover();});
+$('cover-pause').addEventListener('click',()=>{coverPlaying=!coverPlaying;updateCoverButton();scheduleCover();});
+$('cover-card').addEventListener('pointerenter',e=>{if(e.pointerType==='mouse'){coverHovered=true;scheduleCover();}});
+$('cover-card').addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'){coverHovered=false;scheduleCover();}});
+if(coverPlaces.length){setCover(0);updateCoverButton();scheduleCover();}else{$('cover-card').hidden=true;document.querySelector('.cover-controls').hidden=true;}
+
+/* 현재 운영 사이트의 GA 수집과 유입 이벤트는 운영 도메인에서만 실행합니다. */
+if (LIVE) {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){window.dataLayer.push(arguments);};
+  gtag('js',new Date());
+  gtag('config','G-932FXBJVFT');
+  const tag=document.createElement('script'); tag.async=true; tag.src='https://www.googletagmanager.com/gtag/js?id=G-932FXBJVFT'; document.head.appendChild(tag);
+  if(attribution.from) gtag('event','ondo_source_visit',{source_channel:attribution.from});
+}
+function track(evt, data={}) {
+  const safe={...data,...attribution};
+  try { const log=JSON.parse(localStorage.getItem('ondo_log')||'[]');log.push({evt,data:safe,ts:Date.now()});if(log.length>300)log.splice(0,log.length-300);localStorage.setItem('ondo_log',JSON.stringify(log)); } catch(e) {}
+  if (!LIVE) return;
+  if (window.gtag) { const ga={}; if(data.vid)ga.vid=data.vid;if(data.q1)ga.q1=data.q1;if(data.q2)ga.q2=data.q2;if(state.q2)ga.category=state.q2;if(state.mood)ga.mood=state.mood;if(attribution.from)ga.source_channel=attribution.from;window.gtag('event',evt,ga); }
+  const body=new URLSearchParams({timestamp:new Date().toLocaleString('ko-KR'),event:evt,store:data.store||'',q1:data.q1||state.q1||'',q2:data.q2||state.q2||'',category:state.q2||'',mood:state.mood||'',visited:'',satisfaction:'',reasons:'',vid:data.vid||'',from:attribution.from,utm_source:attribution.utm_source,utm_campaign:attribution.utm_campaign});
+  try {if(!navigator.sendBeacon || !navigator.sendBeacon(GAS_URL,body))fetch(GAS_URL,{method:'POST',mode:'no-cors',body,keepalive:true}).catch(()=>{});} catch(e) {}
+}
+function setScreen(name) {
+  document.querySelectorAll('.screen').forEach(el=>{el.hidden=el.id!=='screen-'+name;el.classList.remove('leaving');});
+  state.screen=name; $('sticky').hidden=name!=='result';$('topnote-copy').textContent=name==='explore'?'부산의 장소를 둘러보세요':'직접 다녀온 곳을 소개합니다';scheduleCover();window.scrollTo(0,0);
+}
+function move(name,delay=160) {
+  return new Promise(resolve=>{const current=$('screen-'+state.screen);current.classList.add('leaving');setTimeout(()=>{setScreen(name);resolve();},reduced.matches?0:delay);});
+}
+function companionMatches(venue,who) {
+  const s=venue.companion||'';
+  if(who==='연인')return /연인|데이트|커플/.test(s);
+  if(who==='친구')return /친구|동성|남자끼리/.test(s);
+  if(who==='혼자')return /혼자|혼밥|혼술/.test(s+' '+venue.reason+' '+venue.occasion);
+  return /가족|부모|아이|어른들\s*모시고/.test(s+' '+venue.reason+' '+venue.occasion);
+}
+function candidates() {
+  const byCategory=VENUES.filter(v=>v.category===state.q2);
+  const companion=state.q1==='그 외'?byCategory:byCategory.filter(v=>companionMatches(v,state.q1));
+  state.relaxedCompanion=state.q1!=='그 외'&&companion.length===0;
+  const eligible=companion.length?companion:byCategory;
+  const mood=state.mood?eligible.filter(v=>(v.moods||[]).includes(state.mood)):eligible;
+  state.relaxedMood=!!state.mood&&mood.length===0;
+  return mood.length?mood:eligible;
+}
+function seoulMinutes(){const d=new Date(Date.now()+9*60*60*1000);return d.getUTCHours()*60+d.getUTCMinutes();}
+function matchesTime(v,minute){return (v.recommendedTimes||[]).some(([start,end])=>start<=end?(minute>=start&&minute<=end):(minute>=start||minute<=end));}
+function choose() {
+  const pool=state.pool;
+  if(!pool.length)return null;
+  let fresh=pool.filter(v=>!state.seen.includes(v.id));
+  if(!fresh.length){state.seen=state.venue?[state.venue.id]:[];fresh=pool.filter(v=>!state.seen.includes(v.id));}
+  if(!fresh.length)fresh=pool;
+  state.nowMinute=seoulMinutes();
+  const timely=fresh.filter(v=>matchesTime(v,state.nowMinute));
+  const choices=timely.length?timely:fresh;
+  const picked=choices[Math.floor(Math.random()*choices.length)];state.seen.push(picked.id);return picked;
+}
+function makeToken() {
+  const abc='0123456789abcdefghijklmnopqrstuvwxyz';let suffix='';
+  if(window.crypto && crypto.getRandomValues){const b=new Uint32Array(4);crypto.getRandomValues(b);for(const n of b)suffix+=abc[n%abc.length];}
+  else for(let i=0;i<4;i++)suffix+=abc[Math.floor(Math.random()*abc.length)];
+  return 'r'+Date.now().toString(36)+suffix;
+}
+function makeStory(label,value) {if(!value)return;const section=document.createElement('section');section.className='field show-on-scroll';const h=document.createElement('h2');h.className='section-title';h.textContent=label;const p=document.createElement('p');p.textContent=value;section.append(h,p);$('result-story').append(section);}
+function makeRow(label,value) {if(!value)return;const row=document.createElement('div');row.className='data-row show-on-scroll';const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=value;row.append(dt,dd);$('result-details').append(row);}
+function renderResult(v) {
+  state.venue=v;state.token=makeToken();$('checkin-strip').hidden=true;$('place-name').textContent=v.name;$('place-location').textContent=v.location||'';$('place-location').hidden=!v.location;$('verdict').textContent=v.verdict||v.reason||'';
+  const notes=[];
+  if(state.relaxedCompanion)notes.push('동행에 대한 기록이 부족해 다른 조건을 기준으로 골랐어요.');
+  if(state.relaxedMood)notes.push('선택하신 분위기에 대한 기록이 부족해 다른 조건을 기준으로 골랐어요.');
+  const note=$('result-note');note.hidden=notes.length===0;note.textContent=notes.join(' ');
+  const photo=$('place-photo'),figure=$('result-photo');figure.hidden=true;photo.onload=null;photo.onerror=null;
+  if(v.photo){photo.alt=v.name+'의 장소 사진';loadPhoto(photo,v.photo,()=>state.venue.id===v.id,()=>{figure.hidden=false;},()=>{figure.hidden=true;});}else{photo.removeAttribute('src');photo.alt='';}
+  $('result-story').replaceChildren();$('result-details').replaceChildren();makeStory('왜 이곳인가요',v.reason);makeStory('꼭 시켜보세요',v.order);if(v.avoid && !/^(없음|딱히 없음)/.test(v.avoid))makeStory('안 시켜도 괜찮아요',v.avoid);makeRow('1인 가격',v.price);makeRow('좋은 시간 · 대기',v.wait);makeRow('주차',v.parking);
+  $('drawback').hidden=!v.drawback;$('drawback').open=true;$('drawback-text').textContent=v.drawback||'';$('next-section').hidden=!v.next;$('next-text').textContent=v.next||'';
+  $('visit').textContent=(v.visited?'마지막 방문: '+v.visited+' · ':'')+'메뉴·가격·영업 및 대기 정보는 방문 당시의 기록이며 달라질 수 있어요. 방문 전 지도에서 확인해 주세요.';
+  $('map-link').href='https://ondoguide.com/m/'+encodeURIComponent(v.id);$('checkin').href='https://ondoguide.com/c/?r='+encodeURIComponent(state.token)+'&v='+encodeURIComponent(v.id);
+  $('reroll').disabled=state.pool.length<2;$('reroll').title=state.pool.length<2?'이 조건의 다른 후보가 아직 없어요.':'';
+  if('IntersectionObserver' in window && !reduced.matches){const ob=new IntersectionObserver((entries,o)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');o.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll('.show-on-scroll').forEach(el=>ob.observe(el));}else document.querySelectorAll('.show-on-scroll').forEach(el=>el.classList.add('in-view'));
+  track('result_shown',{vid:v.id,store:v.name});
+}
+async function pickAndShow(){
+  const next=choose();
+  if(!next){state.locked=false;setScreen('q2');return;}
+  await move('loading');
+  const target=$('type-name');let count=0;target.textContent=state.pool[0].name;
+  const spin=setInterval(()=>{count++;target.textContent=state.pool[count%state.pool.length].name;target.style.animation='none';void target.offsetWidth;target.style.animation='';},150);
+  await new Promise(resolve=>setTimeout(resolve,reduced.matches?50:1200));clearInterval(spin);target.textContent=next.name;
+  renderResult(next);await move('result',reduced.matches?0:80);state.locked=false;$('place-name').focus({preventScroll:true});
+}
+/* 전체 탐색에는 이전 지도 기록이 포함됩니다. 직접 방문 추천과 별도입니다. */
+const exp={origin:'intro',category:'all',subcategory:'',query:'',visitedOnly:false,selected:null,map:null,markers:[],myLocation:null,loading:false,attempt:0,timer:null};
+const EXP_LABELS={dining:'식사',cafe:'카페',bar:'한잔'};
+const SUB_LABELS={korean:'한식',japanese:'일식',chinese:'중식',western:'양식',etc:'기타',etc_dining:'기타 식사',cafe:'카페',bakery:'베이커리',izakaya:'이자카야',sojuhouse:'한식 주점',bar:'바',cocktail:'칵테일',winebar:'와인',whiskybar:'위스키',beerhall:'맥주',bar_etc:'기타 주점'};
+function hasMapPoint(place){return Number.isFinite(place.lat)&&Number.isFinite(place.lng);}
+function filteredExplore(){
+  const query=exp.query.toLocaleLowerCase('ko-KR').replace(/\s+/g,'');
+  return EXPLORE_PLACES.filter(p=>{
+    const text=[p.name,p.address,p.location,SUB_LABELS[p.subcategory]||''].join(' ').toLocaleLowerCase('ko-KR').replace(/\s+/g,'');
+    return (exp.category==='all'||p.category===exp.category)&&(!exp.subcategory||p.subcategory===exp.subcategory)&&(!exp.visitedOnly||p.visited)&&(!query||text.includes(query));
+  });
+}
+function refreshSubcategories(){
+  const select=$('explore-subcategory');select.replaceChildren();
+  const all=document.createElement('option');all.value='';all.textContent='음식 종류 전체';select.append(all);
+  const values=[...new Set(EXPLORE_PLACES.filter(p=>exp.category==='all'||p.category===exp.category).map(p=>p.subcategory).filter(Boolean))];
+  values.sort((a,b)=>(SUB_LABELS[a]||a).localeCompare(SUB_LABELS[b]||b,'ko'));
+  for(const value of values){const option=document.createElement('option');option.value=value;option.textContent=SUB_LABELS[value]||'기타';select.append(option);}
+  select.value=exp.subcategory;
+}
+function renderExploreList(places){
+  const list=$('explore-list');list.replaceChildren();
+  const pinCount=places.filter(hasMapPoint).length;
+  $('explore-count').textContent=places.length+'개 기록 · 좌표 '+pinCount+'개';
+  if(!places.length){const li=document.createElement('li');li.className='explore-empty';li.textContent='조건에 맞는 장소가 없어요.';list.append(li);return;}
+  places.forEach((place,index)=>{
+    const li=document.createElement('li');const button=document.createElement('button');button.type='button';button.className='explore-list-button';button.dataset.placeId=place.id;button.setAttribute('aria-current',String(exp.selected===place.id));
+    const number=document.createElement('span');number.className='explore-list-number';number.textContent=String(index+1).padStart(2,'0');
+    const text=document.createElement('span');text.className='explore-list-text';const name=document.createElement('span');name.className='explore-list-name';name.textContent=place.name;
+    const meta=document.createElement('span');meta.className='explore-list-meta';meta.textContent=(EXP_LABELS[place.category]||'장소')+' · '+(place.visited?'직접 방문 기록':'기존 목록')+(hasMapPoint(place)?'':' · 좌표 미확인');
+    const arrow=document.createElement('span');arrow.className='explore-list-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';text.append(name,meta);button.append(number,text,arrow);button.addEventListener('click',()=>selectExplore(place.id));li.append(button);list.append(li);
+  });
+}
+function renderExplorePins(places){
+  for(const marker of exp.markers)marker.overlay.setMap(null);exp.markers=[];
+  if(!exp.map||!window.kakao||!window.kakao.maps)return;
+  const maps=window.kakao.maps;
+  for(const place of places){
+    if(!hasMapPoint(place))continue;
+    const pin=document.createElement('button');pin.type='button';pin.className='map-pin'+(place.visited?' visited':'');pin.setAttribute('aria-label',place.name+'의 장소 정보 보기');pin.setAttribute('aria-pressed',String(exp.selected===place.id));pin.addEventListener('click',()=>selectExplore(place.id));
+    const overlay=new maps.CustomOverlay({position:new maps.LatLng(place.lat,place.lng),content:pin,clickable:true,yAnchor:.5,zIndex:place.visited?3:2});overlay.setMap(exp.map);exp.markers.push({overlay,pin,id:place.id});
+  }
+}
+function refreshExplore(){
+  const places=filteredExplore();
+  if(exp.selected&&!places.some(p=>p.id===exp.selected)){exp.selected=null;$('explore-detail').hidden=true;}
+  renderExploreList(places);renderExplorePins(places);
+}
+function selectExplore(id){
+  const place=EXPLORE_PLACES.find(p=>p.id===id);if(!place)return;exp.selected=id;
+  document.querySelectorAll('#explore-list [data-place-id]').forEach(el=>el.setAttribute('aria-current',String(el.dataset.placeId===id)));
+  exp.markers.forEach(m=>m.pin.setAttribute('aria-pressed',String(m.id===id)));
+  $('explore-detail').hidden=false;$('explore-detail-kicker').textContent=place.visited?'직접 방문 기록':'기존 지도 목록 · 방문 미확인';$('explore-detail-name').textContent=place.name;
+  $('explore-detail-copy').textContent=place.visited?(place.verdict||'직접 다녀온 장소입니다.'):'기존 지도에 있던 장소예요. 직접 방문 여부와 현재 정보는 확인되지 않았습니다.';
+  let location=place.address?'기존 주소: '+place.address:(place.location||'상세 위치는 지도 검색에서 확인해 주세요.');
+  if(!hasMapPoint(place))location+=' · 지도 좌표 미확인';
+  $('explore-detail-location').textContent=location;
+  const query=place.name+' '+(place.address||'부산');$('explore-detail-link').href='https://map.naver.com/p/search/'+encodeURIComponent(query);
+  const detail=$('explore-detail'),img=$('explore-detail-img');img.hidden=true;detail.classList.add('no-photo');img.onload=null;img.onerror=null;
+  if(place.photo){img.alt=place.name+'의 장소 사진';loadPhoto(img,place.photo,()=>exp.selected===id,()=>{img.hidden=false;detail.classList.remove('no-photo');},()=>{img.hidden=true;detail.classList.add('no-photo');});}
+  else{img.removeAttribute('src');img.alt='';}
+  if(exp.map&&hasMapPoint(place))exp.map.panTo(new window.kakao.maps.LatLng(place.lat,place.lng));
+  detail.focus({preventScroll:true});if(typeof detail.scrollIntoView==='function')detail.scrollIntoView({behavior:reduced.matches?'auto':'smooth',block:'nearest'});
+  track('explore_select',{vid:place.venueId,store:place.name});
+}
+function mapControls(enabled){['explore-zoom-in','explore-zoom-out','explore-locate'].forEach(id=>$(id).disabled=!enabled);}
+function mapFailure(attempt){
+  if(attempt!==exp.attempt)return;clearTimeout(exp.timer);exp.timer=null;exp.loading=false;mapControls(false);
+  $('explore-map-cover').hidden=false;$('explore-map-title').textContent='지도를 불러오지 못했어요.';$('explore-map-copy').textContent='아래 목록에서 장소를 찾아 지도 검색으로 열 수 있어요.';$('explore-retry').hidden=false;
+}
+function makeExploreMap(attempt){
+  if(attempt!==exp.attempt||!exp.loading)return;
+  clearTimeout(exp.timer);exp.timer=null;exp.loading=false;
+  if(state.screen!=='explore')return;
+  try{
+    const maps=window.kakao.maps;exp.map=new maps.Map($('explore-map'),{center:new maps.LatLng(35.1531,129.1186),level:5});
+    $('explore-map-cover').hidden=true;$('explore-retry').hidden=true;mapControls(true);renderExplorePins(filteredExplore());
+    setTimeout(()=>{if(exp.map&&state.screen==='explore')exp.map.relayout();},100);
+  }catch(e){exp.map=null;mapFailure(attempt);}
+}
+function initExploreMap(){
+  if(exp.map){setTimeout(()=>{if(state.screen==='explore')exp.map.relayout();},0);return;}
+  if(exp.loading)return;
+  const attempt=++exp.attempt;exp.loading=true;mapControls(false);$('explore-map-cover').hidden=false;$('explore-map-title').textContent='지도를 준비하고 있어요.';$('explore-map-copy').textContent='잠시만 기다려 주세요.';$('explore-retry').hidden=true;
+  exp.timer=setTimeout(()=>mapFailure(attempt),10000);
+  function begin(){
+    if(attempt!==exp.attempt||!exp.loading)return;
+    try{const maps=window.kakao&&window.kakao.maps;if(!maps){mapFailure(attempt);return;}if(typeof maps.Map==='function')makeExploreMap(attempt);else if(typeof maps.load==='function')maps.load(()=>makeExploreMap(attempt));else mapFailure(attempt);}catch(e){mapFailure(attempt);}
+  }
+  if(window.kakao&&window.kakao.maps){begin();return;}
+  const script=document.createElement('script');script.async=true;script.src='https://dapi.kakao.com/v2/maps/sdk.js?appkey='+encodeURIComponent(KAKAO_MAP_KEY)+'&autoload=false';script.onload=begin;script.onerror=()=>mapFailure(attempt);document.head.appendChild(script);
+}
+async function openExplore(){
+  if(state.locked)return;state.locked=true;exp.origin=state.screen==='result'?'result':'intro';
+  await move('explore');$('explore-total').textContent=String(EXPLORE_PLACES.length);refreshSubcategories();refreshExplore();initExploreMap();state.locked=false;$('explore-heading').focus({preventScroll:true});track('explore_open');
+}
+async function closeExplore(){if(state.locked)return;state.locked=true;const target=exp.origin==='result'&&state.venue?'result':'intro';await move(target);state.locked=false;(target==='result'?$('place-name'):$('explore-open')).focus({preventScroll:true});}
+$('explore-open').addEventListener('click',openExplore);
+$('explore-from-result').addEventListener('click',openExplore);
+$('explore-back').addEventListener('click',closeExplore);
+$('intro-instagram').addEventListener('click',()=>track('instagram_click'));
+$('explore-search').addEventListener('input',e=>{exp.query=e.target.value.trim();refreshExplore();});
+$('explore-subcategory').addEventListener('change',e=>{exp.subcategory=e.target.value;refreshExplore();});
+$('explore-visited').addEventListener('change',e=>{exp.visitedOnly=e.target.checked;refreshExplore();});
+$('explore-categories').addEventListener('click',e=>{const btn=e.target.closest('[data-explore-cat]');if(!btn)return;exp.category=btn.dataset.exploreCat;exp.subcategory='';document.querySelectorAll('[data-explore-cat]').forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));refreshSubcategories();refreshExplore();});
+$('explore-retry').addEventListener('click',initExploreMap);
+$('explore-detail-link').addEventListener('click',()=>{const p=EXPLORE_PLACES.find(p=>p.id===exp.selected);if(p)track('explore_map_click',{vid:p.venueId,store:p.name});});
+$('explore-zoom-in').addEventListener('click',()=>{if(exp.map)exp.map.setLevel(Math.max(1,exp.map.getLevel()-1));});
+$('explore-zoom-out').addEventListener('click',()=>{if(exp.map)exp.map.setLevel(Math.min(14,exp.map.getLevel()+1));});
+$('explore-locate').addEventListener('click',()=>{
+  if(!exp.map||!navigator.geolocation){$('explore-map-message').textContent='이 기기에서 위치를 확인할 수 없어요.';return;}
+  navigator.geolocation.getCurrentPosition(pos=>{if(!exp.map)return;const maps=window.kakao.maps,point=new maps.LatLng(pos.coords.latitude,pos.coords.longitude);if(exp.myLocation)exp.myLocation.setMap(null);const marker=document.createElement('span');marker.className='map-me';marker.setAttribute('aria-label','현재 위치');exp.myLocation=new maps.CustomOverlay({position:point,content:marker,yAnchor:.5,zIndex:10});exp.myLocation.setMap(exp.map);exp.map.panTo(point);$('explore-map-message').textContent='현재 위치를 표시했어요. 장소의 실제 위치는 방문 전에 확인해 주세요.';},()=>{$('explore-map-message').textContent='현재 위치를 확인하지 못했어요. 위치 권한을 확인해 주세요.';},{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
+});
+$('start').addEventListener('click',async()=>{if(state.locked)return;state.locked=true;await move('q1');state.locked=false;});
+document.querySelectorAll('[data-back]').forEach(btn=>btn.addEventListener('click',async()=>{if(state.locked)return;state.locked=true;await move(btn.dataset.back);state.locked=false;}));
+$('q1-options').addEventListener('click',async e=>{const btn=e.target.closest('[data-q1]');if(!btn||state.locked)return;state.locked=true;state.q1=btn.dataset.q1;$('q2-sub').textContent=state.q1==='그 외'?'동행 조건 없이, 선택하신 장소 종류를 기준으로 골라드려요.':'지금 원하는 장소를 골라주세요.';btn.classList.add('selected');track('q1',{q1:state.q1});await move('q2');btn.classList.remove('selected');state.locked=false;});
+$('mood-options').addEventListener('click',e=>{const btn=e.target.closest('[data-mood]');if(!btn||state.locked)return;state.mood=btn.dataset.mood;document.querySelectorAll('[data-mood]').forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));$('mood-summary').textContent=state.mood?'선택한 분위기: '+state.mood:'분위기도 고르고 싶어요 · 선택 사항';$('mood-panel').open=false;});
+$('q2-options').addEventListener('click',async e=>{const btn=e.target.closest('[data-q2]');if(!btn||state.locked)return;state.locked=true;state.q2=btn.dataset.q2;state.seen=[];state.pool=candidates();btn.classList.add('selected');track('q2',{q1:state.q1,q2:state.q2});await new Promise(r=>setTimeout(r,reduced.matches?0:180));btn.classList.remove('selected');pickAndShow();});
+$('reroll').addEventListener('click',()=>{if(state.locked||state.pool.length<2)return;state.locked=true;track('reroll',{vid:state.venue.id,store:state.venue.name});pickAndShow();});
+$('restart').addEventListener('click',async()=>{if(state.locked)return;state.locked=true;state.seen=[];state.q1='';state.q2='';state.mood='';$('mood-summary').textContent='분위기도 고르고 싶어요 · 선택 사항';$('mood-panel').open=false;document.querySelectorAll('[data-mood]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.mood==='')));await move('q1');state.locked=false;});
+$('map-link').addEventListener('click',()=>{$('checkin-strip').hidden=false;track('map_click',{vid:state.venue.id,store:state.venue.name});});
+$('checkin').addEventListener('click',()=>track('checkin_link',{vid:state.venue.id,store:state.venue.name}));
+$('talk').addEventListener('click',()=>track('talk_click',{vid:state.venue.id,store:state.venue.name}));
+document.querySelectorAll('.venue-count').forEach(el=>el.textContent=VENUES.length);
+track('view_intro');
+</script>
+</body>
+</html>
