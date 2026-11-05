@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "venues": {
+    "v35": {
+      "grade": "detail",
+      "checkinReady": true,
+      "visits": {
+        "last": "2026-11",
+        "paid": true
+      },
+      "detail": {
+        "owned": true,
+        "photos": [
+          {
+            "src": "./img/v35/1.webp",
+            "alt": "디저트 진열대와 좌석",
+            "caption": "디저트 진열대와 좌석",
+            "month": "2026-11",
+            "capturedAt": "2026-11-04",
+            "width": 1066,
+            "height": 1600,
+            "camera": "FUJIFILM X-M5",
+            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+          },
+          {
+            "src": "./img/v35/2.webp",
+            "alt": "창가 옆 테이블",
+            "caption": "창가 옆 테이블",
+            "month": "2026-11",
+            "capturedAt": "2026-11-04",
+            "width": 1066,
+            "height": 1600,
+            "camera": "FUJIFILM X-M5",
+            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+          },
+          {
+            "src": "./img/v35/3.webp",
+            "alt": "커피를 준비하는 카운터",
+            "caption": "커피를 준비하는 카운터",
+            "month": "2026-11",
+            "capturedAt": "2026-11-04",
+            "width": 1066,
+            "height": 1600,
+            "camera": "FUJIFILM X-M5",
+            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+          },
+          {
+            "src": "./img/v35/4.webp",
+            "alt": "진열대와 좌석이 함께 보이는 공간",
+            "caption": "진열대와 좌석이 함께 보이는 공간",
+            "month": "2026-11",
+            "capturedAt": "2026-11-04",
+            "width": 1600,
+            "height": 1066,
+            "camera": "FUJIFILM X-M5",
+            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+          }
+        ],
+        "blocks": [
+          {
+            "type": "text",
+            "title": "집 한 채에서 만나는 오후",
+            "text": "주택 한 채를 카페로 활용한 시즌즈. 공간을 찬찬히 둘러보다가, 날이 좋은 날에는 넓은 마당에서 볕을 쬐며 커피 한 잔을 즐기고 싶은 곳입니다."
+          },
+          {
+            "type": "text",
+            "title": "온도가 기억한 장면",
+            "text": "공간의 디자인과 분위기 좋은 음악이 인상적이었습니다. 연인과 함께하거나 2~4명이 모이는 자리에 어울립니다."
+          }
+        ],
+        "notRecommended": "기다림 없이 바로 자리에 앉고 싶은 분이라면 대기 가능성을 먼저 확인해 주세요."
+      }
+    }
+  }
+}
