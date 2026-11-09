@@ -72,6 +72,7 @@ main{min-height:calc(100svh - 159px)}.screen[hidden]{display:none!important}.scr
 @media(max-width:700px){.map-journal-header{min-height:66px;padding:11px 12px;gap:9px}.map-journal-caption{gap:7px}.map-journal-number{font-size:17px}.map-journal-copy{font-size:11px}.map-tone button{padding:0 8px;min-height:36px}.explore-legend{gap:12px;padding:11px 12px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.show-on-scroll{opacity:1;transform:none}}
 .dual-heading{display:none!important}.dual-credit{display:none!important}.detail-gallery{margin-top:18px}
+.weather-now{display:inline-flex;align-items:center;gap:.4em;margin:.2em 0 .9em;padding:.32em .8em;border:1px solid currentColor;border-radius:999px;font-size:.82rem;opacity:.78;letter-spacing:.01em}
 </style>
 <style>
 .locate-pulse{width:46px;height:46px;margin:0 auto 24px;position:relative}.locate-pulse[hidden]{display:none}
@@ -152,7 +153,7 @@ main{min-height:calc(100svh - 159px)}.screen[hidden]{display:none!important}.scr
 <header class="topbar"><a class="wordmark" href="https://ondoguide.com/go/" aria-label="온도 처음으로"><img src="./assets/ondo-wordmark.png" alt="ONDO" width="150" height="72"></a><div class="topnote"><b>부산 · 광안리</b><br><span id="topnote-copy">직접 다녀온 곳을 소개합니다</span></div></header>
 <main id="main">
 <section class="screen intro" id="screen-intro" aria-labelledby="intro-heading"><div class="return-banner" id="return-banner" hidden role="region" aria-label="방문 인증 안내"><span id="rb-text"></span><span><a id="rb-link" href="https://ondoguide.com/c/">방문 인증하기 →</a><button id="rb-close" type="button" aria-label="닫기">×</button></span></div>
- <div><p class="eyebrow">광안리에서, 지금 갈 한 곳</p><h1 class="headline" id="intro-heading"><span class="line">백 개 말고,</span><span class="line">지금 갈 <em>한 곳.</em></span></h1><p class="intro-copy" id="intro-copy">제가 직접 가본 곳 중에서<br>오늘의 자리에 맞는 한 곳을 골라드릴게요.</p><button class="primary" id="start" type="button">한 곳 추천받기 <span class="arrow" aria-hidden="true">→</span></button><p class="intro-small">질문 두 개면 충분해요.</p><div class="intro-aux"><button class="intro-aux-link" id="explore-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg><span>전체 지도 둘러보기</span><span class="aux-arrow" aria-hidden="true">→</span></button><a class="intro-aux-link" id="intro-instagram" href="https://www.instagram.com/ondo.guide/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.1" cy="6.9" r=".8" fill="currentColor" stroke="none"/></svg><span>온도의 인스타그램</span><span class="aux-arrow" aria-hidden="true">↗</span></a></div><p class="intro-promise">직접 다녀온 기록을 바탕으로<br>이유와 아쉬운 점까지 전합니다.</p></div>
+ <div><p class="eyebrow">광안리에서, 지금 갈 한 곳</p><p class="weather-now" id="weather-now" hidden aria-live="polite"></p><h1 class="headline" id="intro-heading"><span class="line">백 개 말고,</span><span class="line">지금 갈 <em>한 곳.</em></span></h1><p class="intro-copy" id="intro-copy">제가 직접 가본 곳 중에서<br>오늘의 자리에 맞는 한 곳을 골라드릴게요.</p><button class="primary" id="start" type="button">한 곳 추천받기 <span class="arrow" aria-hidden="true">→</span></button><p class="intro-small">질문 두 개면 충분해요.</p><div class="intro-aux"><button class="intro-aux-link" id="explore-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg><span>전체 지도 둘러보기</span><span class="aux-arrow" aria-hidden="true">→</span></button><a class="intro-aux-link" id="intro-instagram" href="https://www.instagram.com/ondo.guide/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.1" cy="6.9" r=".8" fill="currentColor" stroke="none"/></svg><span>온도의 인스타그램</span><span class="aux-arrow" aria-hidden="true">↗</span></a></div><p class="intro-promise">직접 다녀온 기록을 바탕으로<br>이유와 아쉬운 점까지 전합니다.</p></div>
  <aside class="cover-shell" aria-label="온도가 다녀온 가게"><div class="cover" id="cover-card"><div class="cover-top"><span>온도가 기록한 광안리</span></div><div class="cover-media" id="cover-media"><img id="cover-photo" alt="" decoding="async"><span class="cover-fallback" id="cover-fallback" hidden>사진을 불러오지 못했어요.</span></div><div class="cover-body" id="cover-body"><div class="cover-small">제가 직접 다녀온 곳</div><p class="cover-big" id="cover-name"></p><p class="cover-place" id="cover-location"></p></div><div class="cover-bottom"><strong><span class="venue-count"></span>곳의 기록</strong><span>고민은 짧게, 시간은 따뜻하게.</span></div></div><div class="cover-controls" aria-label="가게 사진 보기"><button type="button" class="cover-control" id="cover-prev">← 이전</button><button type="button" class="cover-control" id="cover-next">다음 →</button><button type="button" class="cover-control pause" id="cover-pause" aria-pressed="false">일시정지</button><span class="sr-only" id="cover-status" aria-live="polite"></span></div></aside>
 </section>
 <section class="screen" id="screen-q1" aria-labelledby="q1-heading" hidden><div class="question-wrap"><button class="back" type="button" data-back="intro"><span class="arrow" aria-hidden="true">←</span> 처음으로</button><div class="question-meta"><div class="step">01 <span>/ 02</span></div><span class="question-label">첫 번째 질문</span></div><h1 class="question-title" id="q1-heading">누구와 함께인가요?</h1><p class="question-sub">오늘 함께하는 사람을 골라주세요.</p><div class="options" id="q1-options"><button class="option" type="button" data-q1="연인"><span class="number">01</span><span class="label">연인과</span><span class="hint">둘만의 시간</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="친구"><span class="number">02</span><span class="label">친구와</span><span class="hint">편안한 만남</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="그 외"><span class="number">03</span><span class="label">그 외</span><span class="hint">가족·혼자 등</span><span class="option-arrow" aria-hidden="true">→</span></button></div></div></section>
@@ -332,7 +333,7 @@ for(const kind of ['portrait','landscape']){
 
 function setScreen(name) {
   document.querySelectorAll('.screen').forEach(el=>{el.hidden=el.id!=='screen-'+name;el.classList.remove('leaving');});
-  state.screen=name; $('sticky').hidden=name!=='result';$('topnote-copy').textContent=name==='explore'?'부산의 장소를 둘러보세요':(MODE==='field'?'직접 다녀온 곳을 소개합니다':'부산의 장소를 둘러보세요');scheduleCover();window.scrollTo(0,0);
+  state.screen=name; if(!window.__ondoPop&&name!=='loading'){try{if(!history.state||!history.state.s)history.replaceState({s:name},'');else if(history.state.s!==name)history.pushState({s:name},'');}catch(e){}} $('sticky').hidden=name!=='result';$('topnote-copy').textContent=name==='explore'?'부산의 장소를 둘러보세요':(MODE==='field'?'직접 다녀온 곳을 소개합니다':'부산의 장소를 둘러보세요');scheduleCover();window.scrollTo(0,0);
 }
 function move(name,delay=160) {
   return new Promise(resolve=>{const current=$('screen-'+state.screen);current.classList.add('leaving');setTimeout(()=>{setScreen(name);resolve();},reduced.matches?0:delay);});
@@ -616,6 +617,24 @@ $('talk').addEventListener('click',()=>track('talk_click',{vid:state.venue.id,st
 document.querySelectorAll('.venue-count').forEach(el=>el.textContent=VENUES.length);
 (function(){try{const l=JSON.parse(localStorage.getItem('ondo_last')||'null');if(l&&!l.dismissed&&Date.now()-l.at<48*3600*1000){$('rb-text').textContent=l.name+', 다녀오셨나요?';$('rb-link').href=l.url;$('return-banner').hidden=false;track('return_banner_shown',{vid:l.v,store:l.name});}}catch(e){}})();
 track('view_intro');
+</script>
+
+<script>
+(function(){
+  try{history.replaceState({s:'intro'},'');}catch(e){}
+  window.addEventListener('popstate',function(e){
+    var s=(e.state&&e.state.s)||'intro'; if(!document.getElementById('screen-'+s))s='intro';
+    window.__ondoPop=true; try{ if(typeof state!=='undefined')state.locked=false; setScreen(s);}finally{window.__ondoPop=false;}
+  });
+  var W={0:['맑음','☀️'],1:['대체로 맑음','🌤️'],2:['구름 조금','⛅'],3:['흐림','☁️'],45:['안개','🌫️'],48:['안개','🌫️'],51:['이슬비','🌦️'],53:['이슬비','🌦️'],55:['이슬비','🌦️'],61:['비','🌧️'],63:['비','🌧️'],65:['강한 비','🌧️'],71:['눈','🌨️'],73:['눈','🌨️'],75:['강한 눈','🌨️'],80:['소나기','🌦️'],81:['소나기','🌧️'],82:['강한 소나기','🌧️'],95:['뇌우','⛈️']};
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=35.1532&longitude=129.1187&current=temperature_2m,weather_code&timezone=Asia%2FSeoul',{cache:'no-store'})
+  .then(function(r){return r.ok?r.json():null}).then(function(d){
+    if(!d||!d.current)return; var t=Math.round(d.current.temperature_2m), w=W[d.current.weather_code]||['',''];
+    if(typeof state!=='undefined')state.weather={temp:t,code:d.current.weather_code};
+    var el=document.getElementById('weather-now'); if(!el)return;
+    el.textContent=(w[1]?w[1]+' ':'')+'광안리 지금 '+t+'°'+(w[0]?' · '+w[0]:''); el.hidden=false;
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>
