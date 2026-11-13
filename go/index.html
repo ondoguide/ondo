@@ -190,7 +190,7 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 const $ = id => document.getElementById(id);
 if(MODE==='general'){$('intro-copy').innerHTML='지금 계신 곳 가까이에서<br>오늘의 장소를 찾아드릴게요.';$('topnote-copy').textContent='부산의 장소를 둘러보세요';}
 /* 부산역 판넬 QR(?from=busan_station)로 들어온 방문자에게는 첫 화면을 부산역 기준으로 보여 줍니다. */
-if(attribution.from==='busan_station'){try{const q=x=>document.querySelector(x);q('.topnote b').textContent='부산 · 부산역';$('topnote-copy').textContent='직접 다녀온 곳을 소개합니다';q('#screen-intro .eyebrow').textContent='부산역에서, 지금 갈 한 곳';$('intro-copy').innerHTML='부산역 근처, 제가 직접 가본 곳 중에서<br>지금 갈 한 곳을 골라드릴게요.';q('#screen-intro .intro-promise').innerHTML='부산역·초량은 제가 직접 다녀온 곳만<br>골라 두었어요.';q('#screen-intro .cover-shell').hidden=true;}catch(e){}}
+if(attribution.from==='busan_station'){try{const q=x=>document.querySelector(x);q('.topnote b').textContent='부산 · 부산역';$('topnote-copy').textContent='직접 다녀온 곳을 소개합니다';q('#screen-intro .eyebrow').textContent='부산역에서, 지금 갈 한 곳';$('intro-copy').innerHTML='부산역 근처, 제가 직접 가본 곳 중에서<br>지금 갈 한 곳을 골라드릴게요.';q('#screen-intro .intro-promise').innerHTML='부산역·초량은 제가 직접 다녀온 곳만<br>골라 두었어요.';q('#screen-intro .cover-shell').hidden=true;const ao=$('area-options'),bs=ao.querySelector('[data-area="5"]');ao.prepend(bs);ao.querySelectorAll('.number').forEach((n,i)=>n.textContent=String(i+1).padStart(2,'0'));}catch(e){}}
 const state = {screen:'intro', q1:'', q2:'', mood:'', venue:null, token:'', locked:false, seen:[], pool:[], relaxedCompanion:false, relaxedMood:false, nowMinute:0};
 const coverPlaces=VENUES.filter(v=>v.photo);
 let coverPosition=0,coverPlaying=!reduced.matches,coverHovered=false,coverTimer=null;
@@ -478,7 +478,7 @@ async function pickAndShow(){
   $('locate-pulse').hidden=true;await Promise.race([detailsReady,new Promise(resolve=>setTimeout(resolve,1200))]);renderResult(next);await move('result',reduced.matches?0:80);state.locked=false;$('place-name').focus({preventScroll:true});
 }
 /* 전체 탐색에는 이전 지도 기록이 포함됩니다. 직접 방문 추천과 별도입니다. */
-const exp={origin:'intro',category:'all',subcategory:'',query:'',visitedOnly:false,selected:null,map:null,markers:[],myLocation:null,loading:false,attempt:0,timer:null};
+const exp={origin:'intro',category:'all',subcategory:'',query:'',visitedOnly:false,selected:null,map:null,markers:[],myLocation:null,me:null,loading:false,attempt:0,timer:null};
 const EXP_LABELS={dining:'식사',cafe:'카페',bar:'한잔'};
 const SUB_LABELS={korean:'한식',japanese:'일식',chinese:'중식',western:'양식',etc:'기타',etc_dining:'기타 식사',cafe:'카페',bakery:'베이커리',izakaya:'이자카야',sojuhouse:'한식 주점',bar:'바',cocktail:'칵테일',winebar:'와인',whiskybar:'위스키',beerhall:'맥주',bar_etc:'기타 주점'};
 function hasMapPoint(place){return Number.isFinite(place.lat)&&Number.isFinite(place.lng);}
@@ -506,7 +506,7 @@ function renderExploreList(places){
     const li=document.createElement('li');const button=document.createElement('button');button.type='button';button.className='explore-list-button';button.dataset.placeId=place.id;button.setAttribute('aria-current',String(exp.selected===place.id));
     const number=document.createElement('span');number.className='explore-list-number';number.textContent=String(index+1).padStart(2,'0');
     const text=document.createElement('span');text.className='explore-list-text';const name=document.createElement('span');name.className='explore-list-name';name.textContent=place.name;
-    const meta=document.createElement('span');meta.className='explore-list-meta'+(place.visited?' is-visited':'');meta.textContent=(EXP_LABELS[place.category]||'장소')+' · '+(place.visited?'직접 방문 기록':'방문 기록 미확인')+(hasMapPoint(place)?'':' · 좌표 미확인');
+    const meta=document.createElement('span');meta.className='explore-list-meta'+(place.visited?' is-visited':'');meta.textContent=(EXP_LABELS[place.category]||'장소')+' · '+(place.visited?'직접 방문 기록':'방문 기록 미확인')+(hasMapPoint(place)?(exp.me?' · '+fmtDist(distM(exp.me.lat,exp.me.lng,place.lat,place.lng)):''):' · 좌표 미확인');
     const arrow=document.createElement('span');arrow.className='explore-list-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='→';text.append(name,meta);button.append(number,text,arrow);button.addEventListener('click',()=>selectExplore(place.id));li.append(button);list.append(li);
   });
 }
@@ -520,8 +520,9 @@ function renderExplorePins(places){
     const overlay=new maps.CustomOverlay({position:new maps.LatLng(place.lat,place.lng),content:pin,clickable:true,yAnchor:.5,zIndex:exp.selected===place.id?9:(place.visited?3:2)});overlay.setMap(exp.map);exp.markers.push({overlay,pin,id:place.id,visited:place.visited});
   }
 }
+function sortByMe(places){if(!exp.me)return places;const d=p=>hasMapPoint(p)?distM(exp.me.lat,exp.me.lng,p.lat,p.lng):Infinity;return places.map(p=>[d(p),p]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);}
 function refreshExplore(){
-  const places=filteredExplore();
+  const places=sortByMe(filteredExplore());
   if(exp.selected&&!places.some(p=>p.id===exp.selected)){exp.selected=null;$('explore-detail').hidden=true;}
   renderExploreList(places);renderExplorePins(places);
 }
@@ -552,7 +553,7 @@ function makeExploreMap(attempt){
   clearTimeout(exp.timer);exp.timer=null;exp.loading=false;
   if(state.screen!=='explore')return;
   try{
-    const maps=window.kakao.maps;exp.map=new maps.Map($('explore-map'),{center:new maps.LatLng(35.1531,129.1186),level:5});
+    const maps=window.kakao.maps;const c0=(state.pos&&Date.now()-state.pos.at<10*60*1000)?[state.pos.lat,state.pos.lng]:(attribution.from==='busan_station'?[35.1151,129.0410]:[35.1531,129.1186]);exp.map=new maps.Map($('explore-map'),{center:new maps.LatLng(c0[0],c0[1]),level:5});setTimeout(()=>exploreLocate(true),300);
     $('explore-map-cover').hidden=true;$('explore-retry').hidden=true;mapControls(true);renderExplorePins(filteredExplore());
     setTimeout(()=>{if(exp.map&&state.screen==='explore')exp.map.relayout();},100);
   }catch(e){exp.map=null;mapFailure(attempt);}
@@ -592,10 +593,20 @@ $('map-tone-original').addEventListener('click',()=>setMapTone('original'));
 $('explore-detail-link').addEventListener('click',()=>{const p=EXPLORE_PLACES.find(p=>p.id===exp.selected);if(p)track('explore_map_click',{vid:p.venueId,store:p.name});});
 $('explore-zoom-in').addEventListener('click',()=>{if(exp.map)exp.map.setLevel(Math.max(1,exp.map.getLevel()-1));});
 $('explore-zoom-out').addEventListener('click',()=>{if(exp.map)exp.map.setLevel(Math.min(14,exp.map.getLevel()+1));});
-$('explore-locate').addEventListener('click',()=>{
-  if(!exp.map||!navigator.geolocation){$('explore-map-message').textContent='이 기기에서 위치를 확인할 수 없어요.';return;}
-  navigator.geolocation.getCurrentPosition(pos=>{if(!exp.map)return;const maps=window.kakao.maps,point=new maps.LatLng(pos.coords.latitude,pos.coords.longitude);if(exp.myLocation)exp.myLocation.setMap(null);const marker=document.createElement('span');marker.className='map-me';marker.setAttribute('aria-label','현재 위치');exp.myLocation=new maps.CustomOverlay({position:point,content:marker,yAnchor:.5,zIndex:10});exp.myLocation.setMap(exp.map);exp.map.panTo(point);$('explore-map-message').textContent='현재 위치를 표시했어요. 장소의 실제 위치는 방문 전에 확인해 주세요.';},()=>{$('explore-map-message').textContent='현재 위치를 확인하지 못했어요. 위치 권한을 확인해 주세요.';},{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
-});
+function exploreLocate(auto){
+  if(!exp.map)return;
+  const fail=()=>{if(auto&&attribution.from==='busan_station'&&!exp.me){exp.me={lat:35.1151,lng:129.0410};refreshExplore();$('explore-map-message').textContent='부산역 기준으로 가까운 순서대로 보여드려요. 지도의 "내 위치"를 누르면 내 주변부터 볼 수 있어요.';return;}$('explore-map-message').textContent=auto?'위치를 허용하면 내 주변 장소부터 볼 수 있어요. 지도의 "내 위치"를 눌러 주세요.':'현재 위치를 확인하지 못했어요. 위치 권한을 확인해 주세요.';};
+  const done=(lat,lng)=>{if(!exp.map)return;
+    const nearest=Math.min(...EXPLORE_PLACES.filter(hasMapPoint).map(p=>distM(lat,lng,p.lat,p.lng)));
+    if(nearest>20000){$('explore-map-message').textContent='지금은 부산 밖에 계신 것 같아요. 부산 지도를 그대로 보여드려요.';return;}
+    const maps=window.kakao.maps,point=new maps.LatLng(lat,lng);if(exp.myLocation)exp.myLocation.setMap(null);const marker=document.createElement('span');marker.className='map-me';marker.setAttribute('aria-label','현재 위치');exp.myLocation=new maps.CustomOverlay({position:point,content:marker,yAnchor:.5,zIndex:10});exp.myLocation.setMap(exp.map);
+    exp.me={lat,lng};if(auto){exp.map.setCenter(point);exp.map.setLevel(4);}else exp.map.panTo(point);refreshExplore();
+    $('explore-map-message').textContent='현재 위치 기준으로 가까운 순서대로 보여드려요. 장소의 실제 위치는 방문 전에 확인해 주세요.';track('explore_locate',{note:auto?'auto':'button'});};
+  if(state.pos&&Date.now()-state.pos.at<10*60*1000)return done(state.pos.lat,state.pos.lng);
+  if(!navigator.geolocation){$('explore-map-message').textContent='이 기기에서 위치를 확인할 수 없어요.';return;}
+  navigator.geolocation.getCurrentPosition(pos=>{state.pos={lat:pos.coords.latitude,lng:pos.coords.longitude,at:Date.now()};done(state.pos.lat,state.pos.lng);},fail,{enableHighAccuracy:false,timeout:10000,maximumAge:60000});
+}
+$('explore-locate').addEventListener('click',()=>exploreLocate(false));
 $('start').addEventListener('click',async()=>{if(state.locked)return;state.locked=true;await move('q1');state.locked=false;});
 document.querySelectorAll('[data-back]').forEach(btn=>btn.addEventListener('click',async()=>{if(state.locked)return;state.locked=true;await move(btn.dataset.back);state.locked=false;}));
 $('q1-options').addEventListener('click',async e=>{const btn=e.target.closest('[data-q1]');if(!btn||state.locked)return;state.locked=true;state.q1=btn.dataset.q1;$('q2-sub').textContent=state.q1==='그 외'?'동행 조건 없이, 선택하신 장소 종류를 기준으로 골라드려요.':'지금 원하는 장소를 골라주세요.';btn.classList.add('selected');track('q1',{q1:state.q1});await move('q2');btn.classList.remove('selected');state.locked=false;});
