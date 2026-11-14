@@ -328,7 +328,7 @@ function setCover(position,announce=false){
   if(!coverPlaces.length)return;
   coverPosition=(position+coverPlaces.length)%coverPlaces.length;
   const venue=coverPlaces[coverPosition],img=$('cover-photo'),fallback=$('cover-fallback');
-  $('cover-name').textContent=venue.name;$('cover-location').textContent=venue.location||'';{const has=coverHasDetail(venue),card=$('cover-card');if(has)setTimeout(()=>preloadDetail(venue,true),600);card.classList.toggle('cover-linked',has);$('cover-read').hidden=!has;if(has){card.setAttribute('role','link');card.tabIndex=0;card.setAttribute('aria-label',venue.name+' 상세 기록 읽기');}else{card.removeAttribute('role');card.removeAttribute('tabindex');card.removeAttribute('aria-label');}}
+  $('cover-name').textContent=venue.name;$('cover-location').textContent=venue.location||'';{const has=coverHasDetail(venue),card=$('cover-card');if(has)setTimeout(()=>preloadDetail(venue,false),600);card.classList.toggle('cover-linked',has);$('cover-read').hidden=!has;if(has){card.setAttribute('role','link');card.tabIndex=0;card.setAttribute('aria-label',venue.name+' 상세 기록 읽기');}else{card.removeAttribute('role');card.removeAttribute('tabindex');card.removeAttribute('aria-label');}}
   img.hidden=true;fallback.hidden=false;fallback.textContent='사진을 불러오고 있어요.';img.alt=venue.name+'에 연결된 기존 사진';
   loadPhoto(img,coverPhoto(venue),()=>coverPlaces[coverPosition].id===venue.id,
     ()=>{img.hidden=false;fallback.hidden=true;img.classList.remove('cover-animated');void img.offsetWidth;img.classList.add('cover-animated');},
@@ -391,9 +391,9 @@ function registeredDetail(venue){
   const known=VENUES.some(v=>v.id===venue.id);
   const magazineOnly=entry&&entry.venue&&typeof entry.venue.name==='string'&&entry.venue.name.trim()&&entry.venue.name.trim()===String(venue.name||'').trim();
   if(!known&&!magazineOnly)return null;
-  if(!entry || entry.grade!=='detail' || !entry.visits || entry.visits.paid!==true || !/^\d{4}-(0[1-9]|1[0-2])$/.test(entry.visits.last||'') || !venue.verdict || !venue.drawback)return null;
+  if(!entry || entry.grade!=='detail' || !entry.visits || entry.visits.paid!==true || !(/^\d{4}-(0[1-9]|1[0-2])$/.test(entry.visits.last||'') || (typeof entry.visits.lastLabel==='string' && entry.visits.lastLabel.trim())) || !venue.verdict || !venue.drawback)return null;
   const d=entry.detail;if(!d || d.owned!==true || !Array.isArray(d.photos) || !d.photos.length || !d.notRecommended || !Array.isArray(d.blocks) || !d.blocks.some(b=>b && b.type==='text' && b.text))return null;
-  const safePhoto=p=>p && typeof p.src==='string' && /^(?:\.\/)?img\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.(?:webp|jpg|jpeg|png)$/i.test(p.src) && typeof p.alt==='string' && p.alt && typeof p.caption==='string' && p.caption && /^\d{4}-(0[1-9]|1[0-2])$/.test(p.month||'');
+  const safePhoto=p=>p && typeof p.src==='string' && /^(?:\.\/)?img\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.(?:webp|jpg|jpeg|png)$/i.test(p.src) && typeof p.alt==='string' && p.alt && typeof p.caption==='string' && p.caption && (/^\d{4}-(0[1-9]|1[0-2])$/.test(p.month||'') || p.dateUnknown===true);
   return d.photos.every(safePhoto)?entry:null;
 }
 function preparedVenue(v){
@@ -403,9 +403,10 @@ function preparedVenue(v){
 }
 
 let detailGroups={portrait:[],landscape:[]},detailIndexes={portrait:0,landscape:0},detailGeneration=0;
+function visitLabel(visits){return visits.lastLabel || (visits.last||'').replace('-','년 ')+'월';}
 function captionFor(photo){
   const date=photo.capturedAt||'';
-  const when=/^\d{4}-\d{2}-\d{2}$/.test(date)?date.slice(0,4)+'년 '+Number(date.slice(5,7))+'월 '+Number(date.slice(8,10))+'일 촬영':(photo.month?photo.month.replace('-','년 ')+'월 촬영':'촬영 월 확인 중');
+  const when=/^\d{4}-\d{2}-\d{2}$/.test(date)?date.slice(0,4)+'년 '+Number(date.slice(5,7))+'월 '+Number(date.slice(8,10))+'일 촬영':(photo.month?photo.month.replace('-','년 ')+'월 촬영':'촬영일 미기록');
   return photo.caption+' · '+when;
 }
 function creditFor(photo){return [photo.camera,photo.lens].filter(Boolean).join(' · ');}
@@ -600,7 +601,7 @@ function renderResult(v,options={}) {preloadDetail(v,true);
   document.querySelector('#talk .talk-kicker').textContent=fromMagazine?'다음 장소가 고민되세요?':'추천이 안 맞으세요?';
   v=preparedVenue(v);
   const listedInRecommendations=VENUES.some(known=>known.id===v.id);
-  state.resultCheckinAvailable=!v.tier2&&v.checkinReady!==false&&(!fromMagazine||listedInRecommendations||(ONDO_DETAILS[v.id]&&ONDO_DETAILS[v.id].checkinReady===true));const resultGrade=v.grade;const grade=$('result-grade');grade.dataset.grade=resultGrade;grade.textContent=resultGrade==='detail'?'온도 상세 기록 · '+v.visits.last.replace('-','년 ')+'월 방문':resultGrade==='candidate'?'온도의 방문 기록이 없는 곳':'온도가 직접 가 봤어요';$('result-label').textContent=fromMagazine?'온도가 기록한 장소':(resultGrade==='candidate'?'온도 주변 후보':'온도가 고른 오늘의 한 곳');document.querySelector('.result-wrap').dataset.grade=resultGrade;
+  state.resultCheckinAvailable=!v.tier2&&v.checkinReady!==false&&(!fromMagazine||listedInRecommendations||(ONDO_DETAILS[v.id]&&ONDO_DETAILS[v.id].checkinReady===true));const resultGrade=v.grade;const grade=$('result-grade');grade.dataset.grade=resultGrade;grade.textContent=resultGrade==='detail'?'온도 상세 기록 · '+visitLabel(v.visits).replace(/\s*\([^)]*\)/g,'')+' 방문':resultGrade==='candidate'?'온도의 방문 기록이 없는 곳':'온도가 직접 가 봤어요';$('result-label').textContent=fromMagazine?'온도가 기록한 장소':(resultGrade==='candidate'?'온도 주변 후보':'온도가 고른 오늘의 한 곳');document.querySelector('.result-wrap').dataset.grade=resultGrade;
   $('detail-gallery').hidden=true;$('detail-editorial').hidden=true;$('detail-editorial').replaceChildren();
   state.venue=v;state.token=makeToken();$('checkin-strip').hidden=true;$('place-name').textContent=v.name;$('place-location').textContent=v.location||'';$('place-location').hidden=!v.location;$('verdict').textContent=v.verdict||v.reason||'';
   const notes=[];
@@ -612,7 +613,7 @@ function renderResult(v,options={}) {preloadDetail(v,true);
   photo.removeAttribute('src');photo.alt='';if(resultGrade==='detail')renderDetailed(v);
   $('result-story').replaceChildren();$('result-details').replaceChildren();if(resultGrade!=='detail')makeStory('왜 이곳인가요',v.reason);makeStory('꼭 시켜보세요',v.order);if(v.avoid && !/^(없음|딱히 없음)/.test(v.avoid))makeStory('안 시켜도 괜찮아요',v.avoid);makeRow('1인 가격',v.price);makeRow('좋은 시간 · 대기',v.wait);makeRow('주차',v.parking);
   $('drawback').hidden=!v.drawback;$('drawback').open=true;$('drawback-text').textContent=v.drawback||'';$('next-section').hidden=!v.next;$('next-text').textContent=v.next||'';renderNextPlaces(v);
-  $('visit').textContent=(resultGrade==='detail'?'마지막 방문: '+v.visits.last.replace('-','년 ')+'월 · 직접 결제 · ':(v.visited?'마지막 방문: '+v.visited+' · ':''))+'메뉴·가격·영업 및 대기 정보는 방문 당시의 기록이며 달라질 수 있어요. 방문 전 지도에서 확인해 주세요.';
+  $('visit').textContent=(resultGrade==='detail'?'마지막 방문: '+visitLabel(v.visits)+' · 직접 결제 · ':(v.visited?'마지막 방문: '+v.visited+' · ':''))+'메뉴·가격·영업 및 대기 정보는 방문 당시의 기록이며 달라질 수 있어요. 방문 전 지도에서 확인해 주세요.';
   $('map-link').href=v.mapUrl||'https://ondoguide.com/m/'+encodeURIComponent(v.id);const visitUrl='https://ondoguide.com/c/?r='+encodeURIComponent(state.token)+'&v='+encodeURIComponent(v.id)+'&m='+MODE+(fromMagazine?'&from=magazine':'');$('checkin').href=visitUrl;$('vc-go').href=visitUrl;$('vc-status').textContent='';$('visit-card').hidden=!state.resultCheckinAvailable;
   if(fromMagazine&&!VENUES.some(known=>known.id===v.id)){let target='';try{const u=new URL(v.mapUrl||'');if(u.protocol==='https:')target=u.href;}catch(e){}$('map-link').href=target||'https://map.naver.com/p/search/'+encodeURIComponent(v.name+' '+(v.address||v.location||'부산'));}
   if(!fromMagazine&&!v.tier2&&v.checkinReady!==false){try{localStorage.setItem('ondo_last',JSON.stringify({r:state.token,v:v.id,name:v.name,url:visitUrl,at:Date.now()}));}catch(e){}}
