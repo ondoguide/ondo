@@ -808,7 +808,8 @@ function magazineRegion(venue,entry){
   if(/^(gwangan|minrak|광안|광안리|민락|광안·민락|민락광안)$/.test(explicit))return 'gwangan';
   if(/^(seomyeon|jeonpo|서면|전포|서면·전포)$/.test(explicit))return 'seomyeon';
   if(/^(other|기타|부산 다른 지역)$/.test(explicit))return 'other';
-  const loc=String((entry.venue&&entry.venue.address)||venue.address||venue.location||'');
+  const mapped=EXPLORE_PLACES.find(p=>p.venueId===venue.id);
+  const loc=[(entry.venue&&entry.venue.address)||'',venue.address||'',mapped&&mapped.address||'',venue.location||''].join(' ');
   if(/광안|민락|수영구/.test(loc))return 'gwangan';
   if(/서면|전포|부전|부산진구/.test(loc))return 'seomyeon';
   return 'other';

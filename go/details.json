@@ -6,7 +6,8 @@
       "checkinReady": false,
       "visits": {
         "last": "2026-11",
-        "paid": true
+        "paid": true,
+        "lastLabel": "2026년 11월 4일"
       },
       "detail": {
         "owned": true,
@@ -582,7 +583,8 @@
       "checkinReady": false,
       "visits": {
         "last": "2026-11",
-        "paid": true
+        "paid": true,
+        "lastLabel": "2026년 11월 5일"
       },
       "detail": {
         "owned": true,
@@ -727,7 +729,8 @@
       "instagram": "https://www.instagram.com/p/DftsbWIIOn6/",
       "visits": {
         "last": "2026-11",
-        "paid": true
+        "paid": true,
+        "lastLabel": "2026년 11월 11일"
       },
       "detail": {
         "owned": true,
@@ -821,5 +824,5 @@
       }
     }
   },
-  "rev": "20261114-details14"
+  "rev": "20261114-details16"
 }
