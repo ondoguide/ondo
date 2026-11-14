@@ -3,7 +3,7 @@
   "venues": {
     "v35": {
       "grade": "detail",
-      "checkinReady": false,
+      "checkinReady": true,
       "visits": {
         "last": "2026-11",
         "paid": true
@@ -71,512 +71,148 @@
         "notRecommended": "기다림 없이 바로 자리에 앉고 싶은 분이라면 대기 가능성을 먼저 확인해 주세요."
       }
     },
-    "v03": {
+    "v36": {
       "grade": "detail",
-      "region": "gwangan",
+      "checkinReady": false,
       "visits": {
-        "lastLabel": "2022년경 (현재 영업시간·가격 재확인 필요)",
+        "last": "2026-11",
         "paid": true
       },
       "detail": {
         "owned": true,
         "photos": [
           {
-            "src": "img/v03/1.webp",
-            "alt": "새벽집 — 해변로에서 찾는 새벽집 입구",
-            "caption": "해변로에서 찾는 새벽집 입구",
-            "width": 1067,
-            "height": 1600,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "술자리 뒤, 따뜻한 한 그릇",
-            "text": "술을 마신 뒤 속이 허할 때 떠올리는 곳입니다. 방문 기록에는 시래기 된장국밥과 콩나물국밥을 남겼습니다."
-          }
-        ],
-        "notRecommended": "은은한 조명 아래 분위기 있는 식사를 원한다면 다른 곳이 더 어울릴 수 있어요."
-      }
-    },
-    "v04": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026-09 중순",
-        "paid": true,
-        "last": "2026-09"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v04/1.webp",
-            "alt": "쿠치가 — 테이블에 차려진 요리",
-            "caption": "테이블에 차려진 요리",
-            "width": 1067,
-            "height": 1600,
-            "month": "2026-10",
-            "capturedAt": "2026-10-16",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v04/2.webp",
-            "alt": "쿠치가 — 사시미 한 접시",
-            "caption": "사시미 한 접시",
-            "width": 1200,
-            "height": 1600,
-            "month": "2026-10",
-            "capturedAt": "2026-10-16"
-          },
-          {
-            "src": "img/v04/3.webp",
-            "alt": "쿠치가 — 고등어 봉초밥",
-            "caption": "고등어 봉초밥",
-            "width": 1200,
-            "height": 1600,
-            "month": "2026-10",
-            "capturedAt": "2026-10-16"
-          },
-          {
-            "src": "img/v04/4.webp",
-            "alt": "쿠치가 — 방문 당시 주문한 사이드 메뉴",
-            "caption": "방문 당시 주문한 사이드 메뉴",
-            "width": 1200,
-            "height": 1600,
-            "month": "2026-10",
-            "capturedAt": "2026-10-16"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "사시미부터 사이드까지",
-            "text": "민락에서 자주 찾은 이자카야입니다. 사시미뿐 아니라 사이드 메뉴도 고르게 만족스러웠다는 점이 다시 찾는 이유입니다. 오픈 직후에 방문해 편한 테이블 자리를 살펴보길 권합니다."
-          }
-        ],
-        "notRecommended": "대기 없이 바로 앉아야 하는 일정이라면 맞지 않을 수 있어요."
-      }
-    },
-    "v08": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 여름 경",
-        "paid": true
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v08/1.webp",
-            "alt": "야끼토리 로만 — 방문 당시 주문한 꼬치",
-            "caption": "방문 당시 주문한 꼬치",
-            "width": 1200,
-            "height": 1600,
-            "month": "2026-02",
-            "capturedAt": "2026-02-12"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "배부른 저녁의 가벼운 다음 자리",
-            "text": "1차 식사 뒤에도 꼬치를 조금씩 골라 술과 곁들이기 좋은 곳입니다. 여러 종류의 야키토리를 부담을 나눠 즐기고 싶을 때 추천합니다."
-          }
-        ],
-        "notRecommended": "조용한 대화가 가장 중요한 자리라면 다른 곳을 권해요."
-      }
-    },
-    "v09": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 여름 경",
-        "paid": true
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v09/1.webp",
-            "alt": "스시사카바 하토바 — 방문 당시 주문한 사시미",
-            "caption": "방문 당시 주문한 사시미",
-            "width": 1067,
-            "height": 1600,
+            "src": "./img/v36/1.webp",
+            "alt": "골목에서 본 유메노마치 건물",
+            "caption": "골목에서 본 유메노마치 건물",
             "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
           },
           {
-            "src": "img/v09/2.webp",
-            "alt": "스시사카바 하토바 — 골목에서 만나는 하토바 외관",
-            "caption": "골목에서 만나는 하토바 외관",
+            "src": "./img/v36/2.webp",
+            "alt": "입구와 쇼윈도",
+            "caption": "입구와 쇼윈도",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
             "width": 1600,
-            "height": 1067,
-            "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+            "height": 1066
           },
           {
-            "src": "img/v09/3.webp",
-            "alt": "스시사카바 하토바 — 입구 앞 메뉴 안내",
-            "caption": "입구 앞 메뉴 안내",
+            "src": "./img/v36/3.webp",
+            "alt": "입구 앞 입간판",
+            "caption": "입구 앞 입간판",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/4.webp",
+            "alt": "창가에 놓인 인형들",
+            "caption": "창가에 놓인 인형들",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/5.webp",
+            "alt": "포스터와 스티커·엽서 진열대",
+            "caption": "포스터와 스티커·엽서 진열대",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
             "width": 1600,
-            "height": 1067,
+            "height": 1066
+          },
+          {
+            "src": "./img/v36/6.webp",
+            "alt": "서랍 속 스티커와 캡슐 토이",
+            "caption": "서랍 속 스티커와 캡슐 토이",
             "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v09/4.webp",
-            "alt": "스시사카바 하토바 — 테이블에 차려진 사시미 한 상",
-            "caption": "테이블에 차려진 사시미 한 상",
-            "width": 1200,
-            "height": 1600,
-            "month": "2026-11",
-            "capturedAt": "2026-11-04"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "둘이서 사시미, 그리고 초밥 한 점",
-            "text": "사시미를 먹다가 조금 더 먹고 싶으면 초밥을 하나씩 추가할 수 있습니다. 처음부터 양을 크게 정하기보다 둘의 속도에 맞춰 주문하기 좋은 점을 기억합니다."
-          }
-        ],
-        "notRecommended": "세 명 이상이 마주 보며 오래 대화할 자리라면 다찌석 위주의 구성이 불편할 수 있어요."
-      }
-    },
-    "v11": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2024 겨울 경",
-        "paid": true
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v11/1.webp",
-            "alt": "톤쇼우 광안점 — 방문 당시 돈카츠 한 접시",
-            "caption": "방문 당시 돈카츠 한 접시",
-            "width": 1200,
-            "height": 1600,
-            "month": "2022-10",
-            "capturedAt": "2022-10-13"
-          },
-          {
-            "src": "img/v11/2.webp",
-            "alt": "톤쇼우 광안점 — 밥과 함께 차려진 돈카츠",
-            "caption": "밥과 함께 차려진 돈카츠",
-            "width": 1200,
-            "height": 1600,
-            "month": "2022-10",
-            "capturedAt": "2022-10-13"
-          },
-          {
-            "src": "img/v11/3.webp",
-            "alt": "톤쇼우 광안점 — 위에서 바라본 돈카츠 한 상",
-            "caption": "위에서 바라본 돈카츠 한 상",
-            "width": 1200,
-            "height": 1600,
-            "month": "2022-10",
-            "capturedAt": "2022-10-13"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "부산에서 만나는 프리미엄 돈카츠",
-            "text": "부산 여행 중 돈카츠 한 끼를 제대로 즐기고 싶을 때 떠올리는 곳입니다. 버크셔 K 로스카츠와 히레카츠, 일식 카레를 추천 메뉴로 기록했습니다."
-          }
-        ],
-        "notRecommended": "기다릴 여유가 없는 일정에는 권하기 어려워요. 대기가 매우 길었던 곳입니다."
-      }
-    },
-    "v20": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 10월 중순",
-        "paid": true,
-        "last": "2026-10"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v20/1.webp",
-            "alt": "테츠아지 — 따뜻하게 차려진 토리나베",
-            "caption": "따뜻하게 차려진 토리나베",
-            "width": 1067,
-            "height": 1600,
-            "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v20/2.webp",
-            "alt": "테츠아지 — 방문 당시 주문한 히레카츠",
-            "caption": "방문 당시 주문한 히레카츠",
-            "width": 1067,
-            "height": 1600,
-            "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v20/3.webp",
-            "alt": "테츠아지 — 거리에서 바라본 테츠아지",
-            "caption": "거리에서 바라본 테츠아지",
+            "capturedAt": "2026-11-05",
             "width": 1600,
-            "height": 1067,
-            "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+            "height": 1066
           },
           {
-            "src": "img/v20/4.webp",
-            "alt": "테츠아지 — 입구 옆 간판",
-            "caption": "입구 옆 간판",
-            "width": 1067,
-            "height": 1600,
+            "src": "./img/v36/7.webp",
+            "alt": "피규어와 고양이 소품 선반",
+            "caption": "피규어와 고양이 소품 선반",
             "month": "2026-11",
-            "capturedAt": "2026-11-04",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "다섯 번 넘게 찾게 된 이유",
-            "text": "일식 요리의 맛과 실내의 조도를 함께 좋게 기억한 곳입니다. 토리나베와 히레카츠를 먼저 권합니다. 다만 테이블 수가 적어 원하는 좌석을 잡을 수 있는지는 살펴봐야 합니다."
-          }
-        ],
-        "notRecommended": "여럿이 넓은 테이블에 둘러앉는 자리를 꼭 원한다면 좌석 구성이 맞지 않을 수 있어요."
-      }
-    },
-    "v21": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026.10.21",
-        "paid": true,
-        "last": "2026-10"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v21/1.webp",
-            "alt": "치킨버거클럽 광안점 — 창가에서 먹은 버거와 감자튀김",
-            "caption": "창가에서 먹은 버거와 감자튀김",
-            "width": 1067,
-            "height": 1600,
-            "month": "2026-11",
-            "capturedAt": "2026-11-11",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
           },
           {
-            "src": "img/v21/2.webp",
-            "alt": "치킨버거클럽 광안점 — 노란 간판이 보이는 외관",
-            "caption": "노란 간판이 보이는 외관",
+            "src": "./img/v36/8.webp",
+            "alt": "피규어와 인형이 놓인 장식장",
+            "caption": "피규어와 인형이 놓인 장식장",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/9.webp",
+            "alt": "빈티지 의류와 포스터 코너",
+            "caption": "빈티지 의류와 포스터 코너",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/10.webp",
+            "alt": "일본 레코드와 무사 갑옷 장식",
+            "caption": "일본 레코드와 무사 갑옷 장식",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/11.webp",
+            "alt": "노렌과 레트로 선풍기",
+            "caption": "노렌과 레트로 선풍기",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/12.webp",
+            "alt": "창가의 레트로 소품",
+            "caption": "창가의 레트로 소품",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
+            "width": 1066,
+            "height": 1600
+          },
+          {
+            "src": "./img/v36/13.webp",
+            "alt": "고양이 레트로 포스터 진열",
+            "caption": "고양이 레트로 포스터 진열",
+            "month": "2026-11",
+            "capturedAt": "2026-11-05",
             "width": 1600,
-            "height": 1067,
-            "month": "2026-11",
-            "capturedAt": "2026-11-11",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v21/3.webp",
-            "alt": "치킨버거클럽 광안점 — 유리창의 버거 그래픽",
-            "caption": "유리창의 버거 그래픽",
-            "width": 1600,
-            "height": 1067,
-            "month": "2026-11",
-            "capturedAt": "2026-11-11",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v21/4.webp",
-            "alt": "치킨버거클럽 광안점 — 매장 안에서 바라본 입구",
-            "caption": "매장 안에서 바라본 입구",
-            "width": 1067,
-            "height": 1600,
-            "month": "2026-11",
-            "capturedAt": "2026-11-11",
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
+            "height": 1066
           }
         ],
         "blocks": [
           {
             "type": "text",
-            "title": "다시 생각나는 바삭한 한 입",
-            "text": "다섯 번 이상 다시 찾은 치킨버거 전문점입니다. 바삭한 튀김옷과 소스, 푹신한 번의 조합을 기억합니다. 달짝지근한 맛은 더티 화이트, 짭짤한 맛은 BLT로 취향을 나눠 골라보세요."
-          }
-        ],
-        "notRecommended": "매장 주차 지원이 꼭 필요한 분께는 불편할 수 있어요."
-      }
-    },
-    "v22": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 8월 초순",
-        "paid": true,
-        "last": "2026-08"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v22/1.webp",
-            "alt": "듀플릿 — 창가에 놓인 커피",
-            "caption": "창가에 놓인 커피",
-            "width": 1200,
-            "height": 1600,
-            "month": "2025-11",
-            "capturedAt": "2025-11-12"
+            "title": "집 한 채에 모아 둔 일본 레트로",
+            "text": "주택 한 채를 소품샵으로 꾸민 유메노마치. 고양이 소품이 특히 많고, 몬치치와 세일러문을 비롯한 일본 굿즈가 층마다 빼곡하게 놓여 있습니다."
           },
-          {
-            "src": "img/v22/2.webp",
-            "alt": "듀플릿 — 조명이 켜진 마당",
-            "caption": "조명이 켜진 마당",
-            "width": 1200,
-            "height": 1600,
-            "month": "2025-11",
-            "capturedAt": "2025-11-12"
-          },
-          {
-            "src": "img/v22/3.webp",
-            "alt": "듀플릿 — 밤의 건물과 안내 간판",
-            "caption": "밤의 건물과 안내 간판",
-            "width": 1200,
-            "height": 1600,
-            "month": "2025-11",
-            "capturedAt": "2025-11-12"
-          },
-          {
-            "src": "img/v22/4.webp",
-            "alt": "듀플릿 — 입구의 듀플릿 간판",
-            "caption": "입구의 듀플릿 간판",
-            "width": 1200,
-            "height": 1600,
-            "month": "2025-11",
-            "capturedAt": "2025-11-12"
-          }
-        ],
-        "blocks": [
           {
             "type": "text",
-            "title": "낮의 채광, 밤의 마당",
-            "text": "마당과 1·2층의 독채 공간이 함께 있는 카페입니다. 햇빛이 좋은 낮과 경관 조명이 켜진 저녁이 서로 다른 인상을 줍니다. 날이 맑고 춥지 않을 때는 야외 자리도 살펴보세요."
+            "title": "온도가 기억한 장면",
+            "text": "고양이 레트로 포스터와 교토 키링, 고양이 수첩을 골랐습니다. 혼자 천천히 둘러보거나, 연인과 일본 굿즈 분위기의 데이트를 하고 싶은 날에 어울립니다."
           }
         ],
-        "notRecommended": "평평하고 안정적인 야외 좌석이나 큰길에서 바로 들어가는 접근성을 원한다면 불편할 수 있어요."
-      }
-    },
-    "v24": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 1월 초순",
-        "paid": true,
-        "last": "2026-01"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v24/1.webp",
-            "alt": "해성막창 광안리점 — 간판으로 찾아가는 해성막창",
-            "caption": "간판으로 찾아가는 해성막창",
-            "width": 1067,
-            "height": 1600,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "기름진 안주가 당기는 저녁",
-            "text": "막창과 대창, 곱창전골을 소주와 곁들이고 싶을 때 찾는 곳입니다. 여러 번 방문하며 음식 맛이 일관되게 유지된다고 느꼈습니다. 1차 술자리로 추천합니다."
-          }
-        ],
-        "notRecommended": "조용하고 은은한 분위기에서 대화할 곳을 찾는다면 맞지 않을 수 있어요."
-      }
-    },
-    "v31": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 10월 초순",
-        "paid": true,
-        "last": "2026-10"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v31/1.webp",
-            "alt": "루베르부산 — 붉은 벽돌 외관과 입구",
-            "caption": "붉은 벽돌 외관과 입구",
-            "width": 1600,
-            "height": 1067,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v31/2.webp",
-            "alt": "루베르부산 — 입구에 놓인 메뉴 안내",
-            "caption": "입구에 놓인 메뉴 안내",
-            "width": 1067,
-            "height": 1600,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          },
-          {
-            "src": "img/v31/3.webp",
-            "alt": "루베르부산 — 벽면의 루베르부산 간판",
-            "caption": "벽면의 루베르부산 간판",
-            "width": 1600,
-            "height": 1067,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "메뉴 취향이 갈리는 날의 한 자리",
-            "text": "한식과 양식, 일식 중 한 가지로 마음을 정하기 어려운 날 떠올릴 만한 퓨전 주점입니다. 한곳에서 여러 장르의 안주를 즐길 수 있고, 육사시미와 생새우회를 추천 메뉴로 기록했습니다."
-          }
-        ],
-        "notRecommended": "작은 목소리로 차분히 대화하고 싶은 자리에는 권하기 어려워요."
+        "notRecommended": "가게가 좁은 편이라, 한적하게 둘러보고 싶은 분이라면 사람이 적은 시간대를 골라 주세요."
       }
     }
-  },
-  "rev": "20261114-details11"
+  }
 }
