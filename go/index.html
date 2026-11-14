@@ -209,6 +209,8 @@ body{font-family:var(--sans);font-size:15px;line-height:1.75;letter-spacing:-.02
 @media(max-width:700px){.frame{width:calc(100% - 40px)}.topbar{height:80px;gap:16px}.wordmark,.wordmark img{width:110px;height:34px}.brand-nav{gap:19px}.brand-nav button{font-size:12px;padding:13px 0}.brand-nav button:first-child{display:none}.topnote{display:none}.intro{display:flex;align-items:stretch;padding:33px 0 36px;gap:29px;min-height:0}.eyebrow{font-size:11px;margin-bottom:15px}.headline{font-size:clamp(38px,10.5vw,57px);line-height:1.23;letter-spacing:-.065em}.intro-copy{font-size:14px;line-height:1.8;margin:19px 0 22px}.weather-now{margin-bottom:15px;font-size:10px}.intro .primary{width:100%;min-height:56px;font-size:14px}.intro-small{font-size:11px}.intro-magazine{width:100%;margin-top:19px;padding:14px 0}.intro-magazine-copy strong{font-size:15px}.intro-magazine-copy span{font-size:11px}.intro-aux{width:100%;gap:15px;margin-top:4px}.intro-aux-link{font-size:11px}.intro-promise{font-size:10px;margin-top:10px}.cover-media{aspect-ratio:1.3;height:auto}.cover-top{padding-bottom:10px}.cover-body{padding:17px 0}.cover-big{font-size:27px}.cover-small{font-size:10px}.cover-bottom{font-size:10px}.cover-controls{padding-top:3px}.footer{font-size:10px;min-height:70px}.question-wrap{padding:20px 0 50px}.question-meta{margin:25px 0 25px}.question-title{font-size:29px}.question-sub{font-size:13px;margin-bottom:25px}.option{padding:19px 15px;min-height:83px;gap:12px}.option .number{width:22px;font-size:11px}.option .label{font-size:18px}.option .hint{font-size:10px}.option .option-arrow{width:26px;height:26px}.result-wrap{padding-top:24px}.place-name,.result-wrap[data-grade="detail"] .place-name{font-size:34px}.verdict-text,.result-wrap[data-grade="detail"] .verdict-text{font-size:21px;line-height:1.65}.result-wrap[data-grade="detail"] .result-head{padding:23px 0 18px}.result-wrap[data-grade="detail"] .result-verdict{padding:0 0 23px}.dual-gallery{gap:25px;margin-top:23px}.dual-frame.portrait{height:clamp(330px,110vw,520px)}.dual-caption{font-size:11px}.detail-editorial{padding-top:32px}.detail-editorial p{font-size:15px;line-height:1.9}.detail-editorial h2{font-size:15px}.result-layout{padding-top:30px}.field p{font-size:14px}.data-row{font-size:13px;grid-template-columns:88px 1fr}.note-sheet summary{font-size:15px;padding:19px}.note-sheet p{font-size:14px;padding:0 19px 20px}.visit-card{padding:20px}.visit-card h2{font-size:18px}.talk-card{padding:18px}.talk-title{font-size:16px}.talk-sub{font-size:11px}.magazine-wrap{padding-top:18px}.magazine-back{margin-bottom:20px}.magazine-masthead{grid-template-columns:1fr;padding-bottom:24px;gap:19px}.magazine-title{font-size:37px}.magazine-kicker{font-size:10px;margin-bottom:12px}.magazine-intro{font-size:13px;line-height:1.8;margin-top:15px}.magazine-edition{text-align:left;display:flex;align-items:baseline;gap:12px}.magazine-edition strong{font-size:22px;margin:0}.magazine-filters{padding:20px 0;gap:7px}.magazine-filters-label{width:100%;font-size:11px}.magazine-filter{font-size:12px;padding:10px 16px}.magazine-card:first-child{display:flex}.magazine-card:first-child .magazine-card-media,.magazine-card-media{aspect-ratio:1.22;border-radius:4px 4px 0 0}.magazine-card:first-child .magazine-card-content{padding:25px}.magazine-card-name{font-size:32px;margin:15px 0 12px}.magazine-card-verdict{font-size:14px}.magazine-card-read{margin-top:24px}.magazine-bottom-note{font-size:11px}.explore-head{margin:23px 0;gap:15px}.explore-title{font-size:30px}.explore-total{font-size:32px}.explore-desc{font-size:12px}.explore-search-row{gap:9px}.explore-select{height:46px}.explore-list-button{padding:18px 6px}.explore-detail{padding:17px;grid-template-columns:90px 1fr}.explore-detail h2{font-size:19px}.explore-detail p{font-size:12px}.map-journal-copy{font-size:11px}.map-journal-header{padding:12px}.explore-chip{padding:9px 16px}.sticky{padding-left:20px;padding-right:20px}.sticky .primary{min-height:54px}.visit{font-size:11px}.brand-nav button:hover:after{transform:none}}
 @media(prefers-reduced-motion:reduce){.option,.primary,.brand-nav button:after{transition:none}.option:hover{transform:none}}
 
+
+#intro-heading .line{word-break:keep-all}
 </style>
 </head>
 <body>
@@ -216,7 +218,7 @@ body{font-family:var(--sans);font-size:15px;line-height:1.75;letter-spacing:-.02
 <header class="topbar"><a class="wordmark" href="https://ondoguide.com/go/" aria-label="온도 처음으로"><img src="./assets/ondo-wordmark.png" alt="ONDO" width="150" height="72"></a><nav class="brand-nav" aria-label="주요 메뉴"><button type="button" data-brand-target="start">한 곳 추천</button><button type="button" data-brand-target="magazine-open">매거진</button><button type="button" data-brand-target="explore-open">장소 지도</button></nav><div class="topnote"><b>부산 · 광안리</b><br><span id="topnote-copy">직접 다녀온 곳을 소개합니다</span></div></header>
 <main id="main">
 <section class="screen intro" id="screen-intro" aria-labelledby="intro-heading"><div class="return-banner" id="return-banner" hidden role="region" aria-label="방문 인증 안내"><span id="rb-text"></span><span><a id="rb-link" href="https://ondoguide.com/c/">방문 인증하기 →</a><button id="rb-close" type="button" aria-label="닫기">×</button></span></div>
- <div><p class="eyebrow">광안리에서, 지금 갈 한 곳</p><p class="weather-now" id="weather-now" hidden aria-live="polite"></p><h1 class="headline" id="intro-heading"><span class="line">백 개 말고,</span><span class="line">지금 갈 <em>한 곳.</em></span></h1><p class="intro-copy" id="intro-copy">제가 직접 가본 곳 중에서<br>오늘의 자리에 맞는 한 곳을 골라드릴게요.</p><button class="primary" id="start" type="button">한 곳 추천받기 <span class="arrow" aria-hidden="true">→</span></button><p class="intro-small">질문 두 개면 충분해요.</p>
+ <div><p class="eyebrow">광안리에서, 지금 갈 한 곳</p><p class="weather-now" id="weather-now" hidden aria-live="polite"></p><h1 class="headline" id="intro-heading"><span class="line">지금 갈 곳,</span><span class="line"><em>딱 한 곳</em>만 골라드려요.</span></h1><p class="intro-copy" id="intro-copy">제가 직접 가본 곳 중에서<br>오늘의 자리에 맞는 한 곳을 골라드릴게요.</p><button class="primary" id="start" type="button">한 곳 추천받기 <span class="arrow" aria-hidden="true">→</span></button><p class="intro-small">질문 두 개면 충분해요.</p>
 <button class="intro-magazine" id="magazine-open" type="button" aria-label="온도의 매거진 보기">
   <span class="intro-magazine-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5c3-1.2 5.7-.8 8 1v13c-2.3-1.8-5-2.2-8-1zM20 5.5c-3-1.2-5.7-.8-8 1v13c2.3-1.8 5-2.2 8-1z"/></svg></span>
   <span class="intro-magazine-copy"><small>THE ONDO JOURNAL</small><strong>온도의 매거진</strong><span>직접 다녀온 장소의 사진과 기록</span></span><span class="intro-magazine-arrow" aria-hidden="true">↗</span>
@@ -352,13 +354,15 @@ function track(evt, data={}) {
 
 /* 가게별 상세 기록은 details.json의 데이터만 추가하면 됩니다. */
 const ONDO_DETAILS = Object.create(null);
-let detailLoadStatus='loading';
+let detailLoadStatus='loading',detailRev='';
+/* 같은 파일 이름으로 사진을 바꿔 올려도 예전 사진이 남지 않도록, 사진 주소 뒤에 버전을 붙입니다. details.json에 "rev" 값을 적으면 그 값을, 없으면 오늘 날짜를 씁니다. */
+function photoUrl(p){const src=String(p&&p.src||'');return detailRev?src+(src.includes('?')?'&':'?')+'v='+encodeURIComponent(detailRev):src;}
 function loadDetails(){
   detailLoadStatus='loading';
   if(typeof fetch!=='function'){detailLoadStatus='error';return Promise.resolve();}
   return fetch('./details.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('details unavailable');return r.json();}).then(data=>{
     if(!data||data.version!==1||!data.venues||typeof data.venues!=='object'||Array.isArray(data.venues))throw new Error('invalid details');
-    Object.keys(ONDO_DETAILS).forEach(k=>delete ONDO_DETAILS[k]);Object.assign(ONDO_DETAILS,data.venues);detailLoadStatus='ready';
+    Object.keys(ONDO_DETAILS).forEach(k=>delete ONDO_DETAILS[k]);Object.assign(ONDO_DETAILS,data.venues);detailRev=String(data.rev||new Date().toISOString().slice(0,10).replace(/-/g,''));detailLoadStatus='ready';
   }).catch(()=>{detailLoadStatus='error';});
 }
 let detailsReady=loadDetails();
@@ -392,7 +396,7 @@ function displayDetailPhoto(kind,index,userInitiated){
   const v=state.venue,photos=detailGroups[kind];if(!v || v.grade!=='detail' || !photos || !photos.length)return;
   const old=detailIndexes[kind];detailIndexes[kind]=(index+photos.length)%photos.length;const p=photos[detailIndexes[kind]].photo;
   const img=$('detail-photo-'+kind),fallback=$('detail-fallback-'+kind);img.hidden=false;fallback.hidden=true;img.alt=p.alt;
-  img.onerror=()=>{img.hidden=true;fallback.hidden=false;};img.onload=()=>{img.hidden=false;fallback.hidden=true;};img.classList.remove('photo-enter');void img.offsetWidth;img.src=p.src;img.classList.add('photo-enter');
+  img.onerror=()=>{img.hidden=true;fallback.hidden=false;};img.onload=()=>{img.hidden=false;fallback.hidden=true;};img.classList.remove('photo-enter');void img.offsetWidth;img.src=photoUrl(p);img.classList.add('photo-enter');
   $('detail-count-'+kind).textContent=String(detailIndexes[kind]+1).padStart(2,'0')+' / '+String(photos.length).padStart(2,'0');
   $('detail-caption-'+kind).textContent=captionFor(p);const credit=$('detail-credit-'+kind);credit.textContent=creditFor(p);credit.hidden=!credit.textContent;
   $('detail-prev-'+kind).disabled=$('detail-next-'+kind).disabled=photos.length<2;$('detail-group-'+kind).hidden=false;updateGroupCount();
@@ -413,7 +417,7 @@ function renderDetailed(v){
     if(typeof Image==='undefined'){addPhoto(p,i,'landscape');return;}
     pending++;status.hidden=false;status.textContent='사진을 준비하고 있어요.';const probe=new Image();
     const finish=(kind)=>{if(generation!==detailGeneration)return;addPhoto(p,i,kind);pending--;if(pending===0)status.hidden=true;};
-    probe.onload=()=>finish(photoOrientation(p,probe.naturalWidth,probe.naturalHeight));probe.onerror=()=>finish('landscape');probe.src=p.src;
+    probe.onload=()=>finish(photoOrientation(p,probe.naturalWidth,probe.naturalHeight));probe.onerror=()=>finish('landscape');probe.src=photoUrl(p);
   });
   for(const block of d.blocks){
     if(!block || typeof block!=='object')continue;
@@ -422,7 +426,7 @@ function renderDetailed(v){
       if(block.title){const h=document.createElement('h2');h.textContent=String(block.title);section.append(h);}
       const p=document.createElement('p');p.textContent=block.text;section.append(p);wrap.append(section);
     }else if(block.type==='photo' && Number.isInteger(block.index) && d.photos[block.index]){
-      const p=d.photos[block.index],f=document.createElement('figure'),img=document.createElement('img'),c=document.createElement('figcaption'),credit=document.createElement('small');f.dataset.orientation=photoOrientation(p,0,0);img.onload=()=>{f.dataset.orientation=photoOrientation(p,img.naturalWidth,img.naturalHeight);};img.src=p.src;img.alt=p.alt;img.loading='lazy';c.textContent=captionFor(p);credit.className='photo-credit';credit.textContent=creditFor(p);credit.hidden=!credit.textContent;f.append(img,c,credit);wrap.append(f);
+      const p=d.photos[block.index],f=document.createElement('figure'),img=document.createElement('img'),c=document.createElement('figcaption'),credit=document.createElement('small');f.dataset.orientation=photoOrientation(p,0,0);img.onload=()=>{f.dataset.orientation=photoOrientation(p,img.naturalWidth,img.naturalHeight);};img.src=photoUrl(p);img.alt=p.alt;img.loading='lazy';c.textContent=captionFor(p);credit.className='photo-credit';credit.textContent=creditFor(p);credit.hidden=!credit.textContent;f.append(img,c,credit);wrap.append(f);
     }
   }
   const section=document.createElement('section');section.className='editorial-text not-for';const h=document.createElement('h2');h.textContent='이런 분께는 맞지 않을 수 있어요';const p=document.createElement('p');p.textContent=d.notRecommended;section.append(h,p);wrap.append(section);
@@ -765,7 +769,7 @@ function makeMagazineCard(item,index){
   const {venue:v,entry,area}=item, d=entry.detail;
   const card=document.createElement('button');card.type='button';card.className='magazine-card';card.setAttribute('aria-label',v.name+' 상세 기록 읽기');
   const media=document.createElement('div');media.className='magazine-card-media';const fallback=document.createElement('span');fallback.className='magazine-image-fallback';fallback.textContent='사진을 불러오지 못했어요.';fallback.hidden=true;
-  const image=document.createElement('img');const photo=d.photos.find(p=>Number(p.width)>=Number(p.height))||d.photos[0];image.src=photo.src;image.alt=photo.alt;image.loading=index?'lazy':'eager';image.decoding='async';image.onerror=()=>{image.hidden=true;fallback.hidden=false;};media.append(image,fallback);
+  const image=document.createElement('img');const photo=d.photos.find(p=>Number(p.width)>=Number(p.height))||d.photos[0];image.src=photoUrl(photo);image.alt=photo.alt;image.loading=index?'lazy':'eager';image.decoding='async';image.onerror=()=>{image.hidden=true;fallback.hidden=false;};media.append(image,fallback);
   const body=document.createElement('div');body.className='magazine-card-content';
   const top=document.createElement('div');top.className='magazine-card-top';const label=document.createElement('span');label.textContent=area==='gwangan'?'광안 · 민락':area==='seomyeon'?'서면 · 전포':'부산';const no=document.createElement('small');no.textContent=' / '+String(index+1).padStart(2,'0');top.append(label,no);
   const name=document.createElement('h2');name.className='magazine-card-name';name.textContent=v.name;
