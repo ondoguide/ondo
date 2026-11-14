@@ -217,7 +217,7 @@ body{font-family:var(--sans);font-size:15px;line-height:1.75;letter-spacing:-.02
 .next-cards{display:grid;gap:10px;margin-top:14px}.next-cards:empty{display:none}
 .next-card{display:flex;align-items:stretch;min-height:84px;border:1px solid var(--line);border-radius:6px;background:var(--white,#fffaf3);color:var(--ink);text-decoration:none;overflow:hidden}
 .next-card-thumb{flex:none;width:84px;background:#e7dfd3;display:grid;place-items:center;overflow:hidden}
-.next-card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cover.cover-linked{cursor:pointer}.cover-read{margin:10px 0 0;font-size:11px;font-weight:600;color:var(--accent)}.cover.cover-linked:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.next-card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .next-card-thumb svg{width:26px;height:26px;stroke:var(--accent)}
 .next-card-body{flex:1;min-width:0;padding:12px 14px;display:flex;flex-direction:column;justify-content:center;gap:3px}
 .next-card-label{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.02em}
@@ -236,7 +236,7 @@ body{font-family:var(--sans);font-size:15px;line-height:1.75;letter-spacing:-.02
   <span class="intro-magazine-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5c3-1.2 5.7-.8 8 1v13c-2.3-1.8-5-2.2-8-1zM20 5.5c-3-1.2-5.7-.8-8 1v13c2.3-1.8 5-2.2 8-1z"/></svg></span>
   <span class="intro-magazine-copy"><small>THE ONDO JOURNAL</small><strong>온도의 매거진</strong><span>직접 다녀온 장소의 사진과 기록</span></span><span class="intro-magazine-arrow" aria-hidden="true">↗</span>
 </button><div class="intro-aux"><button class="intro-aux-link" id="explore-open" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg><span>전체 지도 둘러보기</span><span class="aux-arrow" aria-hidden="true">→</span></button><a class="intro-aux-link" id="intro-instagram" href="https://www.instagram.com/ondo.guide/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.1" cy="6.9" r=".8" fill="currentColor" stroke="none"/></svg><span>온도의 인스타그램</span><span class="aux-arrow" aria-hidden="true">↗</span></a></div><p class="intro-promise">직접 다녀온 기록을 바탕으로<br>이유와 아쉬운 점까지 전합니다.</p></div>
- <aside class="cover-shell" aria-label="온도가 다녀온 가게"><div class="cover" id="cover-card"><div class="cover-top"><span>온도가 기록한 광안리</span></div><div class="cover-media" id="cover-media"><img id="cover-photo" alt="" decoding="async"><span class="cover-fallback" id="cover-fallback" hidden>사진을 불러오지 못했어요.</span></div><div class="cover-body" id="cover-body"><div class="cover-small">제가 직접 다녀온 곳</div><p class="cover-big" id="cover-name"></p><p class="cover-place" id="cover-location"></p></div><div class="cover-bottom"><strong><span class="venue-count"></span>곳의 기록</strong><span>고민은 짧게, 시간은 따뜻하게.</span></div></div><div class="cover-controls" aria-label="가게 사진 보기"><button type="button" class="cover-control" id="cover-prev">← 이전</button><button type="button" class="cover-control" id="cover-next">다음 →</button><button type="button" class="cover-control pause" id="cover-pause" aria-pressed="false">일시정지</button><span class="sr-only" id="cover-status" aria-live="polite"></span></div></aside>
+ <aside class="cover-shell" aria-label="온도가 다녀온 가게"><div class="cover" id="cover-card"><div class="cover-top"><span>온도가 기록한 광안리</span></div><div class="cover-media" id="cover-media"><img id="cover-photo" alt="" decoding="async"><span class="cover-fallback" id="cover-fallback" hidden>사진을 불러오지 못했어요.</span></div><div class="cover-body" id="cover-body"><div class="cover-small">제가 직접 다녀온 곳</div><p class="cover-big" id="cover-name"></p><p class="cover-place" id="cover-location"></p><p class="cover-read" id="cover-read" hidden>이곳의 이야기 읽기 ↗</p></div><div class="cover-bottom"><strong><span class="venue-count"></span>곳의 기록</strong><span>고민은 짧게, 시간은 따뜻하게.</span></div></div><div class="cover-controls" aria-label="가게 사진 보기"><button type="button" class="cover-control" id="cover-prev">← 이전</button><button type="button" class="cover-control" id="cover-next">다음 →</button><button type="button" class="cover-control pause" id="cover-pause" aria-pressed="false">일시정지</button><span class="sr-only" id="cover-status" aria-live="polite"></span></div></aside>
 </section>
 <section class="screen" id="screen-q1" aria-labelledby="q1-heading" hidden><div class="question-wrap"><button class="back" type="button" data-back="intro"><span class="arrow" aria-hidden="true">←</span> 처음으로</button><div class="question-meta"><div class="step">01 <span>/ 02</span></div><span class="question-label">첫 번째 질문</span></div><h1 class="question-title" id="q1-heading">누구와 함께인가요?</h1><p class="question-sub">오늘 함께하는 사람을 골라주세요.</p><div class="options" id="q1-options"><button class="option" type="button" data-q1="연인"><span class="number">01</span><span class="label">연인과</span><span class="hint">둘만의 시간</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="친구"><span class="number">02</span><span class="label">친구와</span><span class="hint">편안한 만남</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q1="그 외"><span class="number">03</span><span class="label">그 외</span><span class="hint">가족·혼자 등</span><span class="option-arrow" aria-hidden="true">→</span></button></div></div></section>
 <section class="screen" id="screen-q2" aria-labelledby="q2-heading" hidden><div class="question-wrap"><button class="back" type="button" data-back="q1"><span class="arrow" aria-hidden="true">←</span> 이전 질문</button><div class="question-meta"><div class="step">02 <span>/ 02</span></div><span class="question-label">두 번째 질문</span></div><h1 class="question-title" id="q2-heading">오늘은 어떤 자리인가요?</h1><p class="question-sub" id="q2-sub">지금 원하는 장소를 골라주세요.</p><div class="options" id="q2-options"><button class="option" type="button" data-q2="dining"><span class="number">01</span><span class="label">든든한 식사</span><span class="hint">맛있는 한 끼</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q2="bar"><span class="number">02</span><span class="label">가볍게 한잔</span><span class="hint">좋은 안주와 함께</span><span class="option-arrow" aria-hidden="true">→</span></button><button class="option" type="button" data-q2="cafe"><span class="number">03</span><span class="label">카페 · 디저트</span><span class="hint">잠시 쉬어가는 시간</span><span class="option-arrow" aria-hidden="true">→</span></button></div><details class="mood-panel" id="mood-panel"><summary id="mood-summary">분위기도 고르고 싶어요 · 선택 사항</summary><p class="category-label">분위기를 고른 뒤 위에서 장소 종류를 선택해 주세요.</p><div class="category-options" id="mood-options" aria-label="분위기 선택"><button class="category-choice" type="button" data-mood="" aria-pressed="true">상관없어요</button><button class="category-choice" type="button" data-mood="편안하게" aria-pressed="false">편안하게</button><button class="category-choice" type="button" data-mood="특별하게" aria-pressed="false">특별하게</button></div></details></div></section>
@@ -297,7 +297,7 @@ if(MODE==='general'){$('intro-copy').innerHTML='지금 계신 곳 가까이에�
 /* 부산역 판넬 QR(?from=busan_station)로 들어온 방문자에게는 첫 화면을 부산역 기준으로 보여 줍니다. */
 if(attribution.from==='busan_station'){try{const q=x=>document.querySelector(x);q('.topnote b').textContent='부산 · 부산역';$('topnote-copy').textContent='직접 다녀온 곳을 소개합니다';q('#screen-intro .eyebrow').textContent='부산역에서, 지금 갈 한 곳';$('intro-copy').innerHTML='부산역 근처, 제가 직접 가본 곳 중에서<br>지금 갈 한 곳을 골라드릴게요.';q('#screen-intro .intro-promise').innerHTML='부산역·초량은 제가 직접 다녀온 곳만<br>골라 두었어요.';q('#screen-intro .cover-shell').hidden=true;const ao=$('area-options'),bs=ao.querySelector('[data-area="5"]');ao.prepend(bs);ao.querySelectorAll('.number').forEach((n,i)=>n.textContent=String(i+1).padStart(2,'0'));}catch(e){}}
 const state = {screen:'intro', q1:'', q2:'', mood:'', venue:null, token:'', locked:false, seen:[], pool:[], relaxedCompanion:false, relaxedMood:false, nowMinute:0};
-const coverPlaces=VENUES.filter(v=>v.photo);
+let coverPlaces=VENUES.filter(v=>v.photo);
 let coverPosition=0,coverPlaying=!reduced.matches,coverHovered=false,coverTimer=null;
 // 기존 네이버 검색 이미지가 실패하면 그 주소에 명시된 원본 사진을 한 번 더 시도합니다.
 function photoSources(photo){
@@ -322,13 +322,15 @@ function loadPhoto(img,source,isCurrent,onSuccess,onFailure){
   };
   img.src=sources[0];
 }
+function coverHasDetail(v){try{return !!(v&&typeof registeredDetail==='function'&&registeredDetail(v));}catch(e){return false;}}
+function coverPhoto(v){if(coverHasDetail(v)){try{const ph=ONDO_DETAILS[v.id].detail.photos;const p=ph.find(x=>Number(x.width)>=Number(x.height))||ph[0];if(p)return photoUrl(p);}catch(e){}}return v.photo;}
 function setCover(position,announce=false){
   if(!coverPlaces.length)return;
   coverPosition=(position+coverPlaces.length)%coverPlaces.length;
   const venue=coverPlaces[coverPosition],img=$('cover-photo'),fallback=$('cover-fallback');
-  $('cover-name').textContent=venue.name;$('cover-location').textContent=venue.location||'';
+  $('cover-name').textContent=venue.name;$('cover-location').textContent=venue.location||'';{const has=coverHasDetail(venue),card=$('cover-card');card.classList.toggle('cover-linked',has);$('cover-read').hidden=!has;if(has){card.setAttribute('role','link');card.tabIndex=0;card.setAttribute('aria-label',venue.name+' 상세 기록 읽기');}else{card.removeAttribute('role');card.removeAttribute('tabindex');card.removeAttribute('aria-label');}}
   img.hidden=true;fallback.hidden=false;fallback.textContent='사진을 불러오고 있어요.';img.alt=venue.name+'에 연결된 기존 사진';
-  loadPhoto(img,venue.photo,()=>coverPlaces[coverPosition].id===venue.id,
+  loadPhoto(img,coverPhoto(venue),()=>coverPlaces[coverPosition].id===venue.id,
     ()=>{img.hidden=false;fallback.hidden=true;img.classList.remove('cover-animated');void img.offsetWidth;img.classList.add('cover-animated');},
     ()=>{img.hidden=true;fallback.hidden=false;fallback.textContent='사진을 불러오지 못했어요.';});
   for(const id of ['cover-media','cover-body']){const el=$(id);el.classList.remove('cover-animated');void el.offsetWidth;el.classList.add('cover-animated');}
@@ -837,7 +839,7 @@ function renderMagazine(){
   $('magazine-grid').replaceChildren(...items.map(makeMagazineCard));
 }
 async function openMagazine(){
-  if(state.locked)return;state.locked=true;await move('magazine');state.locked=false;$('magazine-heading').focus({preventScroll:true});track('magazine_open');renderMagazine();await detailsReady;if(state.screen==='magazine')renderMagazine();
+  if(state.locked)return;state.detailFromCover=false;state.locked=true;await move('magazine');state.locked=false;$('magazine-heading').focus({preventScroll:true});track('magazine_open');renderMagazine();await detailsReady;if(state.screen==='magazine')renderMagazine();
 }
 async function closeMagazine(){
   if(state.locked)return;state.locked=true;await move('intro');state.locked=false;$('magazine-open').focus({preventScroll:true});
@@ -848,8 +850,22 @@ async function openMagazineDetail(v){
   renderResult(v,{fromMagazine:true});await move('result',reduced.matches?0:80);state.locked=false;$('place-name').focus({preventScroll:true});
 }
 async function returnToMagazine(){
-  if(state.locked)return;state.locked=true;await move('magazine');state.locked=false;renderMagazine();$('magazine-heading').focus({preventScroll:true});
+  if(state.locked)return;if(state.detailFromCover){state.detailFromCover=false;state.locked=true;await move('intro');state.locked=false;scheduleCover();return;}state.locked=true;await move('magazine');state.locked=false;renderMagazine();$('magazine-heading').focus({preventScroll:true});
 }
+function reorderCover(){
+  const withDetail=magazineVenues().map(x=>x.venue).filter(v=>coverHasDetail(v));if(!withDetail.length)return;
+  const ids=new Set(withDetail.map(v=>v.id));const current=coverPlaces[coverPosition];
+  coverPlaces=[...withDetail,...coverPlaces.filter(v=>!ids.has(v.id))];
+  $('cover-card').hidden=false;document.querySelector('.cover-controls').hidden=false;
+  if(state.screen==='intro'||!current){setCover(0);updateCoverButton();scheduleCover();}else coverPosition=Math.max(0,coverPlaces.findIndex(v=>v.id===current.id));
+}
+async function openCoverDetail(){
+  const v=coverPlaces[coverPosition];if(!v||!coverHasDetail(v)||state.locked)return;
+  track('cover_detail_click',{vid:v.id,store:v.name});state.detailFromCover=true;await openMagazineDetail(v);
+}
+$('cover-card').addEventListener('click',openCoverDetail);
+$('cover-card').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openCoverDetail();}});
+detailsReady.then(()=>{try{reorderCover();}catch(e){}});
 $('magazine-open').addEventListener('click',openMagazine);
 $('magazine-back').addEventListener('click',closeMagazine);
 $('magazine-article-back').addEventListener('click',returnToMagazine);
