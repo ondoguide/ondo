@@ -823,7 +823,98 @@
         ],
         "notRecommended": "11월에 방문했을 때 모기가 조금 있었어요. 벌레에 민감한 분은 참고해 주세요."
       }
+    },
+    "v38": {
+      "grade": "detail",
+      "checkinReady": false,
+      "mapClicks": 0,
+      "visits": {
+        "last": "2026-11",
+        "lastLabel": "2026년 11월 15일",
+        "paid": true
+      },
+      "detail": {
+        "owned": true,
+        "photos": [
+          {
+            "src": "./img/v38/1.webp",
+            "alt": "창밖으로 보이는 광안대교와 마리나",
+            "caption": "창밖으로 보이는 광안대교와 마리나",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 1280,
+            "height": 1132
+          },
+          {
+            "src": "./img/v38/2.webp",
+            "alt": "시그니처 메뉴 일출",
+            "caption": "시그니처 메뉴 일출",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v38/3.webp",
+            "alt": "창가 소파 자리",
+            "caption": "창가 소파 자리",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v38/4.webp",
+            "alt": "식물과 가구가 놓인 실내",
+            "caption": "식물과 가구가 놓인 실내",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 733,
+            "height": 1280
+          },
+          {
+            "src": "./img/v38/5.webp",
+            "alt": "천장 조명과 행잉 플랜트",
+            "caption": "천장 조명과 행잉 플랜트",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 1161,
+            "height": 1280
+          },
+          {
+            "src": "./img/v38/6.webp",
+            "alt": "식물과 러그로 꾸민 벽면 자리",
+            "caption": "식물과 러그로 꾸민 벽면 자리",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v38/7.webp",
+            "alt": "건물 외벽의 Sangroksu 간판",
+            "caption": "건물 외벽의 Sangroksu 간판",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "blocks": [
+          {
+            "type": "text",
+            "title": "바다와 마리나가 한눈에 들어오는 자리",
+            "text": "남천에서 마리나와 광안대교를 한눈에 담을 수 있는 상록수. 원두를 직접 시향해서 고를 수 있고, 웰컴 드링크도 시음할 수 있습니다."
+          },
+          {
+            "type": "text",
+            "title": "온도가 기억한 장면",
+            "text": "시그니처 메뉴 '일출'을 마셨습니다. 날씨와 상관없이 바다를 보며 특별한 커피를 마시고 싶은 날, 혼자 또는 연인과 함께 가기 좋습니다."
+          }
+        ],
+        "notRecommended": "붐비는 시간대에는 다소 소란스러워요. 조용히 대화하고 싶은 분은 오전 시간대를 추천합니다."
+      }
     }
   },
-  "rev": "20261114-details16"
+  "rev": "20261115-details18"
 }
