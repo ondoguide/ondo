@@ -914,7 +914,116 @@
         ],
         "notRecommended": "붐비는 시간대에는 다소 소란스러워요. 조용히 대화하고 싶은 분은 오전 시간대를 추천합니다."
       }
+    },
+    "v39": {
+      "grade": "detail",
+      "checkinReady": false,
+      "mapClicks": 0,
+      "visits": {
+        "last": "2026-11",
+        "lastLabel": "2026년 11월 16일",
+        "paid": true
+      },
+      "detail": {
+        "owned": true,
+        "photos": [
+          {
+            "src": "./img/v39/1.webp",
+            "alt": "트리로 꾸민 하이안 외관",
+            "caption": "트리로 꾸민 하이안 외관",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 1280,
+            "height": 1267
+          },
+          {
+            "src": "./img/v39/2.webp",
+            "alt": "빨간 리본으로 장식한 대형 트리",
+            "caption": "빨간 리본으로 장식한 대형 트리",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 863,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/3.webp",
+            "alt": "트리 옆 야외 좌석",
+            "caption": "트리 옆 야외 좌석",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/4.webp",
+            "alt": "파란 타일의 테라스 좌석",
+            "caption": "파란 타일의 테라스 좌석",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/5.webp",
+            "alt": "테라스에서 마신 아이스 아메리카노",
+            "caption": "테라스에서 마신 아이스 아메리카노",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/6.webp",
+            "alt": "케이크 진열대",
+            "caption": "케이크 진열대",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/7.webp",
+            "alt": "실내의 곰 인형 장식",
+            "caption": "실내의 곰 인형 장식",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 1218,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/8.webp",
+            "alt": "호두까기 인형과 거울 포토존",
+            "caption": "호두까기 인형과 거울 포토존",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v39/9.webp",
+            "alt": "입구의 Hi:An 간판",
+            "caption": "입구의 Hi:An 간판",
+            "month": "2026-11",
+            "capturedAt": "2026-11-16",
+            "width": 853,
+            "height": 1280
+          }
+        ],
+        "blocks": [
+          {
+            "type": "text",
+            "title": "트리 아래에서 보내는 연말",
+            "text": "대형 트리부터 내부 인테리어까지, 연말 분위기로 가득 꾸민 하이안. 겨울 분위기를 즐기기 좋은 전포의 베이커리 카페입니다."
+          },
+          {
+            "type": "text",
+            "title": "온도가 기억한 장면",
+            "text": "테라스에서 아이스 아메리카노를 마셨습니다. 테라스 자리를 즐기려면 맑은 날이 좋고, 밤에는 경관 조명이 켜져 연말 저녁에 가기 좋습니다."
+          }
+        ],
+        "notRecommended": "연말 시즌에는 사람이 많이 붐빌 수 있어요. 한적한 카페를 찾는 분은 점심 직후 시간대를 피해 주세요."
+      }
     }
   },
-  "rev": "20261115-details18"
+  "rev": "20261116-details19"
 }
