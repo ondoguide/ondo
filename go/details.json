@@ -921,7 +921,7 @@
       "grade": "detail",
       "checkinReady": false,
       "mapClicks": 0,
-      "instagram":"https://www.instagram.com/p/Df4WUzuoOsp/",
+      "instagram": "https://www.instagram.com/p/Df4WUzuoOsp/",
       "visits": {
         "last": "2026-11",
         "lastLabel": "2026년 11월 16일",
@@ -1026,7 +1026,99 @@
         ],
         "notRecommended": "연말 시즌에는 사람이 많이 붐빌 수 있어요. 한적한 카페를 찾는 분은 점심 직후 시간대를 피해 주세요."
       }
+    },
+    "v40": {
+      "grade": "detail",
+      "checkinReady": false,
+      "mapClicks": 0,
+      "instagram": "https://www.instagram.com/p/Df67LHmIEhA/",
+      "visits": {
+        "last": "2026-11",
+        "lastLabel": "2026년 11월 15일",
+        "paid": true
+      },
+      "detail": {
+        "owned": true,
+        "photos": [
+          {
+            "src": "./img/v40/1.webp",
+            "alt": "오렌지색 외관의 히피몬드 전포점",
+            "caption": "오렌지색 외관의 히피몬드 전포점",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/2.webp",
+            "alt": "나무 집 모양 포토존과 가로등",
+            "caption": "나무 집 모양 포토존과 가로등",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/3.webp",
+            "alt": "원목 선반이 둘러싼 매장 안",
+            "caption": "원목 선반이 둘러싼 매장 안",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/4.webp",
+            "alt": "영화 굿즈로 꾸민 코너",
+            "caption": "영화 굿즈로 꾸민 코너",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/5.webp",
+            "alt": "엽서와 카드가 가득한 벽면",
+            "caption": "엽서와 카드가 가득한 벽면",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/6.webp",
+            "alt": "3,000원 볼펜과 키링 벽",
+            "caption": "3,000원 볼펜과 키링 벽",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          },
+          {
+            "src": "./img/v40/7.webp",
+            "alt": "온도가 고른 몬치치 엽서",
+            "caption": "온도가 고른 몬치치 엽서",
+            "month": "2026-11",
+            "capturedAt": "2026-11-15",
+            "width": 853,
+            "height": 1280
+          }
+        ],
+        "blocks": [
+          {
+            "type": "text",
+            "title": "전포에서 굿즈 구경하기 좋은 곳",
+            "text": "해외에서 유명한 캐릭터 굿즈부터 요즘 화제인 국내 굿즈까지, 다양한 무드의 소품을 한 번에 둘러볼 수 있는 전포동 소품샵입니다. 가격대가 2,000원부터라 부담 없이 고르기 좋습니다."
+          },
+          {
+            "type": "text",
+            "title": "온도가 기억한 장면",
+            "text": "몬치치 엽서를 골랐습니다. 웨이팅은 거의 없어서, 식사 후 산책하듯 들르기 좋았습니다. 가게 앞 나무 집 포토존도 함께 들러 보세요."
+          }
+        ],
+        "notRecommended": "사람이 많을 때는 물건을 자세히 구경하기 어려워요. 여유 있게 보려면 붐비지 않는 시간대에 가 보세요."
+      }
     }
   },
-  "rev": "20261116-details19"
+  "rev": "20261119-details20"
 }
