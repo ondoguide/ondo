@@ -496,38 +496,6 @@
         "notRecommended": "평평하고 안정적인 야외 좌석이나 큰길에서 바로 들어가는 접근성을 원한다면 불편할 수 있어요."
       }
     },
-    "v24": {
-      "grade": "detail",
-      "region": "gwangan",
-      "visits": {
-        "lastLabel": "2026 1월 초순",
-        "paid": true,
-        "last": "2026-01"
-      },
-      "detail": {
-        "owned": true,
-        "photos": [
-          {
-            "src": "img/v24/1.webp",
-            "alt": "해성막창 광안리점 — 간판으로 찾아가는 해성막창",
-            "caption": "간판으로 찾아가는 해성막창",
-            "width": 854,
-            "height": 1280,
-            "dateUnknown": true,
-            "camera": "FUJIFILM X-M5",
-            "lens": "XC 15–45mm F3.5–5.6 OIS PZ"
-          }
-        ],
-        "blocks": [
-          {
-            "type": "text",
-            "title": "기름진 안주가 당기는 저녁",
-            "text": "막창과 대창, 곱창전골을 소주와 곁들이고 싶을 때 찾는 곳입니다. 여러 번 방문하며 음식 맛이 일관되게 유지된다고 느꼈습니다. 1차 술자리로 추천합니다."
-          }
-        ],
-        "notRecommended": "조용하고 은은한 분위기에서 대화할 곳을 찾는다면 맞지 않을 수 있어요."
-      }
-    },
     "v31": {
       "grade": "detail",
       "region": "gwangan",
@@ -1121,5 +1089,5 @@
       }
     }
   },
-  "rev": "20261119-details20"
+  "rev": "20261124-details21"
 }
