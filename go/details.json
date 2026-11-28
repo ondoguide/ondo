@@ -1191,7 +1191,7 @@
     },
     "v41": {
       "grade": "detail",
-      "instagram":"https://www.instagram.com/p/DgHzFyIEyMc",
+      "instagram": "https://www.instagram.com/p/DgHzFyIEyMc",
       "visits": {
         "last": "2026-11",
         "paid": true,
@@ -1344,7 +1344,90 @@
         ],
         "notRecommended": "아이와 함께하는 자리에는 맞지 않아요. 입구에 노키즈존 안내가 있었습니다."
       }
+    },
+    "v43": {
+      "grade": "detail",
+      "instagram": "https://www.instagram.com/p/DgPhhB5IEjl/",
+      "visits": {
+        "last": "2026-11",
+        "paid": true,
+        "lastLabel": "2026년 11월 2일"
+      },
+      "detail": {
+        "owned": true,
+        "photos": [
+          {
+            "src": "./img/v43/1.webp",
+            "alt": "쏘리낫쏘리 — 건물 옆 콘크리트 벽에 그린 로고",
+            "caption": "건물 옆 콘크리트 벽에 그린 로고",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1280
+          },
+          {
+            "src": "./img/v43/2.webp",
+            "alt": "쏘리낫쏘리 — 골함석 외벽과 메뉴 배너",
+            "caption": "골함석 외벽과 메뉴 배너",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1280
+          },
+          {
+            "src": "./img/v43/3.webp",
+            "alt": "쏘리낫쏘리 — 시그니처 딸기라떼",
+            "caption": "시그니처 딸기라떼",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1280
+          },
+          {
+            "src": "./img/v43/4.webp",
+            "alt": "쏘리낫쏘리 — 빈티지 잡지와 야구 페넌트로 꾸민 벽",
+            "caption": "빈티지 잡지와 야구 페넌트로 꾸민 벽",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1280
+          },
+          {
+            "src": "./img/v43/5.webp",
+            "alt": "쏘리낫쏘리 — 창밖으로 보이는 요트 선착장과 시티뷰",
+            "caption": "창밖으로 보이는 요트 선착장과 시티뷰",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1222
+          },
+          {
+            "src": "./img/v43/6.webp",
+            "alt": "쏘리낫쏘리 — 밤에 소파 자리에서 본 야경",
+            "caption": "밤에 소파 자리에서 본 야경",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1440
+          },
+          {
+            "src": "./img/v43/7.webp",
+            "alt": "쏘리낫쏘리 — 카페 근처 부두 풍경",
+            "caption": "카페 근처 부두 풍경",
+            "month": "2026-11",
+            "width": 960,
+            "height": 1280
+          }
+        ],
+        "blocks": [
+          {
+            "type": "text",
+            "title": "식사 뒤 디저트로 넘어가기 좋은 곳",
+            "text": "필로티 구조의 3층 독채를 통으로 쓰는 베이크샵입니다. 말렌카가 유명하고, 추천 메뉴로 시그니처 딸기라떼를 기록했습니다. 지금까지 시킨 메뉴는 모두 만족스러웠고, 웨이팅은 딱히 없었어요."
+          },
+          {
+            "type": "text",
+            "title": "천고 높은 공간에서 보는 야경",
+            "text": "천고가 높아 넓은 공간을 여유 있게 쓸 수 있고, 디자인 감도가 좋아 데이트 분위기가 납니다. 날씨와 관계없이 창밖 야경을 보며 머물기 좋아요. 1층 필로티에 차를 대면 2시간 주차를 지원받을 수 있습니다."
+          }
+        ],
+        "notRecommended": "차 없이 가기에는 불편해요. 교통이 다소 불편해서, 근처에 살지 않거나 차가 없으면 찾아가기 어렵습니다."
+      }
     }
   },
-  "rev": "20261124-details24"
+  "rev": "20261128-details25"
 }
